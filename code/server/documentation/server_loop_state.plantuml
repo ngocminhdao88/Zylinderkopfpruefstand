@@ -1,0 +1,26 @@
+@startuml
+
+title Server Loop State
+[*] --> initialize
+
+initialize -down-> waitOnConnection
+
+waitOnConnection -> waitOnConnection : timeOut
+waitOnConnection -down-> readData : newConnection
+
+readData -> waitOnConnection : clientClosed
+
+readData -> readData : timeOut
+
+readData -down-> writeData : writeCmd
+
+writeData -> readData : writeDone
+
+readData -down-> exit : exit
+
+waitOnConnection -> exit : exit
+
+exit --> [*]
+
+
+@enduml

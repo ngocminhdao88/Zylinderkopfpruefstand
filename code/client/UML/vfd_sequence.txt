@@ -1,0 +1,54 @@
+@startuml
+
+title "VFD - Sequence Diagram"
+
+participant "Test Profile Parser" order 10
+participant "VFD Editor" order 20
+participant "VFD Model" order 30
+participant "VFD" order 40
+participant "Pacemaker" order 50
+
+note over of "Test Profile Parser"
+    Automation mode
+end note
+
+note over of "VFD Editor"
+    Manual mode
+end note
+
+note over of "Pacemaker"
+    From main application
+end note
+
+"Test Profile Parser" -> "VFD Model": updateModel()
+
+
+"VFD Editor" -> "VFD Model": updateModel()
+note right of "VFD Editor"
+    controlSpeed
+    turnDirection
+    rampupRate
+    rampdownRate
+end note
+
+"VFD Model" -> VFD: dataChanged()
+activate VFD
+VFD -> VFD: setTargetValue()
+note right: speedRamp
+VFD -> VFD: setRampupRate()
+VFD -> VFD: setRampdownRate()
+deactivate VFD
+
+Pacemaker -> VFD: updateRequest()
+activate VFD
+VFD -> VFD: calculateSpeedRamp()
+VFD -> VFD: setSpeed()
+VFD -> VFD: getSpeed()
+VFD -> VFD: setDirection()
+VFD -> "VFD Model": updateModel()
+note left: feedBackSpeed
+deactivate VFD
+
+"VFD Model" -> "VFD Editor": updateView()
+
+@enduml

@@ -1,0 +1,38 @@
+@startuml
+
+title Relationships - Class Diagram
+
+class AbstractVFD {
+    {abstract} + speed(): double
+    {abstract} + setSpeed(double): void
+    {abstract} + setDirection(double): void
+    {abstract} + setRampUpRate(double): void
+    {abstract} + setRampDownRate(double): void
+}
+
+class UnicoVFD {
+    - mobusDevice: * QModbusClient
+    - vfdModel: * QAbstractItemModel
+    - speedRamp: * RampGenerator
+    - pacemaker: * QTimer
+
+    + speed(): double
+    + setSpeed(double): void
+    + setDirection(double): void
+    + setRampUpRate(double): void
+    + setRampDownRate(double): void
+
+    + setDevice(QModbusClient): void
+    + setModel(QAbstractItemModel): void
+    + onUpdateRequest(): void
+
+    - onReadReady(): void
+    - onModelDataChanged(QModelIndex, QModelIndex): void
+    - normalizeRate(double): double
+    - getFeedbackSpeed(double, uint): double
+
+}
+
+AbstractVFD <|-- UnicoVFD
+
+@enduml
