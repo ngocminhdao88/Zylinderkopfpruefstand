@@ -4,5 +4,5 @@
 	<Property Name="NI.Lib.SourceVersion" Type="Int">385908736</Property>
 	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
-	<Item Name="data_processing_loop.vi" Type="VI" URL="../data_processing_loop.vi"/>
+	<Item Name="request_processor_loop.vi" Type="VI" URL="../request_processor_loop.vi"/>
 </Library>

@@ -4,5 +4,5 @@
 	<Property Name="NI.Lib.SourceVersion" Type="Int">385908736</Property>
 	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
-	<Item Name="logger.vi" Type="VI" URL="../logger.vi"/>
+	<Item Name="error_logger.vi" Type="VI" URL="../error_logger.vi"/>
 </Library>

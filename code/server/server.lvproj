@@ -42,11 +42,17 @@
 			<Item Name="os_name.vi" Type="VI" URL="../testing/os_name.vi"/>
 		</Item>
 		<Item Name="DataFrame.lvclass" Type="LVClass" URL="../dataframe/DataFrame.lvclass"/>
-		<Item Name="data_processing.lvlib" Type="Library" URL="../data_processing/data_processing.lvlib"/>
-		<Item Name="server.lvlib" Type="Library" URL="../server/server.lvlib"/>
 		<Item Name="worker.lvlib" Type="Library" URL="../worker/worker.lvlib"/>
 		<Item Name="logger.lvlib" Type="Library" URL="../logger/logger.lvlib"/>
 		<Item Name="main.vi" Type="VI" URL="../main.vi"/>
+		<Item Name="request_processor.lvlib" Type="Library" URL="../request_processor/request_processor.lvlib"/>
+		<Item Name="tcp_server.lvlib" Type="Library" URL="../tcp_server/tcp_server.lvlib"/>
+		<Item Name="DataWriteWorker.lvclass" Type="LVClass" URL="../data_write_worker/DataWriteWorker.lvclass"/>
+		<Item Name="DataReadWorker.lvclass" Type="LVClass" URL="../data_read_worker/DataReadWorker.lvclass"/>
+		<Item Name="AnalogReadWorker.lvclass" Type="LVClass" URL="../analog_read_worker/AnalogReadWorker.lvclass"/>
+		<Item Name="DigitalWriteWorker.lvclass" Type="LVClass" URL="../digital_write_worker/DigitalWriteWorker.lvclass"/>
+		<Item Name="AnalogWriteWorker.lvclass" Type="LVClass" URL="../analog_write_worker/AnalogWriteWorker.lvclass"/>
+		<Item Name="DigitalReadWorker.lvclass" Type="LVClass" URL="../digital_read_worker/DigitalReadWorker.lvclass"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Clear Errors.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Clear Errors.vi"/>
@@ -86,6 +92,8 @@
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
 				<Item Name="GetHelpDir.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/GetHelpDir.vi"/>
 			</Item>
+			<Item Name="data_processing_loop.vi" Type="VI" URL="../data_processing/data_processing_loop.vi"/>
+			<Item Name="server_loop.vi" Type="VI" URL="../server/server_loop.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="server" Type="EXE">
@@ -102,14 +110,13 @@
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{9236DFC5-A1BE-45C5-93F4-A12737594CB8}</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
-				<Property Name="DestinationCount" Type="Int">2</Property>
 				<Property Name="Destination[0].destName" Type="Str">server.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../build/NI_AB_PROJECTNAME/Server.exe</Property>
 				<Property Name="Destination[0].preserveHierarchy" Type="Bool">true</Property>
 				<Property Name="Destination[0].type" Type="Str">App</Property>
 				<Property Name="Destination[1].destName" Type="Str">Support Directory</Property>
 				<Property Name="Destination[1].path" Type="Path">../build/NI_AB_PROJECTNAME/data</Property>
-				<Property Name="SourceCount" Type="Int">3</Property>
+				<Property Name="DestinationCount" Type="Int">2</Property>
 				<Property Name="Source[0].itemID" Type="Str">{75986B3C-667E-452D-8523-43660F32521F}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].destinationIndex" Type="Int">0</Property>
@@ -119,6 +126,7 @@
 				<Property Name="Source[2].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[2].itemID" Type="Ref">/My Computer/Support VIs/my_global.vi</Property>
 				<Property Name="Source[2].type" Type="Str">VI</Property>
+				<Property Name="SourceCount" Type="Int">3</Property>
 				<Property Name="TgtF_fileDescription" Type="Str">server</Property>
 				<Property Name="TgtF_internalName" Type="Str">server</Property>
 				<Property Name="TgtF_legalCopyright" Type="Str">Copyright © 2012 </Property>
