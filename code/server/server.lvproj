@@ -34,6 +34,8 @@
 			<Item Name="Error Handler - Event Handling Loop.vi" Type="VI" URL="../support/Error Handler - Event Handling Loop.vi"/>
 			<Item Name="Error Handler - Message Handling Loop.vi" Type="VI" URL="../support/Error Handler - Message Handling Loop.vi"/>
 			<Item Name="my_global.vi" Type="VI" URL="../support/my_global.vi"/>
+			<Item Name="measurement_loop_template.vi" Type="VI" URL="../support/measurement_loop_template.vi"/>
+			<Item Name="measurement_state.ctl" Type="VI" URL="../support/measurement_state.ctl"/>
 		</Item>
 		<Item Name="Type Definitions" Type="Folder">
 			<Item Name="UI Data.ctl" Type="VI" URL="../controls/UI Data.ctl"/>
@@ -47,12 +49,8 @@
 		<Item Name="main.vi" Type="VI" URL="../main.vi"/>
 		<Item Name="request_processor.lvlib" Type="Library" URL="../request_processor/request_processor.lvlib"/>
 		<Item Name="tcp_server.lvlib" Type="Library" URL="../tcp_server/tcp_server.lvlib"/>
-		<Item Name="DataWriteWorker.lvclass" Type="LVClass" URL="../data_write_worker/DataWriteWorker.lvclass"/>
-		<Item Name="DataReadWorker.lvclass" Type="LVClass" URL="../data_read_worker/DataReadWorker.lvclass"/>
-		<Item Name="AnalogReadWorker.lvclass" Type="LVClass" URL="../analog_read_worker/AnalogReadWorker.lvclass"/>
-		<Item Name="DigitalWriteWorker.lvclass" Type="LVClass" URL="../digital_write_worker/DigitalWriteWorker.lvclass"/>
-		<Item Name="AnalogWriteWorker.lvclass" Type="LVClass" URL="../analog_write_worker/AnalogWriteWorker.lvclass"/>
-		<Item Name="DigitalReadWorker.lvclass" Type="LVClass" URL="../digital_read_worker/DigitalReadWorker.lvclass"/>
+		<Item Name="TTLConverter.lvclass" Type="LVClass" URL="../ttl_converter/TTLConverter.lvclass"/>
+		<Item Name="Hardware.lvclass" Type="LVClass" URL="../hardware/Hardware.lvclass"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Clear Errors.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Clear Errors.vi"/>
