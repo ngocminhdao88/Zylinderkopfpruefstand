@@ -44,18 +44,20 @@
 			<Item Name="os_name.vi" Type="VI" URL="../testing/os_name.vi"/>
 			<Item Name="create_virtual_channel.vi" Type="VI" URL="../testing/create_virtual_channel.vi"/>
 		</Item>
+		<Item Name="ReadAnalogWorker" Type="Folder">
+			<Item Name="read_analog_worker_loop.vi" Type="VI" URL="../read_analog_worker/read_analog_worker_loop.vi"/>
+		</Item>
 		<Item Name="DataFrame.lvclass" Type="LVClass" URL="../dataframe/DataFrame.lvclass"/>
 		<Item Name="worker.lvlib" Type="Library" URL="../worker/worker.lvlib"/>
 		<Item Name="logger.lvlib" Type="Library" URL="../logger/logger.lvlib"/>
 		<Item Name="main.vi" Type="VI" URL="../main.vi"/>
 		<Item Name="request_processor.lvlib" Type="Library" URL="../request_processor/request_processor.lvlib"/>
 		<Item Name="tcp_server.lvlib" Type="Library" URL="../tcp_server/tcp_server.lvlib"/>
-		<Item Name="TTLConverter.lvclass" Type="LVClass" URL="../ttl_converter/TTLConverter.lvclass"/>
 		<Item Name="Hardware.lvclass" Type="LVClass" URL="../hardware/Hardware.lvclass"/>
-		<Item Name="AnalogReadHardware.lvclass" Type="LVClass" URL="../analog_read_hardware/AnalogReadHardware.lvclass"/>
-		<Item Name="AnalogReadSim.lvclass" Type="LVClass" URL="../analog_read_sim/AnalogReadSim.lvclass"/>
 		<Item Name="Measurement.lvclass" Type="LVClass" URL="../measurement/Measurement.lvclass"/>
 		<Item Name="MeasurementResult.lvclass" Type="LVClass" URL="../measurement_result/MeasurementResult.lvclass"/>
+		<Item Name="NiHardware.lvclass" Type="LVClass" URL="../ni_hardware/NiHardware.lvclass"/>
+		<Item Name="SimAnalogHardware.lvclass" Type="LVClass" URL="../sim_analog_hardware/SimAnalogHardware.lvclass"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Clear Errors.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Clear Errors.vi"/>
