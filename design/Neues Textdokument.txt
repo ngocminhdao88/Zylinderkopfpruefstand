@@ -1,0 +1,8 @@
+Data size for data acquisition:
+- Analog read: 100
+- Analog write: 100
+- Digital read: 100
+- Digital write: 100
+
+System relevant data size: 100
+PLC data size: 100
