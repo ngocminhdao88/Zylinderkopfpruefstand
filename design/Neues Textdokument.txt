@@ -6,3 +6,7 @@ Data size for data acquisition:
 
 System relevant data size: 100
 PLC data size: 100
+
+Number of samples: 1000
+
+ADC resolution: 16 bit

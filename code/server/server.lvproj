@@ -43,6 +43,8 @@
 		<Item Name="Testing" Type="Folder">
 			<Item Name="os_name.vi" Type="VI" URL="../testing/os_name.vi"/>
 			<Item Name="create_virtual_channel.vi" Type="VI" URL="../testing/create_virtual_channel.vi"/>
+			<Item Name="2d_array.vi" Type="VI" URL="../testing/2d_array.vi"/>
+			<Item Name="data_decimate.vi" Type="VI" URL="../testing/data_decimate.vi"/>
 		</Item>
 		<Item Name="ReadAnalogWorker" Type="Folder">
 			<Item Name="read_analog_worker_loop.vi" Type="VI" URL="../read_analog_worker/read_analog_worker_loop.vi"/>
