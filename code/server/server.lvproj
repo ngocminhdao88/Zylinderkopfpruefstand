@@ -46,6 +46,7 @@
 			<Item Name="my_global.vi" Type="VI" URL="../support/my_global.vi"/>
 			<Item Name="measurement_loop_template.vi" Type="VI" URL="../support/measurement_loop_template.vi"/>
 			<Item Name="measurement_state.ctl" Type="VI" URL="../support/measurement_state.ctl"/>
+			<Item Name="relativ_path_to_absolute_path.vi" Type="VI" URL="../support/relativ_path_to_absolute_path.vi"/>
 		</Item>
 		<Item Name="Type Definitions" Type="Folder">
 			<Item Name="UI Data.ctl" Type="VI" URL="../controls/UI Data.ctl"/>
@@ -68,9 +69,12 @@
 		<Item Name="Hardware.lvclass" Type="LVClass" URL="../hardware/Hardware.lvclass"/>
 		<Item Name="Measurement.lvclass" Type="LVClass" URL="../measurement/Measurement.lvclass"/>
 		<Item Name="MeasurementResult.lvclass" Type="LVClass" URL="../measurement_result/MeasurementResult.lvclass"/>
-		<Item Name="NiHardware.lvclass" Type="LVClass" URL="../ni_hardware/NiHardware.lvclass"/>
-		<Item Name="SimAnalogHardware.lvclass" Type="LVClass" URL="../sim_analog_hardware/SimAnalogHardware.lvclass"/>
+		<Item Name="SimHardware.lvclass" Type="LVClass" URL="../sim_hardware/SimHardware.lvclass"/>
 		<Item Name="main.vi" Type="VI" URL="../main.vi"/>
+		<Item Name="AO_Ni_Hardware.lvclass" Type="LVClass" URL="../ao_ni_hardware/AO_Ni_Hardware.lvclass"/>
+		<Item Name="DI_Ni_Hardware.lvclass" Type="LVClass" URL="../di_ni_hardware/DI_Ni_Hardware.lvclass"/>
+		<Item Name="DO_Ni_Hardware.lvclass" Type="LVClass" URL="../do_ni_hardware/DO_Ni_Hardware.lvclass"/>
+		<Item Name="AI_Ni_Hardware.lvclass" Type="LVClass" URL="../ai_ni_hardware/AI_Ni_Hardware.lvclass"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Clear Errors.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Clear Errors.vi"/>
@@ -218,6 +222,7 @@
 				<Item Name="DAQmx Create Channel (AI-Acceleration-Charge).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/create/channels.llb/DAQmx Create Channel (AI-Acceleration-Charge).vi"/>
 				<Item Name="DAQmx Create Channel (AI-Charge).vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/create/channels.llb/DAQmx Create Channel (AI-Charge).vi"/>
 				<Item Name="DAQmx Start Task.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/task.llb/DAQmx Start Task.vi"/>
+				<Item Name="Get LV Class Default Value.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/LVClass/Get LV Class Default Value.vi"/>
 			</Item>
 			<Item Name="nilvaiu.dll" Type="Document" URL="nilvaiu.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
