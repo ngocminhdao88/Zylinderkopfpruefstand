@@ -19,10 +19,10 @@
 			<Property Name="\0\AI.Thrmcpl.CJCChan" Type="Str"></Property>
 			<Property Name="\0\AI.Thrmcpl.CJCSrc" Type="Str">Built-In</Property>
 			<Property Name="\0\AI.Thrmcpl.CJCVal" Type="Str">25</Property>
-			<Property Name="\0\AI.Thrmcpl.Type" Type="Str">T</Property>
+			<Property Name="\0\AI.Thrmcpl.Type" Type="Str">J</Property>
 			<Property Name="\0\ChanType" Type="Str">Analog Input</Property>
 			<Property Name="\0\Name" Type="Str">AnalogReadTask/Temperature_0</Property>
-			<Property Name="\0\PhysicalChanName" Type="Str">cDAQ1Mod1/ai0</Property>
+			<Property Name="\0\PhysicalChanName" Type="Str">cDAQ2Mod1/ai0</Property>
 			<Property Name="\1\AI.AutoZeroMode" Type="Str">Once</Property>
 			<Property Name="\1\AI.Max" Type="Str">100</Property>
 			<Property Name="\1\AI.MeasType" Type="Str">Temperature:Thermocouple</Property>
@@ -31,10 +31,10 @@
 			<Property Name="\1\AI.Thrmcpl.CJCChan" Type="Str"></Property>
 			<Property Name="\1\AI.Thrmcpl.CJCSrc" Type="Str">Built-In</Property>
 			<Property Name="\1\AI.Thrmcpl.CJCVal" Type="Str">25</Property>
-			<Property Name="\1\AI.Thrmcpl.Type" Type="Str">T</Property>
+			<Property Name="\1\AI.Thrmcpl.Type" Type="Str">J</Property>
 			<Property Name="\1\ChanType" Type="Str">Analog Input</Property>
 			<Property Name="\1\Name" Type="Str">AnalogReadTask/Temperature_1</Property>
-			<Property Name="\1\PhysicalChanName" Type="Str">cDAQ1Mod1/ai1</Property>
+			<Property Name="\1\PhysicalChanName" Type="Str">cDAQ2Mod1/ai1</Property>
 			<Property Name="\2\AI.Max" Type="Str">10</Property>
 			<Property Name="\2\AI.MeasType" Type="Str">Voltage</Property>
 			<Property Name="\2\AI.Min" Type="Str">-10</Property>
@@ -42,7 +42,7 @@
 			<Property Name="\2\AI.Voltage.Units" Type="Str">Volts</Property>
 			<Property Name="\2\ChanType" Type="Str">Analog Input</Property>
 			<Property Name="\2\Name" Type="Str">AnalogReadTask/Voltage_0</Property>
-			<Property Name="\2\PhysicalChanName" Type="Str">cDAQ1Mod2/ai0</Property>
+			<Property Name="\2\PhysicalChanName" Type="Str">cDAQ2Mod2/ai0</Property>
 			<Property Name="\3\AI.Max" Type="Str">10</Property>
 			<Property Name="\3\AI.MeasType" Type="Str">Voltage</Property>
 			<Property Name="\3\AI.Min" Type="Str">-10</Property>
@@ -50,7 +50,7 @@
 			<Property Name="\3\AI.Voltage.Units" Type="Str">Volts</Property>
 			<Property Name="\3\ChanType" Type="Str">Analog Input</Property>
 			<Property Name="\3\Name" Type="Str">AnalogReadTask/Voltage_1</Property>
-			<Property Name="\3\PhysicalChanName" Type="Str">cDAQ1Mod2/ai1</Property>
+			<Property Name="\3\PhysicalChanName" Type="Str">cDAQ2Mod2/ai1</Property>
 			<Property Name="\4\AI.Max" Type="Str">10</Property>
 			<Property Name="\4\AI.MeasType" Type="Str">Voltage</Property>
 			<Property Name="\4\AI.Min" Type="Str">-10</Property>
@@ -58,7 +58,7 @@
 			<Property Name="\4\AI.Voltage.Units" Type="Str">Volts</Property>
 			<Property Name="\4\ChanType" Type="Str">Analog Input</Property>
 			<Property Name="\4\Name" Type="Str">AnalogReadTask/Voltage_2</Property>
-			<Property Name="\4\PhysicalChanName" Type="Str">cDAQ1Mod2/ai2</Property>
+			<Property Name="\4\PhysicalChanName" Type="Str">cDAQ2Mod2/ai2</Property>
 			<Property Name="Channels" Type="Str">AnalogReadTask/Temperature_0, AnalogReadTask/Temperature_1, AnalogReadTask/Voltage_0, AnalogReadTask/Voltage_1, AnalogReadTask/Voltage_2</Property>
 			<Property Name="Name" Type="Str">AnalogReadTask</Property>
 			<Property Name="SampClk.ActiveEdge" Type="Str">Rising</Property>
@@ -69,6 +69,7 @@
 			<Property Name="SampTimingType" Type="Str">Sample Clock</Property>
 		</Item>
 		<Item Name="main.vi" Type="VI" URL="../main.vi"/>
+		<Item Name="main_v2.vi" Type="VI" URL="../main_v2.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="DAQmx Clear Task.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/task.llb/DAQmx Clear Task.vi"/>
