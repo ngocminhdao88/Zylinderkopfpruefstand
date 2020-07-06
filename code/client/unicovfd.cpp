@@ -1,4 +1,8 @@
+#include <QDebug>
+#include <QModbusDataUnit>
+#include <QModbusDevice>
 #include "unicovfd.h"
+#include "vfddatamodel.h"
 
 enum {
     MaxSpeed = 7000, //[RPM]

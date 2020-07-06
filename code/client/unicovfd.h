@@ -3,12 +3,10 @@
 
 #include <QObject>
 #include <QTimer>
-#include <QDebug>
 #include <QModbusClient>
-#include <QModbusDataUnit>
 #include <QAbstractItemModel>
+
 #include "abstractvfd.h"
-#include "vfddatamodel.h"
 #include "rampgenerator.h"
 
 class UnicoVFD : public QObject, public AbstractVFD

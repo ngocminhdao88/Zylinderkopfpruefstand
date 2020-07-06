@@ -1,8 +1,6 @@
 #ifndef ABSTRACTVFD_H
 #define ABSTRACTVFD_H
 
-#include <QModbusDevice>
-
 class AbstractVFD
 {
 public:
