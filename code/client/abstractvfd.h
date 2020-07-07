@@ -1,33 +1,43 @@
 #ifndef ABSTRACTVFD_H
 #define ABSTRACTVFD_H
 
-class AbstractVFD
+#include <QObject>
+
+class AbstractVFD : public QObject
 {
+    Q_OBJECT
 public:
-    /*
+    /**
+     * @brief Constructor for the AbstractVFD class
+     *
+     * @param parent as QObject
+     */
+    explicit AbstractVFD(QObject *parent = 0) : QObject(parent) {};
+
+    /**
      * @brief Set VFD speed
      */
-    virtual void setSpeed(double speed) = 0;
+     virtual void setSpeed(double speed) = 0;
 
-    /*
+    /**
      * @brief Set VFD turn direction
      */
-    virtual void setDirection(double dir) = 0;
+     virtual void setDirection(double dir) = 0;
 
-    /*
+    /**
      * @brief Set VFD ramp rate
      */
-    virtual void setRampUpRate(double rate) = 0;
+     virtual void setRampUpRate(double rate) = 0;
 
-    /*
+    /**
      * @brief Set VFD ramp down rate
      */
-    virtual void setRampDownRate(double rate) = 0;
+     virtual void setRampDownRate(double rate) = 0;
 
-    /*
+    /**
      * @brief Get VFD speed
      */
-    virtual double getSpeed() = 0;
+     virtual double getSpeed() = 0;
 };
 
 #endif // ABSTRACTVFD_H

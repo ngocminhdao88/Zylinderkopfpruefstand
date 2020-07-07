@@ -1,6 +1,7 @@
 #include <QDebug>
 #include <QModbusDataUnit>
 #include <QModbusDevice>
+
 #include "unicovfd.h"
 #include "vfddatamodel.h"
 
@@ -18,7 +19,7 @@ enum {
 };
 
 UnicoVFD::UnicoVFD(QModbusClient *modbusDevice, QAbstractItemModel *model, QTimer *pacemaker, QObject *parent) :
-    QObject(parent),
+    AbstractVFD(parent),
     m_modbusDevice(modbusDevice),
     m_speedRamp(new RampGenerator(this))
 {
@@ -49,9 +50,9 @@ void UnicoVFD::setModel(QAbstractItemModel *model)
 
 void UnicoVFD::setPacemaker(QTimer *pacemaker)
 {
-    m_paceMaker = pacemaker;
-
     if (m_paceMaker) {
+        m_paceMaker = pacemaker;
+
         connect(m_paceMaker, &QTimer::timeout, this, &UnicoVFD::onUpdateRequest);
     }
 }
@@ -163,8 +164,8 @@ void UnicoVFD::onReadReady()
                 double rawValue = unit.value(0);
                 if (m_vfdModel) {
                     //get motor's turn direction
-                    QModelIndex dirIndex = m_vfdModel->index(m_vfdModel->rowCount() - 1, DirectionColumn);
-                    uint direction = m_vfdModel->data(dirIndex).toUInt();
+                    QModelIndex directionIndex = m_vfdModel->index(m_vfdModel->rowCount() - 1, DirectionColumn);
+                    uint direction = m_vfdModel->data(directionIndex).toUInt();
 
                     //parse feedback speed and update the data model
                     double feedbackSpeed = getFeedbackSpeed(rawValue, direction);
@@ -200,22 +201,22 @@ void UnicoVFD::onModelDataChanged(QModelIndex topLeft, QModelIndex bottomRight)
         break;
     case AccelerationColumn:
         //send acceleration request
-        m_speedRamp->setRampUpRate(normalizeRate(data));
+        m_speedRamp->setRampUpRate(normalizeRampRate(data));
         break;
     case DecelerationColumn:
         //send deceleration request
-        m_speedRamp->setRampDownRate(normalizeRate(data));
+        m_speedRamp->setRampDownRate(normalizeRampRate(data));
         break;
     }
 }
 
-double UnicoVFD::normalizeRate(double rate)
+double UnicoVFD::normalizeRampRate(double rate)
 {
     double pacemakerRate = m_paceMaker->interval();
     return rate * pacemakerRate / 1000;
 }
 
-double UnicoVFD::getFeedbackSpeed(double fb, uint direction)
+double UnicoVFD::getFeedbackSpeed(double fbSpeed, uint direction)
 {
     double result = -1;
 
@@ -223,10 +224,10 @@ double UnicoVFD::getFeedbackSpeed(double fb, uint direction)
         result = -1;
 
     if (direction == 1)
-        result = fb / 10;
+        result = fbSpeed / 10;
 
     if (direction == 2)
-        result = (fb - 65536) / 10; //2^16 = 65536
+        result = (fbSpeed - 65536) / 10; //2^16 = 65536
 
     return result;
 }

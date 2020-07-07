@@ -9,15 +9,15 @@
 #include "abstractvfd.h"
 #include "rampgenerator.h"
 
-class UnicoVFD : public QObject, public AbstractVFD
+class UnicoVFD : public AbstractVFD
 {
     Q_OBJECT
 
 public:
-    UnicoVFD(QModbusClient *modbusDevice = nullptr,
-             QAbstractItemModel *model = nullptr,
-             QTimer *pacemaker = nullptr,
-             QObject *parent = nullptr);
+    UnicoVFD(QModbusClient *modbusDevice = 0,
+             QAbstractItemModel *model = 0,
+             QTimer *pacemaker = 0,
+             QObject *parent = 0);
 
     ~UnicoVFD() override;
 
@@ -38,10 +38,9 @@ public:
     /**
      * Set the pacemaker for this VFD
      *
-     * @param pacemaker A clock which shows how often data are sended to VFD
+     * @param pacemaker A clock which shows how often vfds data are updated
      */
     void setPacemaker(QTimer *pacemaker);
-
 
     /**
      * Set VFD speed
@@ -70,6 +69,8 @@ public:
 public slots:
     /**
      * Handle update request from mainwindow
+     *
+     * Update the new motors control speed and turn direction
      */
     void onUpdateRequest();
 
@@ -81,26 +82,36 @@ private slots:
 
     /**
      * Handle the dataChanged signal from data model
+     *
+     * Update the new target ramp value, ramp rate for VFD
+     * @param topLeft Models starting range with new data
+     * @param bottomRight Models ending range with new data
      */
     void onModelDataChanged(QModelIndex topLeft, QModelIndex bottomRight);
 
 private:
     /**
-     * Scale the rate value to the pacemaker update rate
+     * Scale the ramps rate value to the pacemaker update clock
+     *
+     * @param rate Users desired ramp rate
+     * @return double Scaled ramp rate with pacemaker update clock
      */
-    double normalizeRate(double rate);
+    double normalizeRampRate(double rate);
 
     /**
      * Parsing the feedback speed from VFD
+     *
+     * @param fbSpeed Raw speed feedback from the VFD
+     * @param direction Motors turn direction
      */
-    double getFeedbackSpeed(double fb, uint direction);
+    double getFeedbackSpeed(double fbSpeed, uint direction);
 
 private:
-    QModbusClient * m_modbusDevice = nullptr;
-    QAbstractItemModel * m_vfdModel = nullptr;
+    QModbusClient * m_modbusDevice = 0;
+    QAbstractItemModel * m_vfdModel = 0;
 
-    RampGenerator * m_speedRamp = nullptr;
-    QTimer * m_paceMaker = nullptr;
+    RampGenerator * m_speedRamp = 0;
+    QTimer * m_paceMaker = 0;
 };
 
 #endif // UNICOVFD_H

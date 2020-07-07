@@ -39,7 +39,7 @@ class VFDDataModel : public QAbstractTableModel
 {
     Q_OBJECT
 public:
-    VFDDataModel(QObject *parent = nullptr);
+    VFDDataModel(QObject *parent = 0);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -48,8 +48,10 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
-    /*
-     * @brief Get the whole vfd data
+    /**
+     * Get the whole vfd data
+     *
+     * @return VFDData
      */
     const VFDData getVFDData() const;
 
