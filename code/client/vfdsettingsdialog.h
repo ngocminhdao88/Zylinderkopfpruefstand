@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QDialog>
 #include <QSerialPort>
-#include <QtSerialBus/qtserialbusglobal.h>
+//#include <QtSerialBus/qtserialbusglobal.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -35,8 +35,10 @@ public:
     ~VfdSettingsDialog();
 
     /*
-     * \brief Return the vfd's settings
-     * \return Settings User's settings for VFD
+     * Return the vfd's settings
+     *
+     * These are Modbus settings, which needed to connect to the Unico VFD
+     * @return Settings User's settings for VFD
      */
     Settings settings() const;
 

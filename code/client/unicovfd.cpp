@@ -233,16 +233,20 @@ double UnicoVFD::getFeedbackSpeed(double fb, uint direction)
 
 void UnicoVFD::onUpdateRequest()
 {
-    //calculate speed ramp
     m_speedRamp->calculateRamp();
+
     //update model
     QModelIndex rampIndex = m_vfdModel->index(m_vfdModel->rowCount() - 1, RampSpeedColumn);
     m_vfdModel->setData(rampIndex, m_speedRamp->output());
+
     //send ramp speed request
     setSpeed(m_speedRamp->output());
+
     //send get speed request
     getSpeed();
+
     //update feedback speed in model is in onReadyRead slot
+
     //setDirection
     QModelIndex directionIndex = m_vfdModel->index(m_vfdModel->rowCount() - 1, DirectionColumn);
     double direction = m_vfdModel->data(directionIndex).toDouble();

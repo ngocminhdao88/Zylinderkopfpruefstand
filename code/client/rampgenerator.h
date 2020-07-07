@@ -10,53 +10,79 @@ public:
     explicit RampGenerator(QObject *parent = nullptr);
 
     /*
-     * @brief Enable the ramp generator to run
+     * Enable the ramp generator
+     *
+     * The ramp generator will only calculate new output data if it is enabled
+     * @param enable Enable the ramp generator.
      */
     void setEnable(bool enable);
 
     /*
-     * @brief Ramp output has reached the target value
+     * Indicate that the ramp output has reached the target value
+     *
+     * @return bool
      */
     bool isValueReached();
 
     /*
-     * @brief Ramp generator output
+     * Ramp generator output
+     *
+     * @return double Calculated ramp value
      */
     double output();
 
 public slots:
-    /*
-     * @brief Calculating the ramp
+    /**
+     * Calculating the ramp
+     *
+     * A slot to force this ramp generator to calculate a new value
      */
     void calculateRamp();
 
-    /*
-     * @brief Set the ramp target value
+    /**
+     * Set the ramp target value
+     *
+     * This is the maximal number this ramp can generate
      */
     void setTargetValue(double target);
 
-    /*
-     * @brief Set the ramp up rate
+    /**
+     * Set the ramp up rate
+     *
+     * This sets how fast the ramp reaches its target value
+     * when the current output is less than wanted output.
      */
     void setRampUpRate(double rate);
 
-    /*
-     * @brief Set the ramp down rate
+    /**
+     * Set the ramp down rate
+     *
+     * This sets how fast the ramp reaches its target value
+     * when the current output is greater than wanted output.
      */
     void setRampDownRate(double rate);
 
-    /*
-     * @brief Set the ramp start value
+    /**
+     * Set the ramp start value
+     *
+     * This the default output value of the ramp when it first started
      */
     void setStartValue(double rate);
 
 signals:
-    /*
-     * @brief Signal when output has changed from last value
+    /**
+     * Signal outputChanged
+     *
+     * This signal will be emited when the ramp generates a new value
+     * @param newValue This is the new ramp output value
      */
     void outputChanged(double newValue);
+
     /*
-     * @brief Signal when output has reached the target value
+     * Signal valueReached
+     *
+     * This signal will be emited when the ramp output
+     * has reached its target value
      */
     void valueReached();
 
