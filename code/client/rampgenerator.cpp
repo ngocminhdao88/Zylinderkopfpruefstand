@@ -2,7 +2,9 @@
 
 RampGenerator::RampGenerator(QObject *parent) : QObject(parent)
 {
+}
 
+RampGenerator::~RampGenerator() {
 }
 
 void RampGenerator::setEnable(bool enable)
@@ -18,7 +20,7 @@ bool RampGenerator::isValueReached()
 
 void RampGenerator::calculateRamp()
 {
-    //only run the ramp calculation if it's enabled
+    //only calculate the ramp if it's enabled
     if (!m_enable)
         return;
 

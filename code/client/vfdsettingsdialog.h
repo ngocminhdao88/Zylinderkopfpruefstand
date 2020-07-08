@@ -13,37 +13,47 @@ class VfdSettingsDialog;
 }
 QT_END_NAMESPACE
 
-/*
- * \brief The VfdSettingsDialog class
- * \details Holding vfd's settings
+/**
+ * @brief Display a window. It shows all settings for VFD
  */
 class VfdSettingsDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    struct Settings {
+    /**
+      * @brief A Setting data type. It holds the settings data for VFD
+      */
+    typedef struct {
         int parity = QSerialPort::NoParity;
         int baud = QSerialPort::Baud9600;
         int dataBits = QSerialPort::Data8;
         int stopBits = QSerialPort::OneStop;
         int responseTime = 1000;
         int numberOfRetries = 3;
-    };
+    } Setting_t;
 
+    /**
+     * @brief Default constructor
+     * @param parent - A QObject parent, which owns this
+     */
     VfdSettingsDialog(QWidget *parent = nullptr);
+
+    /**
+     * @brief Default deconstructor
+     */
     ~VfdSettingsDialog();
 
-    /*
-     * Return the vfd's settings
+    /**
+     * @brief Return the vfd's settings
      *
-     * These are Modbus settings, which needed to connect to the Unico VFD
-     * @return Settings User's settings for VFD
+     * These are Modbus settings, which used to connect to the Unico VFD
+     * @return Setting_t
      */
-    Settings settings() const;
+    Setting_t settings() const;
 
 private:
-    Settings m_settings;
+    Setting_t m_settings;
     Ui::VfdSettingsDialog *ui;
 };
 

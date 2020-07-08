@@ -1,0 +1,199 @@
+\hypertarget{class_unico_v_f_d}{}\doxysection{Unico\+V\+FD Class Reference}
+\label{class_unico_v_f_d}\index{UnicoVFD@{UnicoVFD}}
+
+
+The \mbox{\hyperlink{class_unico_v_f_d}{Unico\+V\+FD}} class helps the software to talk to the Unico S1100 V\+FD using Modbus.  
+
+
+
+
+{\ttfamily \#include $<$unicovfd.\+h$>$}
+
+Inheritance diagram for Unico\+V\+FD\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_unico_v_f_d}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_unico_v_f_d_a843f8c033946935dbd0806c26862fb31}{on\+Update\+Request}} ()
+\begin{DoxyCompactList}\small\item\em Handle update request from mainwindow. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_unico_v_f_d_ac6eb24d88450f0b3c56e659847ed4356}{Unico\+V\+FD}} (Q\+Modbus\+Client $\ast$modbus\+Device=0, Q\+Abstract\+Item\+Model $\ast$model=0, Q\+Timer $\ast$pacemaker=0, Q\+Object $\ast$parent=0)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_unico_v_f_d_ab35b05d9bb674bb95907b975aa0a232d}\label{class_unico_v_f_d_ab35b05d9bb674bb95907b975aa0a232d}} 
+\mbox{\hyperlink{class_unico_v_f_d_ab35b05d9bb674bb95907b975aa0a232d}{$\sim$\+Unico\+V\+FD}} () override
+\begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_unico_v_f_d_a3597534637949968ca5af9f56b5be5ed}{set\+Device}} (Q\+Modbus\+Client $\ast$device)
+\begin{DoxyCompactList}\small\item\em Set the serial modbus device for this V\+FD. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_unico_v_f_d_ad772a2e70aec719ddcac3c7a445b27d0}{set\+Model}} (Q\+Abstract\+Item\+Model $\ast$model)
+\begin{DoxyCompactList}\small\item\em Set the vfd data model for this V\+FD. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_unico_v_f_d_aca0ac6df05922f63bd82ce25a6a4013e}{set\+Pacemaker}} (Q\+Timer $\ast$pacemaker)
+\begin{DoxyCompactList}\small\item\em Set the pacemaker (update clock) for this V\+FD. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_unico_v_f_d_a4c33205fd829133ea9626324669270eb}{set\+Speed}} (double speed) override
+\begin{DoxyCompactList}\small\item\em Set V\+FD speed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_unico_v_f_d_a654587d1a572fd55c50aa7f019721a7e}{set\+Direction}} (double dir) override
+\begin{DoxyCompactList}\small\item\em Set the motor turn direction. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_unico_v_f_d_af0f84ae41a9a77f49f77a64afb1c6945}\label{class_unico_v_f_d_af0f84ae41a9a77f49f77a64afb1c6945}} 
+void \mbox{\hyperlink{class_unico_v_f_d_af0f84ae41a9a77f49f77a64afb1c6945}{set\+Ramp\+Up\+Rate}} (double rate) override
+\begin{DoxyCompactList}\small\item\em Set V\+FD ramp rate. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_unico_v_f_d_ab6ae0398322760bc8a4269adc1ca228b}\label{class_unico_v_f_d_ab6ae0398322760bc8a4269adc1ca228b}} 
+void \mbox{\hyperlink{class_unico_v_f_d_ab6ae0398322760bc8a4269adc1ca228b}{set\+Ramp\+Down\+Rate}} (double rate) override
+\begin{DoxyCompactList}\small\item\em Set V\+FD ramp down rate. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_unico_v_f_d_af93e2c8bf2be175c0acd342f6a03eb41}{get\+Speed}} () override
+\begin{DoxyCompactList}\small\item\em Get the motor\textquotesingle{}s speed from V\+FD reading. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{class_unico_v_f_d}{Unico\+V\+FD}} class helps the software to talk to the Unico S1100 V\+FD using Modbus. 
+
+\begin{DoxyAuthor}{Author}
+Ngoc Minh Dao 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_unico_v_f_d_ac6eb24d88450f0b3c56e659847ed4356}\label{class_unico_v_f_d_ac6eb24d88450f0b3c56e659847ed4356}} 
+\index{UnicoVFD@{UnicoVFD}!UnicoVFD@{UnicoVFD}}
+\index{UnicoVFD@{UnicoVFD}!UnicoVFD@{UnicoVFD}}
+\doxysubsubsection{\texorpdfstring{UnicoVFD()}{UnicoVFD()}}
+{\footnotesize\ttfamily Unico\+V\+F\+D\+::\+Unico\+V\+FD (\begin{DoxyParamCaption}\item[{Q\+Modbus\+Client $\ast$}]{modbus\+Device = {\ttfamily 0},  }\item[{Q\+Abstract\+Item\+Model $\ast$}]{model = {\ttfamily 0},  }\item[{Q\+Timer $\ast$}]{pacemaker = {\ttfamily 0},  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em modbus\+Device} & -\/ A serial device connected to the Unico V\+FD \\
+\hline
+{\em model} & -\/ A V\+FD data model \\
+\hline
+{\em pacemaker} & -\/ A clock/timer, which determines how often data are sended to V\+FD \\
+\hline
+{\em parent} & -\/ A Q\+Object, which owns this \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_unico_v_f_d_af93e2c8bf2be175c0acd342f6a03eb41}\label{class_unico_v_f_d_af93e2c8bf2be175c0acd342f6a03eb41}} 
+\index{UnicoVFD@{UnicoVFD}!getSpeed@{getSpeed}}
+\index{getSpeed@{getSpeed}!UnicoVFD@{UnicoVFD}}
+\doxysubsubsection{\texorpdfstring{getSpeed()}{getSpeed()}}
+{\footnotesize\ttfamily double Unico\+V\+F\+D\+::get\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the motor\textquotesingle{}s speed from V\+FD reading. 
+
+\begin{DoxyReturn}{Returns}
+Motor\textquotesingle{}s speed 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_abstract_v_f_d_aae5cfbba1d3e73db7d92998343747ed9}{Abstract\+V\+FD}}.
+
+\mbox{\Hypertarget{class_unico_v_f_d_a843f8c033946935dbd0806c26862fb31}\label{class_unico_v_f_d_a843f8c033946935dbd0806c26862fb31}} 
+\index{UnicoVFD@{UnicoVFD}!onUpdateRequest@{onUpdateRequest}}
+\index{onUpdateRequest@{onUpdateRequest}!UnicoVFD@{UnicoVFD}}
+\doxysubsubsection{\texorpdfstring{onUpdateRequest}{onUpdateRequest}}
+{\footnotesize\ttfamily void Unico\+V\+F\+D\+::on\+Update\+Request (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Handle update request from mainwindow. 
+
+Update the new motors control speed and turn direction \mbox{\Hypertarget{class_unico_v_f_d_a3597534637949968ca5af9f56b5be5ed}\label{class_unico_v_f_d_a3597534637949968ca5af9f56b5be5ed}} 
+\index{UnicoVFD@{UnicoVFD}!setDevice@{setDevice}}
+\index{setDevice@{setDevice}!UnicoVFD@{UnicoVFD}}
+\doxysubsubsection{\texorpdfstring{setDevice()}{setDevice()}}
+{\footnotesize\ttfamily void Unico\+V\+F\+D\+::set\+Device (\begin{DoxyParamCaption}\item[{Q\+Modbus\+Client $\ast$}]{device }\end{DoxyParamCaption})}
+
+
+
+Set the serial modbus device for this V\+FD. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em device} & A modbus device, which is used to connect to the V\+FD \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_unico_v_f_d_a654587d1a572fd55c50aa7f019721a7e}\label{class_unico_v_f_d_a654587d1a572fd55c50aa7f019721a7e}} 
+\index{UnicoVFD@{UnicoVFD}!setDirection@{setDirection}}
+\index{setDirection@{setDirection}!UnicoVFD@{UnicoVFD}}
+\doxysubsubsection{\texorpdfstring{setDirection()}{setDirection()}}
+{\footnotesize\ttfamily void Unico\+V\+F\+D\+::set\+Direction (\begin{DoxyParamCaption}\item[{double}]{dir }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Set the motor turn direction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir} & Motor\textquotesingle{}s turn direction. 0 -\/$>$ S\+T\+OP, 1 -\/$>$ C\+CW and 2 -\/$>$ CW. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_abstract_v_f_d_afc642a22ac6dc59616dfce92b8d13ef4}{Abstract\+V\+FD}}.
+
+\mbox{\Hypertarget{class_unico_v_f_d_ad772a2e70aec719ddcac3c7a445b27d0}\label{class_unico_v_f_d_ad772a2e70aec719ddcac3c7a445b27d0}} 
+\index{UnicoVFD@{UnicoVFD}!setModel@{setModel}}
+\index{setModel@{setModel}!UnicoVFD@{UnicoVFD}}
+\doxysubsubsection{\texorpdfstring{setModel()}{setModel()}}
+{\footnotesize\ttfamily void Unico\+V\+F\+D\+::set\+Model (\begin{DoxyParamCaption}\item[{Q\+Abstract\+Item\+Model $\ast$}]{model }\end{DoxyParamCaption})}
+
+
+
+Set the vfd data model for this V\+FD. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & A model holds all data of the V\+FD \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_unico_v_f_d_aca0ac6df05922f63bd82ce25a6a4013e}\label{class_unico_v_f_d_aca0ac6df05922f63bd82ce25a6a4013e}} 
+\index{UnicoVFD@{UnicoVFD}!setPacemaker@{setPacemaker}}
+\index{setPacemaker@{setPacemaker}!UnicoVFD@{UnicoVFD}}
+\doxysubsubsection{\texorpdfstring{setPacemaker()}{setPacemaker()}}
+{\footnotesize\ttfamily void Unico\+V\+F\+D\+::set\+Pacemaker (\begin{DoxyParamCaption}\item[{Q\+Timer $\ast$}]{pacemaker }\end{DoxyParamCaption})}
+
+
+
+Set the pacemaker (update clock) for this V\+FD. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pacemaker} & A clock which shows how often vfds data are updated \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_unico_v_f_d_a4c33205fd829133ea9626324669270eb}\label{class_unico_v_f_d_a4c33205fd829133ea9626324669270eb}} 
+\index{UnicoVFD@{UnicoVFD}!setSpeed@{setSpeed}}
+\index{setSpeed@{setSpeed}!UnicoVFD@{UnicoVFD}}
+\doxysubsubsection{\texorpdfstring{setSpeed()}{setSpeed()}}
+{\footnotesize\ttfamily void Unico\+V\+F\+D\+::set\+Speed (\begin{DoxyParamCaption}\item[{double}]{speed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Set V\+FD speed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em speed} & Wanted motor speed \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_abstract_v_f_d_a4786ffa1e1fd922a35aa90eedce6da0d}{Abstract\+V\+FD}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+unicovfd.\+h\item 
+unicovfd.\+cpp\end{DoxyCompactItemize}

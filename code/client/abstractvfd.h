@@ -3,6 +3,11 @@
 
 #include <QObject>
 
+/**
+ * @brief The AbstractVFD class
+ *
+ * There are some virtual functions in this class, which must be implementd in its child
+ */
 class AbstractVFD : public QObject
 {
     Q_OBJECT

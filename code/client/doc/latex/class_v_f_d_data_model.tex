@@ -1,0 +1,90 @@
+\hypertarget{class_v_f_d_data_model}{}\doxysection{V\+F\+D\+Data\+Model Class Reference}
+\label{class_v_f_d_data_model}\index{VFDDataModel@{VFDDataModel}}
+
+
+Holds all V\+F\+Ds data like speed, ramp, turn direction etc...  
+
+
+
+
+{\ttfamily \#include $<$vfddatamodel.\+h$>$}
+
+Inheritance diagram for V\+F\+D\+Data\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_v_f_d_data_model}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_v_f_d_data_model_1_1_v_f_d_data__t}{V\+F\+D\+Data\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em A V\+F\+D\+Data type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_v_f_d_data_model_a50c96695dabcd7fb5beafcab622ee33e}{V\+F\+D\+Data\+Model}} (Q\+Object $\ast$parent=0)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_v_f_d_data_model_add9b26d06f34634d0b971c0978eab8f9}\label{class_v_f_d_data_model_add9b26d06f34634d0b971c0978eab8f9}} 
+int \mbox{\hyperlink{class_v_f_d_data_model_add9b26d06f34634d0b971c0978eab8f9}{row\+Count}} (const Q\+Model\+Index \&parent=Q\+Model\+Index()) const override
+\begin{DoxyCompactList}\small\item\em Override the row\+Count function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_v_f_d_data_model_a3668732a965747874afd2ca9baa63180}\label{class_v_f_d_data_model_a3668732a965747874afd2ca9baa63180}} 
+int \mbox{\hyperlink{class_v_f_d_data_model_a3668732a965747874afd2ca9baa63180}{column\+Count}} (const Q\+Model\+Index \&parent=Q\+Model\+Index()) const override
+\begin{DoxyCompactList}\small\item\em Override column\+Count function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_v_f_d_data_model_a3f559dbbd23b2133fb0f572457a621c4}\label{class_v_f_d_data_model_a3f559dbbd23b2133fb0f572457a621c4}} 
+Q\+Variant \mbox{\hyperlink{class_v_f_d_data_model_a3f559dbbd23b2133fb0f572457a621c4}{data}} (const Q\+Model\+Index \&index, int role=Qt\+::\+Display\+Role) const override
+\begin{DoxyCompactList}\small\item\em Override data function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_v_f_d_data_model_a71b2dc921cf1b8ab6dcf28cf27a05134}\label{class_v_f_d_data_model_a71b2dc921cf1b8ab6dcf28cf27a05134}} 
+Q\+Variant \mbox{\hyperlink{class_v_f_d_data_model_a71b2dc921cf1b8ab6dcf28cf27a05134}{header\+Data}} (int section, Qt\+::\+Orientation orientation, int role=Qt\+::\+Display\+Role) const override
+\begin{DoxyCompactList}\small\item\em Override header\+Data function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_v_f_d_data_model_ad698c0c76efe255ab56a37c32fcbd446}\label{class_v_f_d_data_model_ad698c0c76efe255ab56a37c32fcbd446}} 
+bool \mbox{\hyperlink{class_v_f_d_data_model_ad698c0c76efe255ab56a37c32fcbd446}{set\+Data}} (const Q\+Model\+Index \&index, const Q\+Variant \&value, int role=Qt\+::\+Edit\+Role) override
+\begin{DoxyCompactList}\small\item\em Override set\+Data function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_v_f_d_data_model_aa79e7b9c8472fbaad4d4eff7d379247c}\label{class_v_f_d_data_model_aa79e7b9c8472fbaad4d4eff7d379247c}} 
+Qt\+::\+Item\+Flags \mbox{\hyperlink{class_v_f_d_data_model_aa79e7b9c8472fbaad4d4eff7d379247c}{flags}} (const Q\+Model\+Index \&index) const override
+\begin{DoxyCompactList}\small\item\em Override flags function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{struct_v_f_d_data_model_1_1_v_f_d_data__t}{V\+F\+D\+Data\+\_\+t}} \mbox{\hyperlink{class_v_f_d_data_model_ac2713c3623b6bd189c7d66f7e5d7456d}{get\+V\+F\+D\+Data}} () const
+\begin{DoxyCompactList}\small\item\em Get the whole V\+F\+Ds data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Holds all V\+F\+Ds data like speed, ramp, turn direction etc... 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_v_f_d_data_model_a50c96695dabcd7fb5beafcab622ee33e}\label{class_v_f_d_data_model_a50c96695dabcd7fb5beafcab622ee33e}} 
+\index{VFDDataModel@{VFDDataModel}!VFDDataModel@{VFDDataModel}}
+\index{VFDDataModel@{VFDDataModel}!VFDDataModel@{VFDDataModel}}
+\doxysubsubsection{\texorpdfstring{VFDDataModel()}{VFDDataModel()}}
+{\footnotesize\ttfamily V\+F\+D\+Data\+Model\+::\+V\+F\+D\+Data\+Model (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & -\/ A Q\+Object parent, which owns this class \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_v_f_d_data_model_ac2713c3623b6bd189c7d66f7e5d7456d}\label{class_v_f_d_data_model_ac2713c3623b6bd189c7d66f7e5d7456d}} 
+\index{VFDDataModel@{VFDDataModel}!getVFDData@{getVFDData}}
+\index{getVFDData@{getVFDData}!VFDDataModel@{VFDDataModel}}
+\doxysubsubsection{\texorpdfstring{getVFDData()}{getVFDData()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{struct_v_f_d_data_model_1_1_v_f_d_data__t}{V\+F\+D\+Data\+\_\+t}} V\+F\+D\+Data\+Model\+::get\+V\+F\+D\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the whole V\+F\+Ds data. 
+
+\begin{DoxyReturn}{Returns}
+V\+F\+D\+Data 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+vfddatamodel.\+h\item 
+vfddatamodel.\+cpp\end{DoxyCompactItemize}

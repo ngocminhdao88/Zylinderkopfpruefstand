@@ -29,17 +29,17 @@ QVariant VFDDataModel::data(const QModelIndex &index, int role) const
 
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
         if (index.column() == ControlSpeedColumn)
-            return vfdData.controlSpeed;
+            return m_vfdData.controlSpeed;
         if (index.column() == RampSpeedColumn)
-            return vfdData.rampSpeed;
+            return m_vfdData.rampSpeed;
         if (index.column() == FeedbackSpeedColumn)
-            return vfdData.feedbackSpeed;
+            return m_vfdData.feedbackSpeed;
         if (index.column() == DirectionColumn)
-            return vfdData.turnDirection;
+            return m_vfdData.turnDirection;
         if (index.column() == AccelerationColumn)
-            return vfdData.acceleration;
+            return m_vfdData.acceleration;
         if (index.column() == DecelerationColumn)
-            return vfdData.deceleration;
+            return m_vfdData.deceleration;
     }
 
     return QVariant();
@@ -79,17 +79,17 @@ bool VFDDataModel::setData(const QModelIndex &index, const QVariant &value, int 
     const int col = index.column();
 
     if (col == ControlSpeedColumn)
-        vfdData.controlSpeed = value.toDouble();
+        m_vfdData.controlSpeed = value.toDouble();
     if (col == RampSpeedColumn)
-        vfdData.rampSpeed = value.toDouble();
+        m_vfdData.rampSpeed = value.toDouble();
     if (col == FeedbackSpeedColumn)
-        vfdData.feedbackSpeed = value.toDouble();
+        m_vfdData.feedbackSpeed = value.toDouble();
     if (col == DirectionColumn)
-        vfdData.turnDirection = value.toDouble();
+        m_vfdData.turnDirection = value.toDouble();
     if (col == AccelerationColumn)
-        vfdData.acceleration = value.toDouble();
+        m_vfdData.acceleration = value.toDouble();
     if (col == DecelerationColumn)
-        vfdData.deceleration = value.toDouble();
+        m_vfdData.deceleration = value.toDouble();
 
     emit dataChanged(index, index);
 
@@ -104,7 +104,7 @@ Qt::ItemFlags VFDDataModel::flags(const QModelIndex &index) const
     return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
 }
 
-const VFDData VFDDataModel::getVFDData() const
+const VFDData_t VFDDataModel::getVFDData() const
 {
-    return vfdData;
+    return m_vfdData;
 }

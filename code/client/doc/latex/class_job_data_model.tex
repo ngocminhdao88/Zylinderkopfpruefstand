@@ -1,0 +1,72 @@
+\hypertarget{class_job_data_model}{}\doxysection{Job\+Data\+Model Class Reference}
+\label{class_job_data_model}\index{JobDataModel@{JobDataModel}}
+
+
+The \mbox{\hyperlink{class_job_data_model}{Job\+Data\+Model}} class holds all information about the test job.  
+
+
+
+
+{\ttfamily \#include $<$jobdatamodel.\+h$>$}
+
+Inheritance diagram for Job\+Data\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_job_data_model}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_job_data_model_1_1_job_data__t}{Job\+Data\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em A Job\+Data type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_job_data_model_aecfd6b80caa5b496804c6e328e873d16}{Job\+Data\+Model}} (Q\+Object $\ast$parent=0)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_job_data_model_aea12d37efb606220be2e56bfaad96100}\label{class_job_data_model_aea12d37efb606220be2e56bfaad96100}} 
+int \mbox{\hyperlink{class_job_data_model_aea12d37efb606220be2e56bfaad96100}{row\+Count}} (const Q\+Model\+Index \&parent=Q\+Model\+Index()) const override
+\begin{DoxyCompactList}\small\item\em Override row\+Count function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_job_data_model_ae84896e0efa16ad52032d199db0e3fbb}\label{class_job_data_model_ae84896e0efa16ad52032d199db0e3fbb}} 
+int \mbox{\hyperlink{class_job_data_model_ae84896e0efa16ad52032d199db0e3fbb}{column\+Count}} (const Q\+Model\+Index \&parent=Q\+Model\+Index()) const override
+\begin{DoxyCompactList}\small\item\em Override column\+Count function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_job_data_model_a935332473df340d66250c53f9caf0dd6}\label{class_job_data_model_a935332473df340d66250c53f9caf0dd6}} 
+Q\+Variant \mbox{\hyperlink{class_job_data_model_a935332473df340d66250c53f9caf0dd6}{data}} (const Q\+Model\+Index \&index, int role=Qt\+::\+Display\+Role) const override
+\begin{DoxyCompactList}\small\item\em Override data function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_job_data_model_a3607db6016381633ad21db525581386f}\label{class_job_data_model_a3607db6016381633ad21db525581386f}} 
+Q\+Variant \mbox{\hyperlink{class_job_data_model_a3607db6016381633ad21db525581386f}{header\+Data}} (int section, Qt\+::\+Orientation orientation, int role=Qt\+::\+Display\+Role) const override
+\begin{DoxyCompactList}\small\item\em Override header\+Data function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_job_data_model_a21d8da958cc1ab4e3b6b08bb97779176}\label{class_job_data_model_a21d8da958cc1ab4e3b6b08bb97779176}} 
+bool \mbox{\hyperlink{class_job_data_model_a21d8da958cc1ab4e3b6b08bb97779176}{set\+Data}} (const Q\+Model\+Index \&index, const Q\+Variant \&value, int role=Qt\+::\+Edit\+Role) override
+\begin{DoxyCompactList}\small\item\em Override set\+Data function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_job_data_model_a371ec318d03af43b86f0375e074f5caf}\label{class_job_data_model_a371ec318d03af43b86f0375e074f5caf}} 
+Qt\+::\+Item\+Flags \mbox{\hyperlink{class_job_data_model_a371ec318d03af43b86f0375e074f5caf}{flags}} (const Q\+Model\+Index \&index) const override
+\begin{DoxyCompactList}\small\item\em Override flags function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{class_job_data_model}{Job\+Data\+Model}} class holds all information about the test job. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_job_data_model_aecfd6b80caa5b496804c6e328e873d16}\label{class_job_data_model_aecfd6b80caa5b496804c6e328e873d16}} 
+\index{JobDataModel@{JobDataModel}!JobDataModel@{JobDataModel}}
+\index{JobDataModel@{JobDataModel}!JobDataModel@{JobDataModel}}
+\doxysubsubsection{\texorpdfstring{JobDataModel()}{JobDataModel()}}
+{\footnotesize\ttfamily Job\+Data\+Model\+::\+Job\+Data\+Model (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & -\/ A Q\+Object, which owns this \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+jobdatamodel.\+h\item 
+jobdatamodel.\+cpp\end{DoxyCompactItemize}

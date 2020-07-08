@@ -37,15 +37,15 @@ QVariant JobDataModel::data(const QModelIndex &index, int role) const
 
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
         if (col == JobNumberColumn)
-            return jobData.jobNumber;
+            return m_jobData.jobNumber;
         if (col == JobDescriptionColumn)
-            return jobData.jobDescription;
+            return m_jobData.jobDescription;
         if (col == PartNameColumn)
-            return jobData.partName;
+            return m_jobData.partName;
         if (col == PartNumberColumn)
-            return jobData.partNumber;
+            return m_jobData.partNumber;
         if (col == CustomerColumn)
-            return jobData.customer;
+            return m_jobData.customer;
     }
 
     return QVariant();
@@ -84,15 +84,15 @@ bool JobDataModel::setData(const QModelIndex &index, const QVariant &value, int 
     const int col = index.column();
 
     if (col == JobNumberColumn)
-        jobData.jobNumber = value.toString();
+        m_jobData.jobNumber = value.toString();
     if (col == JobDescriptionColumn)
-        jobData.jobDescription = value.toString();
+        m_jobData.jobDescription = value.toString();
     if (col == PartNameColumn)
-        jobData.partName = value.toString();
+        m_jobData.partName = value.toString();
     if (col == PartNumberColumn)
-        jobData.partNumber = value.toString();
+        m_jobData.partNumber = value.toString();
     if (col == CustomerColumn)
-        jobData.customer = value.toString();
+        m_jobData.customer = value.toString();
 
     emit dataChanged(index, index);
 

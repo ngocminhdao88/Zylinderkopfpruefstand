@@ -1,0 +1,210 @@
+\hypertarget{class_ramp_generator}{}\doxysection{Ramp\+Generator Class Reference}
+\label{class_ramp_generator}\index{RampGenerator@{RampGenerator}}
+
+
+The \mbox{\hyperlink{class_ramp_generator}{Ramp\+Generator}} class ramps the output slowly to the target value.  
+
+
+
+
+{\ttfamily \#include $<$rampgenerator.\+h$>$}
+
+Inheritance diagram for Ramp\+Generator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_ramp_generator}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_ramp_generator_a18782f53dfef31bf34ffdbd03e40e561}{calculate\+Ramp}} ()
+\begin{DoxyCompactList}\small\item\em Calculating the ramp. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_ramp_generator_a4e1cf4ada80dcda9a8c2e4edea9f2223}{set\+Target\+Value}} (double target)
+\begin{DoxyCompactList}\small\item\em Set the ramp target value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_ramp_generator_a8943e21ee4d3e1eef902058cff82fe75}{set\+Ramp\+Up\+Rate}} (double rate)
+\begin{DoxyCompactList}\small\item\em Set the ramp up rate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_ramp_generator_ac95058cbe830ce374707b936f223f3a0}{set\+Ramp\+Down\+Rate}} (double rate)
+\begin{DoxyCompactList}\small\item\em Set the ramp down rate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_ramp_generator_ae379456c1eb40e926b25d07730ce386a}{set\+Start\+Value}} (double rate)
+\begin{DoxyCompactList}\small\item\em Set the ramp start value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_ramp_generator_afa5383726a171cc9c7b3ac3ea29c2554}{output\+Changed}} (double new\+Value)
+\begin{DoxyCompactList}\small\item\em Signal output\+Changed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_ramp_generator_a7a48d8d20461148972bb5814a4aadb61}{value\+Reached}} ()
+\begin{DoxyCompactList}\small\item\em Signal value\+Reached. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_ramp_generator_ab560948d8d7f83974a18f3169e36ab2c}{Ramp\+Generator}} (Q\+Object $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_ramp_generator_a462c08d7aa497ccf7632225b76c1be03}\label{class_ramp_generator_a462c08d7aa497ccf7632225b76c1be03}} 
+\mbox{\hyperlink{class_ramp_generator_a462c08d7aa497ccf7632225b76c1be03}{$\sim$\+Ramp\+Generator}} ()
+\begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_ramp_generator_afcb56cb49aff6b8ffd3e9d1c8ef7dfae}{set\+Enable}} (bool enable)
+\begin{DoxyCompactList}\small\item\em Enable the ramp generator. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_ramp_generator_a32c99a675ca4ab23b7aaa76916a3339d}{is\+Value\+Reached}} ()
+\begin{DoxyCompactList}\small\item\em Indicate that the ramp output has reached the target value. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_ramp_generator_ad865d314905608c3dd4634f614afd005}{output}} ()
+\begin{DoxyCompactList}\small\item\em Ramp generator output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{class_ramp_generator}{Ramp\+Generator}} class ramps the output slowly to the target value. 
+
+\begin{DoxyAuthor}{Author}
+Ngoc Minh Dao 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+July 2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_ramp_generator_ab560948d8d7f83974a18f3169e36ab2c}\label{class_ramp_generator_ab560948d8d7f83974a18f3169e36ab2c}} 
+\index{RampGenerator@{RampGenerator}!RampGenerator@{RampGenerator}}
+\index{RampGenerator@{RampGenerator}!RampGenerator@{RampGenerator}}
+\doxysubsubsection{\texorpdfstring{RampGenerator()}{RampGenerator()}}
+{\footnotesize\ttfamily Ramp\+Generator\+::\+Ramp\+Generator (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & -\/ A Q\+Oject parent \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_ramp_generator_a18782f53dfef31bf34ffdbd03e40e561}\label{class_ramp_generator_a18782f53dfef31bf34ffdbd03e40e561}} 
+\index{RampGenerator@{RampGenerator}!calculateRamp@{calculateRamp}}
+\index{calculateRamp@{calculateRamp}!RampGenerator@{RampGenerator}}
+\doxysubsubsection{\texorpdfstring{calculateRamp}{calculateRamp}}
+{\footnotesize\ttfamily void Ramp\+Generator\+::calculate\+Ramp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Calculating the ramp. 
+
+This function force this ramp generator to calculate a new value. If it is the first time the ramp generator run then the output is equal the start value. If the ramps output is less than the target value (ramp up) then the new output will be last ouput + ramp up rate. If the ramps output is greater than the target value (ramp down) then the new output will be last ouput -\/ ramp down rate. The ramps output will be capped at target value. \mbox{\Hypertarget{class_ramp_generator_a32c99a675ca4ab23b7aaa76916a3339d}\label{class_ramp_generator_a32c99a675ca4ab23b7aaa76916a3339d}} 
+\index{RampGenerator@{RampGenerator}!isValueReached@{isValueReached}}
+\index{isValueReached@{isValueReached}!RampGenerator@{RampGenerator}}
+\doxysubsubsection{\texorpdfstring{isValueReached()}{isValueReached()}}
+{\footnotesize\ttfamily bool Ramp\+Generator\+::is\+Value\+Reached (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Indicate that the ramp output has reached the target value. 
+
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_ramp_generator_ad865d314905608c3dd4634f614afd005}\label{class_ramp_generator_ad865d314905608c3dd4634f614afd005}} 
+\index{RampGenerator@{RampGenerator}!output@{output}}
+\index{output@{output}!RampGenerator@{RampGenerator}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}}
+{\footnotesize\ttfamily double Ramp\+Generator\+::output (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Ramp generator output. 
+
+\begin{DoxyReturn}{Returns}
+double Calculated ramp value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_ramp_generator_afa5383726a171cc9c7b3ac3ea29c2554}\label{class_ramp_generator_afa5383726a171cc9c7b3ac3ea29c2554}} 
+\index{RampGenerator@{RampGenerator}!outputChanged@{outputChanged}}
+\index{outputChanged@{outputChanged}!RampGenerator@{RampGenerator}}
+\doxysubsubsection{\texorpdfstring{outputChanged}{outputChanged}}
+{\footnotesize\ttfamily void Ramp\+Generator\+::output\+Changed (\begin{DoxyParamCaption}\item[{double}]{new\+Value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Signal output\+Changed. 
+
+This signal will be emitted when the ramp generates a new value 
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & This is the new ramp output value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_ramp_generator_afcb56cb49aff6b8ffd3e9d1c8ef7dfae}\label{class_ramp_generator_afcb56cb49aff6b8ffd3e9d1c8ef7dfae}} 
+\index{RampGenerator@{RampGenerator}!setEnable@{setEnable}}
+\index{setEnable@{setEnable}!RampGenerator@{RampGenerator}}
+\doxysubsubsection{\texorpdfstring{setEnable()}{setEnable()}}
+{\footnotesize\ttfamily void Ramp\+Generator\+::set\+Enable (\begin{DoxyParamCaption}\item[{bool}]{enable }\end{DoxyParamCaption})}
+
+
+
+Enable the ramp generator. 
+
+The ramp generator will only calculate new output data if it is enabled 
+\begin{DoxyParams}{Parameters}
+{\em enable} & Enable the ramp generator. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_ramp_generator_ac95058cbe830ce374707b936f223f3a0}\label{class_ramp_generator_ac95058cbe830ce374707b936f223f3a0}} 
+\index{RampGenerator@{RampGenerator}!setRampDownRate@{setRampDownRate}}
+\index{setRampDownRate@{setRampDownRate}!RampGenerator@{RampGenerator}}
+\doxysubsubsection{\texorpdfstring{setRampDownRate}{setRampDownRate}}
+{\footnotesize\ttfamily void Ramp\+Generator\+::set\+Ramp\+Down\+Rate (\begin{DoxyParamCaption}\item[{double}]{rate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Set the ramp down rate. 
+
+This sets how fast the ramp reaches its target value when the current output is greater than wanted output. \mbox{\Hypertarget{class_ramp_generator_a8943e21ee4d3e1eef902058cff82fe75}\label{class_ramp_generator_a8943e21ee4d3e1eef902058cff82fe75}} 
+\index{RampGenerator@{RampGenerator}!setRampUpRate@{setRampUpRate}}
+\index{setRampUpRate@{setRampUpRate}!RampGenerator@{RampGenerator}}
+\doxysubsubsection{\texorpdfstring{setRampUpRate}{setRampUpRate}}
+{\footnotesize\ttfamily void Ramp\+Generator\+::set\+Ramp\+Up\+Rate (\begin{DoxyParamCaption}\item[{double}]{rate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Set the ramp up rate. 
+
+This sets how fast the ramp reaches its target value when the current output is less than wanted output. \mbox{\Hypertarget{class_ramp_generator_ae379456c1eb40e926b25d07730ce386a}\label{class_ramp_generator_ae379456c1eb40e926b25d07730ce386a}} 
+\index{RampGenerator@{RampGenerator}!setStartValue@{setStartValue}}
+\index{setStartValue@{setStartValue}!RampGenerator@{RampGenerator}}
+\doxysubsubsection{\texorpdfstring{setStartValue}{setStartValue}}
+{\footnotesize\ttfamily void Ramp\+Generator\+::set\+Start\+Value (\begin{DoxyParamCaption}\item[{double}]{rate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Set the ramp start value. 
+
+Set the initiate output value of the ramp when it first started \mbox{\Hypertarget{class_ramp_generator_a4e1cf4ada80dcda9a8c2e4edea9f2223}\label{class_ramp_generator_a4e1cf4ada80dcda9a8c2e4edea9f2223}} 
+\index{RampGenerator@{RampGenerator}!setTargetValue@{setTargetValue}}
+\index{setTargetValue@{setTargetValue}!RampGenerator@{RampGenerator}}
+\doxysubsubsection{\texorpdfstring{setTargetValue}{setTargetValue}}
+{\footnotesize\ttfamily void Ramp\+Generator\+::set\+Target\+Value (\begin{DoxyParamCaption}\item[{double}]{target }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Set the ramp target value. 
+
+The ramps output will be capped at this target value. 
+\begin{DoxyParams}{Parameters}
+{\em target} & -\/ Target value of the ramp generator \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_ramp_generator_a7a48d8d20461148972bb5814a4aadb61}\label{class_ramp_generator_a7a48d8d20461148972bb5814a4aadb61}} 
+\index{RampGenerator@{RampGenerator}!valueReached@{valueReached}}
+\index{valueReached@{valueReached}!RampGenerator@{RampGenerator}}
+\doxysubsubsection{\texorpdfstring{valueReached}{valueReached}}
+{\footnotesize\ttfamily void Ramp\+Generator\+::value\+Reached (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Signal value\+Reached. 
+
+This signal will be emited when the ramp output has reached its target value 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+rampgenerator.\+h\item 
+rampgenerator.\+cpp\end{DoxyCompactItemize}

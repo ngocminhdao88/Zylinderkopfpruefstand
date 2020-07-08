@@ -3,29 +3,45 @@
 
 #include <QObject>
 
+/**
+ * @brief The RampGenerator class ramps the output slowly to the target value
+ *
+ * @author Ngoc Minh Dao
+ * @date July 2020
+ */
 class RampGenerator : public QObject
 {
     Q_OBJECT
 public:
-    explicit RampGenerator(QObject *parent = nullptr);
+    /**
+     * @brief Default constructor
+     *
+     * @param parent - A QOject parent
+     */
+    RampGenerator(QObject *parent = nullptr);
 
-    /*
-     * Enable the ramp generator
+    /**
+     * @brief Default destructor
+     */
+    ~RampGenerator();
+
+    /**
+     * @brief Enable the ramp generator
      *
      * The ramp generator will only calculate new output data if it is enabled
      * @param enable Enable the ramp generator.
      */
     void setEnable(bool enable);
 
-    /*
-     * Indicate that the ramp output has reached the target value
+    /**
+     * @brief Indicate that the ramp output has reached the target value
      *
      * @return bool
      */
     bool isValueReached();
 
-    /*
-     * Ramp generator output
+    /**
+     * @brief Ramp generator output
      *
      * @return double Calculated ramp value
      */
@@ -33,21 +49,29 @@ public:
 
 public slots:
     /**
-     * Calculating the ramp
+     * @brief Calculating the ramp
      *
-     * A slot to force this ramp generator to calculate a new value
+     * This function force this ramp generator to calculate a new value.
+     * If it is the first time the ramp generator run then the output is
+     * equal the start value.
+     * If the ramps output is less than the target value (ramp up) then the
+     *  new output will be last ouput + ramp up rate.
+     * If the ramps output is greater than the target value (ramp down) then the
+     * new output will be last ouput - ramp down rate.
+     * The ramps output will be capped at target value.
      */
     void calculateRamp();
 
     /**
-     * Set the ramp target value
+     * @brief Set the ramp target value
      *
-     * This is the maximal number this ramp can generate
+     * The ramps output will be capped at this target value.
+     * @param target - Target value of the ramp generator
      */
     void setTargetValue(double target);
 
     /**
-     * Set the ramp up rate
+     * @brief Set the ramp up rate
      *
      * This sets how fast the ramp reaches its target value
      * when the current output is less than wanted output.
@@ -55,7 +79,7 @@ public slots:
     void setRampUpRate(double rate);
 
     /**
-     * Set the ramp down rate
+     * @brief Set the ramp down rate
      *
      * This sets how fast the ramp reaches its target value
      * when the current output is greater than wanted output.
@@ -63,23 +87,23 @@ public slots:
     void setRampDownRate(double rate);
 
     /**
-     * Set the ramp start value
+     * @brief Set the ramp start value
      *
-     * This the default output value of the ramp when it first started
+     * Set the initiate output value of the ramp when it first started
      */
     void setStartValue(double rate);
 
 signals:
     /**
-     * Signal outputChanged
+     * @brief Signal outputChanged
      *
-     * This signal will be emited when the ramp generates a new value
+     * This signal will be emitted when the ramp generates a new value
      * @param newValue This is the new ramp output value
      */
     void outputChanged(double newValue);
 
-    /*
-     * Signal valueReached
+    /**
+     * @brief Signal valueReached
      *
      * This signal will be emited when the ramp output
      * has reached its target value
@@ -95,7 +119,6 @@ private:
     double m_rampDownRate = 1; //[unit/s]
     bool m_valueReached = false;
     bool m_enable = false;
-
 };
 
 #endif // RAMPGENERATOR_H
