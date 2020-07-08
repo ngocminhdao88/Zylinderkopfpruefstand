@@ -32,6 +32,7 @@ SOURCES += \
 
 HEADERS += \
     abstractvfd.h \
+    global.h \
     jobdatamodel.h \
     jobeditor.h \
     mainwindow.h \

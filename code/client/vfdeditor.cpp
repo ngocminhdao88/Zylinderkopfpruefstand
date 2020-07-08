@@ -1,3 +1,4 @@
+#include "global.h"
 #include "vfdeditor.h"
 #include "ui_vfdeditor.h"
 
@@ -18,12 +19,12 @@ void VFDEditor::setModel(QAbstractItemModel *model)
     mapper = new QDataWidgetMapper(this);
     mapper->setModel(model);
 
-    mapper->addMapping(ui->controlSpeedSpinbox, ControlSpeedColumn);
+    mapper->addMapping(ui->controlSpeedSpinbox, static_cast<int>(VFDDataColumn::ControlSpeed));
     //mapper->addMapping(ui->rampSpeedSpinbox, RampSpeedColumn);
-    mapper->addMapping(ui->feedbackSpeedSpinbox, FeedbackSpeedColumn);
-    mapper->addMapping(ui->directionSpinbox, DirectionColumn);
-    mapper->addMapping(ui->rampUpRateSpinbox, AccelerationColumn);
-    mapper->addMapping(ui->rampDownRateSpinbox, DecelerationColumn);
+    mapper->addMapping(ui->feedbackSpeedSpinbox, static_cast<int>(VFDDataColumn::FeedbackSpeed));
+    mapper->addMapping(ui->directionSpinbox, static_cast<int>(VFDDataColumn::Direction));
+    mapper->addMapping(ui->rampUpRateSpinbox, static_cast<int>(VFDDataColumn::Acceleration));
+    mapper->addMapping(ui->rampDownRateSpinbox, static_cast<int>(VFDDataColumn::Deceleration));
 
     mapper->toLast();
 }

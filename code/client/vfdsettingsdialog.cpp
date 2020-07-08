@@ -35,7 +35,7 @@ VfdSettingsDialog::~VfdSettingsDialog()
     delete ui;
 }
 
-VfdSettingsDialog::Settings VfdSettingsDialog::settings() const
+VfdSettingsDialog::Setting_t VfdSettingsDialog::settings() const
 {
     return m_settings;
 }

@@ -16,17 +16,8 @@
 
 #include <QAbstractItemModel>
 
-enum  VFDDataColumn {
-    ControlSpeedColumn = 0,
-    RampSpeedColumn = 1,
-    FeedbackSpeedColumn = 2,
-    DirectionColumn = 3,
-    AccelerationColumn = 4,
-    DecelerationColumn = 5,
-};
-
 /**
- * @brief Holds all VFDs data like speed, ramp, turn direction etc...
+ * @brief A VFDDataModel. It holds all VFDs data like speed, ramp, turn direction etc...
  */
 class VFDDataModel : public QAbstractTableModel
 {
@@ -86,7 +77,7 @@ public:
      *
      * @return VFDData
      */
-    const VFDData_t getVFDData() const;
+    VFDData_t getVFDData() const;
 
 private:
     VFDData_t m_vfdData;

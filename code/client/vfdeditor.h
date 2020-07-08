@@ -4,7 +4,6 @@
 #include <QWidget>
 #include <QDataWidgetMapper>
 #include <QAbstractItemModel>
-#include "vfddatamodel.h"
 
 namespace Ui {
 class VFDEditor;
