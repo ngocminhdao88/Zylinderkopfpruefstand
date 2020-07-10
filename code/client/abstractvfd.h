@@ -43,6 +43,16 @@ public:
      * @brief Get VFD speed
      */
      virtual double getSpeed() = 0;
+
+    /**
+     * @brief Connect to the VFD device
+     */
+    virtual void connectDevice() = 0;
+
+    /**
+     * @brief Configure the VFD device
+     */
+    virtual void configDevice() = 0;
 };
 
 #endif // ABSTRACTVFD_H

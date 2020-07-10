@@ -82,6 +82,20 @@ public:
      */
     double getSpeed() override;
 
+    /**
+     * @brief Connect to the Unico VFD using Serial Modbus
+     */
+    void connectDevice() override;
+
+    /**
+     * @brief Configure the Unico VFD device
+     *
+     * User can change the serial Modbus parameters, which used to connect to
+     * this Unico VFD. There are also some basic VFDs parameters like maximal
+     * speed or acceleration.
+     */
+    void configDevice() override;
+
 public slots:
     /**
      * @brief Handle update request from mainwindow

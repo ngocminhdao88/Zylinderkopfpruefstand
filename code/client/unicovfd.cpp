@@ -151,6 +151,14 @@ double UnicoVFD::getSpeed()
     return 0;
 }
 
+void UnicoVFD::connectDevice() {
+
+}
+
+void UnicoVFD::configDevice() {
+
+}
+
 void UnicoVFD::onReadReady()
 {
     auto reply = qobject_cast<QModbusReply *>(sender());
