@@ -28,8 +28,7 @@ public:
      * @param pacemaker - A clock/timer, which determines how often data are sended to VFD
      * @param parent - A QObject, which owns this
      */
-    UnicoVFD(QModbusClient *modbusDevice = 0,
-             QAbstractItemModel *model = 0,
+    UnicoVFD( QAbstractItemModel *model = 0,
              QTimer *pacemaker = 0,
              QObject *parent = 0);
 
@@ -132,7 +131,7 @@ private slots:
      * @param topLeft Models starting range with new data
      * @param bottomRight Models ending range with new data
      */
-    void onModelDataChanged(QModelIndex topLeft, QModelIndex bottomRight);
+    void onModelDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);
 
 private:
     /**

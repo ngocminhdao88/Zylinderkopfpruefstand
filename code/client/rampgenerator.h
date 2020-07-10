@@ -18,7 +18,7 @@ public:
      *
      * @param parent - A QOject parent
      */
-    RampGenerator(QObject *parent = nullptr);
+    RampGenerator(QObject *parent = 0);
 
     /**
      * @brief Default destructor
@@ -46,6 +46,11 @@ public:
      * @return double Calculated ramp value
      */
     double output();
+
+    /**
+     * @brief Reset the ramp to it initiate value
+     */
+    void reset();
 
 public slots:
     /**

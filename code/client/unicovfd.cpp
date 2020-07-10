@@ -21,9 +21,8 @@ enum {
     DecelerationRegister = 87,
 };
 
-UnicoVFD::UnicoVFD(QModbusClient *modbusDevice, QAbstractItemModel *model, QTimer *pacemaker, QObject *parent) :
+UnicoVFD::UnicoVFD(QAbstractItemModel *model, QTimer *pacemaker, QObject *parent) :
     AbstractVFD(parent),
-    m_modbusDevice(modbusDevice),
     m_settingDialog(new VfdSettingsDialog()),
     m_speedRamp(new RampGenerator(this))
 {
@@ -61,7 +60,7 @@ void UnicoVFD::setModel(QAbstractItemModel *model)
 
 void UnicoVFD::setPacemaker(QTimer *pacemaker)
 {
-    if (m_paceMaker) {
+    if (pacemaker) {
         m_paceMaker = pacemaker;
 
         connect(m_paceMaker, &QTimer::timeout, this, &UnicoVFD::onUpdateRequest);
@@ -251,21 +250,21 @@ void UnicoVFD::onReadReady()
         }
     }
     else if (reply->error() == QModbusDevice::ProtocolError) {
-        //Protocol error -> do something about that
+        emit statusChanged(reply->errorString());
     }
     else {
-        //Read respone error -> do something about that
+        emit statusChanged(reply->errorString());
     }
 
     reply->deleteLater();
 }
 
-void UnicoVFD::onModelDataChanged(QModelIndex topLeft, QModelIndex bottomRight)
+void UnicoVFD::onModelDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight)
 {
     Q_UNUSED(bottomRight)
 
-    if (!topLeft.isValid())
-        return;
+    if (!topLeft.isValid()) return;
+    if (!m_speedRamp) return;
 
     int col = topLeft.column();
     double data = topLeft.data(Qt::DisplayRole).toDouble();
@@ -274,12 +273,13 @@ void UnicoVFD::onModelDataChanged(QModelIndex topLeft, QModelIndex bottomRight)
     case static_cast<int>(VFDDataColumn::ControlSpeed):
         m_speedRamp->setTargetValue(data);
         break;
+    case static_cast<int>(VFDDataColumn::Direction):
+        if (data == 0) m_speedRamp->reset();
+        break;
     case static_cast<int>(VFDDataColumn::Acceleration):
-        //send acceleration request
         m_speedRamp->setRampUpRate(normalizeRampRate(data));
         break;
     case static_cast<int>(VFDDataColumn::Deceleration):
-        //send deceleration request
         m_speedRamp->setRampDownRate(normalizeRampRate(data));
         break;
     }
@@ -287,6 +287,7 @@ void UnicoVFD::onModelDataChanged(QModelIndex topLeft, QModelIndex bottomRight)
 
 double UnicoVFD::normalizeRampRate(double rate)
 {
+    if (!m_paceMaker) return 1;
     double pacemakerRate = m_paceMaker->interval();
     return rate * pacemakerRate / 1000;
 }
@@ -309,16 +310,21 @@ double UnicoVFD::getFeedbackSpeed(double fbSpeed, uint direction)
 
 void UnicoVFD::onUpdateRequest()
 {
+    if (!m_speedRamp) return;
+    if (!m_vfdModel) return;
+
+    if (!isConnected()) {
+        m_speedRamp->reset();
+        return;
+    }
+
     m_speedRamp->calculateRamp();
 
     //update model
     QModelIndex rampIndex = m_vfdModel->index(m_vfdModel->rowCount() - 1, static_cast<int>(VFDDataColumn::RampSpeed));
     m_vfdModel->setData(rampIndex, m_speedRamp->output());
 
-    //send ramp speed request
     setSpeed(m_speedRamp->output());
-
-    //send get speed request
     getSpeed();
 
     //update feedback speed in model is in onReadyRead slot

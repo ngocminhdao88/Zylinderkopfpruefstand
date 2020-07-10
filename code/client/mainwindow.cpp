@@ -11,11 +11,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     vfdSettingsDialog = new VfdSettingsDialog(this);
 
+    initPacemaker();
     initVfdDevice();
     initJobDataModel();
-
     initActions();
-    initPacemaker();
 
     //SIGNALS -> SLOTS
     connect(ui->connectButton, &QPushButton::clicked, this, &MainWindow::onConnectButtonClicked);
@@ -45,7 +44,7 @@ void MainWindow::initVfdDevice()
     vfdDataModel = new VFDDataModel(this);
     ui->vfdEditor->setModel(vfdDataModel);
 
-    m_vfdDevice = new UnicoVFD(modbusDevice, vfdDataModel, pacemaker, this);
+    m_vfdDevice = new UnicoVFD(vfdDataModel, pacemaker, this);
 }
 
 void MainWindow::initJobDataModel()

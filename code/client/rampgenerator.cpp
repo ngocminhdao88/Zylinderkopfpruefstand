@@ -7,6 +7,10 @@ RampGenerator::RampGenerator(QObject *parent) : QObject(parent)
 RampGenerator::~RampGenerator() {
 }
 
+void RampGenerator::reset() {
+    m_lastOuput = m_startValue;
+}
+
 void RampGenerator::setEnable(bool enable)
 {
     if (m_enable != enable)
