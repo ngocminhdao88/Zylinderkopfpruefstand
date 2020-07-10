@@ -45,7 +45,12 @@ void \mbox{\hyperlink{class_unico_v_f_d_af0f84ae41a9a77f49f77a64afb1c6945}{set\+
 void \mbox{\hyperlink{class_unico_v_f_d_ab6ae0398322760bc8a4269adc1ca228b}{set\+Ramp\+Down\+Rate}} (double rate) override
 \begin{DoxyCompactList}\small\item\em Set V\+FD ramp down rate. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{class_unico_v_f_d_af93e2c8bf2be175c0acd342f6a03eb41}{get\+Speed}} () override
-\begin{DoxyCompactList}\small\item\em Get the motor\textquotesingle{}s speed from V\+FD reading. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get the motor\textquotesingle{}s speed from V\+FD reading. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_unico_v_f_d_a7f55a3e164f7e4e8f3dc734dfd795520}\label{class_unico_v_f_d_a7f55a3e164f7e4e8f3dc734dfd795520}} 
+void \mbox{\hyperlink{class_unico_v_f_d_a7f55a3e164f7e4e8f3dc734dfd795520}{connect\+Device}} () override
+\begin{DoxyCompactList}\small\item\em Connect to the Unico V\+FD using Serial Modbus. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_unico_v_f_d_af8abcb629bf2350d03d22edf070337f5}{config\+Device}} () override
+\begin{DoxyCompactList}\small\item\em Configure the Unico V\+FD device. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -81,6 +86,20 @@ Default constructor.
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_unico_v_f_d_af8abcb629bf2350d03d22edf070337f5}\label{class_unico_v_f_d_af8abcb629bf2350d03d22edf070337f5}} 
+\index{UnicoVFD@{UnicoVFD}!configDevice@{configDevice}}
+\index{configDevice@{configDevice}!UnicoVFD@{UnicoVFD}}
+\doxysubsubsection{\texorpdfstring{configDevice()}{configDevice()}}
+{\footnotesize\ttfamily void Unico\+V\+F\+D\+::config\+Device (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Configure the Unico V\+FD device. 
+
+User can change the serial Modbus parameters, which used to connect to this Unico V\+FD. There are also some basic V\+F\+Ds parameters like maximal speed or acceleration. 
+
+Implements \mbox{\hyperlink{class_abstract_v_f_d_aa9f82e427f57372586c2706c202243f8}{Abstract\+V\+FD}}.
+
 \mbox{\Hypertarget{class_unico_v_f_d_af93e2c8bf2be175c0acd342f6a03eb41}\label{class_unico_v_f_d_af93e2c8bf2be175c0acd342f6a03eb41}} 
 \index{UnicoVFD@{UnicoVFD}!getSpeed@{getSpeed}}
 \index{getSpeed@{getSpeed}!UnicoVFD@{UnicoVFD}}

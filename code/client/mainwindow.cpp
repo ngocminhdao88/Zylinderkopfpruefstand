@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "unicovfd.h"
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -10,16 +11,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     vfdSettingsDialog = new VfdSettingsDialog(this);
 
-    initActions();
-    initPacemaker();
-    refreshPort();
-    initModbusDevice();
-    initUnicoVFD();
+    initVfdDevice();
     initJobDataModel();
 
+    initActions();
+    initPacemaker();
+
     //SIGNALS -> SLOTS
-    connect(ui->portButton, &QPushButton::clicked, this, &MainWindow::refreshPort);
     connect(ui->connectButton, &QPushButton::clicked, this, &MainWindow::onConnectButtonClicked);
+    connect(m_vfdDevice, &AbstractVFD::statusChanged, this, &MainWindow::onVfdStatusChanged);
 }
 
 MainWindow::~MainWindow()
@@ -32,58 +32,20 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::refreshPort()
-{
-    ui->portCombo->clear();
-
-    QList<QSerialPortInfo> ports = QSerialPortInfo::availablePorts();
-    for (QSerialPortInfo port: ports)
-    {
-        ui->portCombo->addItem(port.portName());
-    }
-}
-
-
 void MainWindow::initActions() {
-
-    connect(ui->actionVfdSetting, &QAction::triggered, vfdSettingsDialog, &QDialog::show);
-    connect(ui->actionConnect, &QAction::triggered, this, &MainWindow::onConnectButtonClicked);
-    connect(ui->actionDisconnect, &QAction::triggered, this, &MainWindow::onConnectButtonClicked);
-}
-
-void MainWindow::initModbusDevice()
-{
-    if (modbusDevice) {
-        modbusDevice->disconnectDevice();
-        delete modbusDevice;
-        modbusDevice = nullptr;
-    }
-
-    modbusDevice = new QModbusRtuSerialMaster(this);
-
-    //SIGNALS -> SLOTS
-    //show modbus dev error on statusbar
-    connect(modbusDevice, &QModbusClient::errorOccurred, [this](QModbusDevice::Error) {
-        statusBar()->showMessage(modbusDevice->errorString(), 5000);
-    });
-
-    //show error when initiate modbus device
-    if (!modbusDevice) {
-        ui->connectButton->setDisabled(true);
-        statusBar()->showMessage("Could not create Modbus master.");
-    }
-    else {
-        connect(modbusDevice, &QModbusClient::stateChanged,
-                this, &MainWindow::onModbusStateChanged);
+    if (m_vfdDevice) {
+        connect(ui->actionVfdSetting, &QAction::triggered, m_vfdDevice, &AbstractVFD::configDevice);
+        connect(ui->actionConnect, &QAction::triggered, m_vfdDevice, &AbstractVFD::connectDevice);
+        connect(ui->actionDisconnect, &QAction::triggered, m_vfdDevice, &AbstractVFD::connectDevice);
     }
 }
 
-void MainWindow::initUnicoVFD()
+void MainWindow::initVfdDevice()
 {
     vfdDataModel = new VFDDataModel(this);
     ui->vfdEditor->setModel(vfdDataModel);
 
-    unicoVfd = new UnicoVFD(modbusDevice, vfdDataModel, pacemaker, this);
+    m_vfdDevice = new UnicoVFD(modbusDevice, vfdDataModel, pacemaker, this);
 }
 
 void MainWindow::initJobDataModel()
@@ -102,48 +64,55 @@ void MainWindow::initPacemaker()
     pacemaker->start();
 }
 
-void MainWindow::onModbusStateChanged(int state)
-{
-    bool connected = (state != QModbusDevice::UnconnectedState);
-    ui->actionConnect->setEnabled(!connected);
-    ui->actionDisconnect->setEnabled(connected);
-
-    if (state == QModbusDevice::UnconnectedState)
-        ui->connectButton->setText("Connect");
-    else if (state == QModbusDevice::ConnectedState)
-        ui->connectButton->setText("Disconnect");
+void MainWindow::onVfdStatusChanged(QString status) {
+    statusBar()->showMessage(status, 5000);
 }
 
-void MainWindow::onConnectButtonClicked()
-{
-    if (!modbusDevice)
-        return;
+void MainWindow::onConnectButtonClicked() {
+    if (!m_vfdDevice) return;
 
-    statusBar()->clearMessage();
+    m_vfdDevice->connectDevice();
 
-    //setup connection params if device is not connected
-    if (modbusDevice->state() != QModbusDevice::ConnectedState) {
-        modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter,
-                                             ui->portCombo->currentText());
-        modbusDevice->setConnectionParameter(QModbusDevice::SerialParityParameter,
-                                             vfdSettingsDialog->settings().parity);
-        modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,
-                                             vfdSettingsDialog->settings().baud);
-        modbusDevice->setConnectionParameter(QModbusDevice::SerialDataBitsParameter,
-                                             vfdSettingsDialog->settings().dataBits);
-        modbusDevice->setConnectionParameter(QModbusDevice::SerialStopBitsParameter,
-                                             vfdSettingsDialog->settings().stopBits);
-        modbusDevice->setTimeout(vfdSettingsDialog->settings().responseTime);
-        modbusDevice->setNumberOfRetries(vfdSettingsDialog->settings().numberOfRetries);
+    // Disable "connect" action and enable "disconnect" action the connection
+    // between host pc and VFD device has established.
+    ui->actionConnect->setEnabled(!m_vfdDevice->isConnected());
+    ui->actionDisconnect->setEnabled(m_vfdDevice->isConnected());
 
-        //try to connect to device
-        if (!modbusDevice->connectDevice()) {
-            statusBar()->showMessage("Connect failed: " + modbusDevice->errorString(), 5000);
-        } else {
-            statusBar()->showMessage("Connected to device on " + ui->portCombo->currentText());
-        }
+    // Change the description of connect button depends on
+    // the connection between host pc and vfd device
+    if (m_vfdDevice->isConnected()) {
+        ui->connectButton->setText("Disconnect");
     } else {
-        modbusDevice->disconnectDevice();
-        statusBar()->showMessage("Disconnected to device on " + ui->portCombo->currentText());
+        ui->connectButton->setText("Connect");
     }
+//    if (!modbusDevice)
+//        return;
+
+//    statusBar()->clearMessage();
+
+//    //setup connection params if device is not connected
+//    if (modbusDevice->state() != QModbusDevice::ConnectedState) {
+//        modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter,
+//                                             ui->portCombo->currentText());
+//        modbusDevice->setConnectionParameter(QModbusDevice::SerialParityParameter,
+//                                             vfdSettingsDialog->settings().parity);
+//        modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,
+//                                             vfdSettingsDialog->settings().baud);
+//        modbusDevice->setConnectionParameter(QModbusDevice::SerialDataBitsParameter,
+//                                             vfdSettingsDialog->settings().dataBits);
+//        modbusDevice->setConnectionParameter(QModbusDevice::SerialStopBitsParameter,
+//                                             vfdSettingsDialog->settings().stopBits);
+//        modbusDevice->setTimeout(vfdSettingsDialog->settings().responseTime);
+//        modbusDevice->setNumberOfRetries(vfdSettingsDialog->settings().numberOfRetries);
+
+//        //try to connect to device
+//        if (!modbusDevice->connectDevice()) {
+//            statusBar()->showMessage("Connect failed: " + modbusDevice->errorString(), 5000);
+//        } else {
+//            statusBar()->showMessage("Connected to device on " + ui->portCombo->currentText());
+//        }
+//    } else {
+//        modbusDevice->disconnectDevice();
+//        statusBar()->showMessage("Disconnected to device on " + ui->portCombo->currentText());
+//    }
 }

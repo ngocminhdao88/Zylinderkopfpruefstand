@@ -2,6 +2,7 @@
 #define ABSTRACTVFD_H
 
 #include <QObject>
+#include <QString>
 
 /**
  * @brief The AbstractVFD class
@@ -47,12 +48,27 @@ public:
     /**
      * @brief Connect to the VFD device
      */
-    virtual void connectDevice() = 0;
+    virtual bool connectDevice() = 0;
 
     /**
      * @brief Configure the VFD device
      */
     virtual void configDevice() = 0;
+
+    /**
+     * @brief Initiate the VFD device
+     */
+    virtual void initDevice() = 0;
+
+    /**
+     * @brief Indicate if the host pc is connected with the VFD device
+     * @return bool
+     */
+    virtual bool isConnected() = 0;
+
+signals:
+    void errorOccured(QString errMsg);
+    void statusChanged(QString status);
 };
 
 #endif // ABSTRACTVFD_H

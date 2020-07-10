@@ -125,6 +125,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:af93e2c8bf2be175c0acd342f6a03eb41"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unico_v_f_d.html#af93e2c8bf2be175c0acd342f6a03eb41">getSpeed</a> () override</td></tr>
 <tr class="memdesc:af93e2c8bf2be175c0acd342f6a03eb41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the motor's speed from VFD reading.  <a href="class_unico_v_f_d.html#af93e2c8bf2be175c0acd342f6a03eb41">More...</a><br /></td></tr>
 <tr class="separator:af93e2c8bf2be175c0acd342f6a03eb41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f55a3e164f7e4e8f3dc734dfd795520"><td class="memItemLeft" align="right" valign="top"><a id="a7f55a3e164f7e4e8f3dc734dfd795520"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unico_v_f_d.html#a7f55a3e164f7e4e8f3dc734dfd795520">connectDevice</a> () override</td></tr>
+<tr class="memdesc:a7f55a3e164f7e4e8f3dc734dfd795520"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect to the Unico VFD using Serial Modbus. <br /></td></tr>
+<tr class="separator:a7f55a3e164f7e4e8f3dc734dfd795520"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8abcb629bf2350d03d22edf070337f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unico_v_f_d.html#af8abcb629bf2350d03d22edf070337f5">configDevice</a> () override</td></tr>
+<tr class="memdesc:af8abcb629bf2350d03d22edf070337f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the Unico VFD device.  <a href="class_unico_v_f_d.html#af8abcb629bf2350d03d22edf070337f5">More...</a><br /></td></tr>
+<tr class="separator:af8abcb629bf2350d03d22edf070337f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_abstract_v_f_d"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_abstract_v_f_d')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_abstract_v_f_d.html">AbstractVFD</a></td></tr>
 <tr class="memitem:af51b54299e36bb641e867df0a02736cd inherit pub_methods_class_abstract_v_f_d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_v_f_d.html#af51b54299e36bb641e867df0a02736cd">AbstractVFD</a> (QObject *parent=0)</td></tr>
 <tr class="memdesc:af51b54299e36bb641e867df0a02736cd inherit pub_methods_class_abstract_v_f_d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the <a class="el" href="class_abstract_v_f_d.html" title="The AbstractVFD class.">AbstractVFD</a> class.  <a href="class_abstract_v_f_d.html#af51b54299e36bb641e867df0a02736cd">More...</a><br /></td></tr>
@@ -186,6 +193,36 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="af8abcb629bf2350d03d22edf070337f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8abcb629bf2350d03d22edf070337f5">&#9670;&nbsp;</a></span>configDevice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UnicoVFD::configDevice </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Configure the Unico VFD device. </p>
+<p>User can change the serial Modbus parameters, which used to connect to this Unico VFD. There are also some basic VFDs parameters like maximal speed or acceleration. </p>
+
+<p>Implements <a class="el" href="class_abstract_v_f_d.html#aa9f82e427f57372586c2706c202243f8">AbstractVFD</a>.</p>
+
+</div>
+</div>
 <a id="af93e2c8bf2be175c0acd342f6a03eb41"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af93e2c8bf2be175c0acd342f6a03eb41">&#9670;&nbsp;</a></span>getSpeed()</h2>
 

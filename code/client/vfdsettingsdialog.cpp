@@ -1,5 +1,6 @@
 #include "vfdsettingsdialog.h"
 #include "ui_vfdsettingsdialog.h"
+#include <QSerialPortInfo>
 
 VfdSettingsDialog::VfdSettingsDialog(QWidget *parent) :
     QDialog(parent),
@@ -15,8 +16,19 @@ VfdSettingsDialog::VfdSettingsDialog(QWidget *parent) :
     ui->timeoutSpinner->setValue(m_settings.responseTime);
     ui->retriesSpinner->setValue(m_settings.numberOfRetries);
 
-    //save the settings
+    // refresh the serial port
+    connect(ui->portButton, &QPushButton::clicked, [this] {
+        ui->portCombo->clear();
+
+        QList<QSerialPortInfo> ports = QSerialPortInfo::availablePorts();
+        for (QSerialPortInfo port: ports) {
+            ui->portCombo->addItem(port.portName());
+        }
+    });
+
+    // save the settings
     connect(ui->applyButton, &QPushButton::clicked, [this]() {
+        m_settings.portName = ui->portCombo->currentText();
         m_settings.parity = ui->parityCombo->currentIndex();
         if (m_settings.parity > 0) m_settings.parity++;
         m_settings.baud = ui->baudCombo->currentText().toInt();
@@ -27,7 +39,6 @@ VfdSettingsDialog::VfdSettingsDialog(QWidget *parent) :
 
         hide();
     });
-
 }
 
 VfdSettingsDialog::~VfdSettingsDialog()

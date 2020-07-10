@@ -1,10 +1,12 @@
 #include <QDebug>
+#include <QModbusRtuSerialMaster>
 #include <QModbusDataUnit>
 #include <QModbusDevice>
 
 #include "global.h"
 #include "unicovfd.h"
 #include "vfddatamodel.h"
+#include "vfdsettingsdialog.h"
 
 enum {
     MaxSpeed = 7000, //[RPM]
@@ -22,8 +24,10 @@ enum {
 UnicoVFD::UnicoVFD(QModbusClient *modbusDevice, QAbstractItemModel *model, QTimer *pacemaker, QObject *parent) :
     AbstractVFD(parent),
     m_modbusDevice(modbusDevice),
+    m_settingDialog(new VfdSettingsDialog()),
     m_speedRamp(new RampGenerator(this))
 {
+    initDevice();
     setModel(model);
     setPacemaker(pacemaker);
     m_speedRamp->setEnable(true);
@@ -31,6 +35,12 @@ UnicoVFD::UnicoVFD(QModbusClient *modbusDevice, QAbstractItemModel *model, QTime
 
 UnicoVFD::~UnicoVFD()
 {
+    if (m_modbusDevice) m_modbusDevice->disconnectDevice();
+    delete m_modbusDevice;
+    m_modbusDevice = 0;
+
+    delete m_settingDialog;
+    m_settingDialog = 0;
 }
 
 void UnicoVFD::setDevice(QModbusClient *device)
@@ -151,12 +161,68 @@ double UnicoVFD::getSpeed()
     return 0;
 }
 
-void UnicoVFD::connectDevice() {
+bool UnicoVFD::connectDevice() {
+    if (!m_modbusDevice) return false;
 
+    //setup connection params if device is not connected
+    if (m_modbusDevice->state() != QModbusDevice::ConnectedState) {
+        m_modbusDevice->setConnectionParameter(QModbusDevice::SerialPortNameParameter,
+                                             m_settingDialog->settings().portName);
+        m_modbusDevice->setConnectionParameter(QModbusDevice::SerialParityParameter,
+                                             m_settingDialog->settings().parity);
+        m_modbusDevice->setConnectionParameter(QModbusDevice::SerialBaudRateParameter,
+                                             m_settingDialog->settings().baud);
+        m_modbusDevice->setConnectionParameter(QModbusDevice::SerialDataBitsParameter,
+                                             m_settingDialog->settings().dataBits);
+        m_modbusDevice->setConnectionParameter(QModbusDevice::SerialStopBitsParameter,
+                                             m_settingDialog->settings().stopBits);
+        m_modbusDevice->setTimeout(m_settingDialog->settings().responseTime);
+        m_modbusDevice->setNumberOfRetries(m_settingDialog->settings().numberOfRetries);
+
+        //try to connect to device
+        if (!m_modbusDevice->connectDevice()) {
+            emit statusChanged("Connection failed: " + m_modbusDevice->errorString());
+            return false;
+        } else {
+            emit statusChanged("Connected to device on " + m_settingDialog->settings().portName);
+            return true;
+        }
+    // disconnect the device if it was already connected
+    } else {
+        m_modbusDevice->disconnectDevice();
+        emit statusChanged("Disconnected to device on " + m_settingDialog->settings().portName);
+        return false;
+    }
 }
 
 void UnicoVFD::configDevice() {
+    if (m_settingDialog) {
+        m_settingDialog->show();
+    }
+}
 
+void UnicoVFD::initDevice() {
+    if (m_modbusDevice) {
+        m_modbusDevice->disconnectDevice();
+        delete m_modbusDevice;
+        m_modbusDevice = 0;
+    }
+
+    m_modbusDevice = new QModbusRtuSerialMaster(this);
+
+    // emit error when creating modbus device
+    if (!m_modbusDevice) {
+        // disable connection button
+        // show error message
+    } else {
+        connect(m_modbusDevice, &QModbusClient::stateChanged, [this](int state) {
+            m_isConnected = (state != QModbusDevice::UnconnectedState);
+        });
+    }
+}
+
+bool UnicoVFD::isConnected() {
+    return m_isConnected;
 }
 
 void UnicoVFD::onReadReady()

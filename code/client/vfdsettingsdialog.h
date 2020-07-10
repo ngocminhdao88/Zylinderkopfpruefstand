@@ -25,6 +25,7 @@ public:
       * @brief A Setting data type. It holds the settings data for VFD
       */
     typedef struct {
+        QString portName = "";
         int parity = QSerialPort::NoParity;
         int baud = QSerialPort::Baud9600;
         int dataBits = QSerialPort::Data8;
@@ -37,7 +38,7 @@ public:
      * @brief Default constructor
      * @param parent - A QObject parent, which owns this
      */
-    VfdSettingsDialog(QWidget *parent = nullptr);
+    VfdSettingsDialog(QWidget *parent = 0);
 
     /**
      * @brief Default deconstructor

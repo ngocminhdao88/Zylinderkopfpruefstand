@@ -5,7 +5,7 @@
 #include "vfdsettingsdialog.h"
 #include "vfddatamodel.h"
 #include "jobdatamodel.h"
-#include "unicovfd.h"
+#include "abstractvfd.h"
 
 #include <QModbusRtuSerialMaster>
 #include <QStatusBar>
@@ -30,24 +30,16 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-public slots:
-    /*
-     * @brief Rescan the avaiable com ports on the computer
-     */
-    void refreshPort();
-
-    /*
-     * @brief Called when modbus device changes state
-     */
-    void onModbusStateChanged(int state);
-
-    /*
-     * @brief Called when user clicks on "Connect" button
+private slots:
+    /**
+     * @brief Connect to the VFD device
      */
     void onConnectButtonClicked();
 
-
-private slots:
+    /**
+     * @brief Handle the statusChanged signal from a VFD device
+     */
+    void onVfdStatusChanged(QString status);
 
 private:
     /*
@@ -56,15 +48,9 @@ private:
     void initActions();
 
     /*
-     * @brief Setup the modbus device
-     * @detail Initiate the modbus device and setup SIGNAL-SLOT connection
-     */
-    void initModbusDevice();
-
-    /*
      * @brief Setup Unico VFD
      */
-    void initUnicoVFD();
+    void initVfdDevice();
 
     /*
      * @brief Setup a model hodling job data
@@ -78,15 +64,15 @@ private:
 
 
 private:
-    Ui::MainWindow *ui;
-    VfdSettingsDialog *vfdSettingsDialog = nullptr;
-    QModbusReply *lastRequest = nullptr;
-    QModbusClient *modbusDevice = nullptr;
+    Ui::MainWindow *ui = 0;
+    VfdSettingsDialog *vfdSettingsDialog = 0;
+    QModbusReply *lastRequest = 0;
+    QModbusClient *modbusDevice = 0;
 
-    VFDDataModel *vfdDataModel;
-    JobDataModel *jobDataModel;
-    UnicoVFD *unicoVfd;
+    VFDDataModel *vfdDataModel = 0;
+    JobDataModel *jobDataModel = 0;
+    AbstractVFD *m_vfdDevice = 0;
 
-    QTimer * pacemaker;
+    QTimer * pacemaker = 0;
 };
 #endif // MAINWINDOW_H

@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QModbusClient>
 #include <QAbstractItemModel>
+#include "vfdsettingsdialog.h"
 
 #include "abstractvfd.h"
 #include "rampgenerator.h"
@@ -85,7 +86,7 @@ public:
     /**
      * @brief Connect to the Unico VFD using Serial Modbus
      */
-    void connectDevice() override;
+    bool connectDevice() override;
 
     /**
      * @brief Configure the Unico VFD device
@@ -95,6 +96,20 @@ public:
      * speed or acceleration.
      */
     void configDevice() override;
+
+    /**
+     * @brief Initiate the VFD device
+     *
+     * Create a serial modbus client object to handle the communication
+     * between host pc and the vfd device
+     */
+    void initDevice() override;
+
+    /**
+     * @brief Indicate if the host pc is connected to the VFD device
+     * @return bool
+     */
+    bool isConnected() override;
 
 public slots:
     /**
@@ -140,8 +155,13 @@ private:
     QModbusClient * m_modbusDevice = 0;
     QAbstractItemModel * m_vfdModel = 0;
 
+    VfdSettingsDialog *m_settingDialog = 0;
+
     RampGenerator * m_speedRamp = 0;
     QTimer * m_paceMaker = 0;
+
+
+    bool m_isConnected = false;
 };
 
 #endif // UNICOVFD_H
