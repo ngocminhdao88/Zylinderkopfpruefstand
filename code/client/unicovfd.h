@@ -114,7 +114,7 @@ private slots:
     /**
      * @brief Handle the dataChanged signal from data model
      *
-     * Update the new target ramp value, ramp rate for VFD
+     * Update the new ramp setpoint, ramp rate and direction for VFD
      * @param topLeft Models starting range with new data
      * @param bottomRight Models ending range with new data
      */
@@ -140,11 +140,8 @@ private:
 private:
     QModbusClient * m_modbusDevice = 0;
     QAbstractItemModel * m_vfdModel = 0;
-
     VfdSettingsDialog *m_settingDialog = 0;
-
     RampGenerator * m_speedRamp = 0;
-
     bool m_isConnected = false;
 };
 
