@@ -1,6 +1,8 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
+#define PACE_MAKER_RATE 250
+
 enum class VFDDataColumn : int {
     ControlSpeed = 0,
     RampSpeed = 1,

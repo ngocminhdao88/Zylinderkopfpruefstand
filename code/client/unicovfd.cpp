@@ -21,14 +21,13 @@ enum {
     DecelerationRegister = 87,
 };
 
-UnicoVFD::UnicoVFD(QAbstractItemModel *model, QTimer *pacemaker, QObject *parent) :
+UnicoVFD::UnicoVFD(QAbstractItemModel *model, QObject *parent) :
     AbstractVFD(parent),
     m_settingDialog(new VfdSettingsDialog()),
     m_speedRamp(new RampGenerator(this))
 {
     initDevice();
     setModel(model);
-    setPacemaker(pacemaker);
 }
 
 UnicoVFD::~UnicoVFD() {
@@ -47,14 +46,6 @@ void UnicoVFD::setModel(QAbstractItemModel *model) {
 
     connect(m_vfdModel, &QAbstractItemModel::dataChanged,
             this, &UnicoVFD::onModelDataChanged);
-}
-
-void UnicoVFD::setPacemaker(QTimer *pacemaker) {
-    if (!pacemaker) return;
-
-    m_paceMaker = pacemaker;
-
-    connect(m_paceMaker, &QTimer::timeout, this, &UnicoVFD::onUpdateRequest);
 }
 
 void UnicoVFD::setSpeed(double speed) {
@@ -273,9 +264,7 @@ void UnicoVFD::onModelDataChanged(const QModelIndex &topLeft, const QModelIndex 
 }
 
 double UnicoVFD::normalizeRampRate(double rate) {
-    if (!m_paceMaker) return 1;
-    double pacemakerRate = m_paceMaker->interval();
-    return rate * pacemakerRate / 1000;
+    return rate * PACE_MAKER_RATE / 1000;
 }
 
 double UnicoVFD::getFeedbackSpeed(double fbSpeed, uint direction) {

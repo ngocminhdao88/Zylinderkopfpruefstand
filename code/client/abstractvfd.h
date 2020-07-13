@@ -66,6 +66,14 @@ public:
      */
     virtual bool isConnected() = 0;
 
+public slots:
+    /**
+     * @brief Handle update request from mainwindow
+     *
+     * Handle the VFD update request
+     */
+    virtual void onUpdateRequest() = 0;
+
 signals:
     void errorOccured(QString errMsg);
     void statusChanged(QString status);

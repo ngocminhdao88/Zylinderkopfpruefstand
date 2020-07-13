@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "unicovfd.h"
+#include "global.h"
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -8,8 +9,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    vfdSettingsDialog = new VfdSettingsDialog(this);
 
     initPacemaker();
     initVfdDevice();
@@ -19,15 +18,10 @@ MainWindow::MainWindow(QWidget *parent)
     //SIGNALS -> SLOTS
     connect(ui->connectButton, &QPushButton::clicked, this, &MainWindow::onConnectButtonClicked);
     connect(m_vfdDevice, &AbstractVFD::statusChanged, this, &MainWindow::onVfdStatusChanged);
+    connect(m_pacemaker, &QTimer::timeout, m_vfdDevice, &AbstractVFD::onUpdateRequest);
 }
 
-MainWindow::~MainWindow()
-{
-    if (modbusDevice)
-        modbusDevice->disconnectDevice();
-    delete modbusDevice;
-    modbusDevice = nullptr;
-
+MainWindow::~MainWindow() {
     delete ui;
 }
 
@@ -44,7 +38,7 @@ void MainWindow::initVfdDevice()
     vfdDataModel = new VFDDataModel(this);
     ui->vfdEditor->setModel(vfdDataModel);
 
-    m_vfdDevice = new UnicoVFD(vfdDataModel, pacemaker, this);
+    m_vfdDevice = new UnicoVFD(vfdDataModel, this);
 }
 
 void MainWindow::initJobDataModel()
@@ -58,9 +52,9 @@ void MainWindow::initJobDataModel()
 
 void MainWindow::initPacemaker()
 {
-    pacemaker = new QTimer(this);
-    pacemaker->setInterval(250); //250ms
-    pacemaker->start();
+    m_pacemaker = new QTimer(this);
+    m_pacemaker->setInterval(PACE_MAKER_RATE); //250ms
+    m_pacemaker->start();
 }
 
 void MainWindow::onVfdStatusChanged(QString status) {

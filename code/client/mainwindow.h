@@ -65,14 +65,11 @@ private:
 
 private:
     Ui::MainWindow *ui = 0;
-    VfdSettingsDialog *vfdSettingsDialog = 0;
-    QModbusReply *lastRequest = 0;
-    QModbusClient *modbusDevice = 0;
 
     VFDDataModel *vfdDataModel = 0;
     JobDataModel *jobDataModel = 0;
     AbstractVFD *m_vfdDevice = 0;
 
-    QTimer * pacemaker = 0;
+    QTimer *m_pacemaker = 0;
 };
 #endif // MAINWINDOW_H

@@ -28,8 +28,7 @@ public:
      * @param pacemaker - A clock/timer, which determines how often data are sended to VFD
      * @param parent - A QObject, which owns this
      */
-    UnicoVFD( QAbstractItemModel *model = 0,
-             QTimer *pacemaker = 0,
+    UnicoVFD(QAbstractItemModel *model = 0,
              QObject *parent = 0);
 
     /**
@@ -43,13 +42,6 @@ public:
      * @param model A model holds all data of the VFD
      */
     void setModel(QAbstractItemModel *model);
-
-    /**
-     * @brief Set the pacemaker (update clock) for this VFD
-     *
-     * @param pacemaker A clock which shows how often vfds data are updated
-     */
-    void setPacemaker(QTimer *pacemaker);
 
     /**
      * @brief Set VFD speed
@@ -105,11 +97,13 @@ public:
 
 public slots:
     /**
-     * @brief Handle update request from mainwindow
+     * @brief Handle VFD update request
      *
-     * Update the new motors control speed and turn direction
+     * The pacemaker timer (in mainwindow) timeout signal will trigger this slot.
+     * The speed ramp output will be calculated and sent to VFD. The motor speed will
+     * be readed from VFD and motors direction.
      */
-    void onUpdateRequest();
+    void onUpdateRequest() override;
 
 private slots:
     /**
@@ -150,8 +144,6 @@ private:
     VfdSettingsDialog *m_settingDialog = 0;
 
     RampGenerator * m_speedRamp = 0;
-    QTimer * m_paceMaker = 0;
-
 
     bool m_isConnected = false;
 };
