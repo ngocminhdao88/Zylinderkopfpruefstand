@@ -38,13 +38,6 @@ public:
     ~UnicoVFD() override;
 
     /**
-     * @brief Set the serial modbus device for this VFD
-     *
-     * @param device A modbus device, which is used to connect to the VFD
-     */
-    void setDevice(QModbusClient *device);
-
-    /**
      * @brief Set the vfd data model for this VFD
      *
      * @param model A model holds all data of the VFD

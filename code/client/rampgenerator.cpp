@@ -1,7 +1,7 @@
 #include "rampgenerator.h"
 
-RampGenerator::RampGenerator(QObject *parent) : QObject(parent)
-{
+RampGenerator::RampGenerator(QObject *parent) : QObject(parent) {
+    setEnable(false); // disable the ramp generator by default
 }
 
 RampGenerator::~RampGenerator() {
@@ -11,19 +11,15 @@ void RampGenerator::reset() {
     m_lastOuput = m_startValue;
 }
 
-void RampGenerator::setEnable(bool enable)
-{
-    if (m_enable != enable)
-        m_enable = enable;
+void RampGenerator::setEnable(bool enable) {
+    if (m_enable != enable) m_enable = enable;
 }
 
-bool RampGenerator::isValueReached()
-{
+bool RampGenerator::isValueReached() {
     return m_valueReached;
 }
 
-void RampGenerator::calculateRamp()
-{
+void RampGenerator::calculateRamp() {
     //only calculate the ramp if it's enabled
     if (!m_enable)
         return;

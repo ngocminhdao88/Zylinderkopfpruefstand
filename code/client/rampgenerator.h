@@ -48,7 +48,7 @@ public:
     double output();
 
     /**
-     * @brief Reset the ramp to it initiate value
+     * @brief Reset the ramp output to its initiate value
      */
     void reset();
 

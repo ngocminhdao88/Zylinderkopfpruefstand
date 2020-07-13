@@ -29,11 +29,9 @@ UnicoVFD::UnicoVFD(QAbstractItemModel *model, QTimer *pacemaker, QObject *parent
     initDevice();
     setModel(model);
     setPacemaker(pacemaker);
-    m_speedRamp->setEnable(true);
 }
 
-UnicoVFD::~UnicoVFD()
-{
+UnicoVFD::~UnicoVFD() {
     if (m_modbusDevice) m_modbusDevice->disconnectDevice();
     delete m_modbusDevice;
     m_modbusDevice = 0;
@@ -42,15 +40,8 @@ UnicoVFD::~UnicoVFD()
     m_settingDialog = 0;
 }
 
-void UnicoVFD::setDevice(QModbusClient *device)
-{
-    m_modbusDevice = device;
-}
-
-void UnicoVFD::setModel(QAbstractItemModel *model)
-{
-    if (!model)
-        return;
+void UnicoVFD::setModel(QAbstractItemModel *model) {
+    if (!model) return;
 
     m_vfdModel = model;
 
@@ -58,17 +49,15 @@ void UnicoVFD::setModel(QAbstractItemModel *model)
             this, &UnicoVFD::onModelDataChanged);
 }
 
-void UnicoVFD::setPacemaker(QTimer *pacemaker)
-{
-    if (pacemaker) {
-        m_paceMaker = pacemaker;
+void UnicoVFD::setPacemaker(QTimer *pacemaker) {
+    if (!pacemaker) return;
 
-        connect(m_paceMaker, &QTimer::timeout, this, &UnicoVFD::onUpdateRequest);
-    }
+    m_paceMaker = pacemaker;
+
+    connect(m_paceMaker, &QTimer::timeout, this, &UnicoVFD::onUpdateRequest);
 }
 
-void UnicoVFD::setSpeed(double speed)
-{
+void UnicoVFD::setSpeed(double speed) {
     if (!m_modbusDevice)
         return;
 
@@ -96,17 +85,13 @@ void UnicoVFD::setSpeed(double speed)
     }
 }
 
-void UnicoVFD::setDirection(double dir)
-{
-    if (!m_modbusDevice)
-        return;
+void UnicoVFD::setDirection(double dir) {
+    if (!m_modbusDevice) return;
 
-    if (m_modbusDevice->state() != QModbusDevice::ConnectedState)
-        return;
+    if (m_modbusDevice->state() != QModbusDevice::ConnectedState) return;
 
     //guarding input. dir should be 0, 1 or 2
-    if (dir > 2)
-        return;
+    if (dir > 2) return;
 
     QModbusDataUnit data = QModbusDataUnit(QModbusDataUnit::HoldingRegisters,
                                            DirectionRegister,
@@ -123,18 +108,15 @@ void UnicoVFD::setDirection(double dir)
     }
 }
 
-void UnicoVFD::setRampDownRate(double rate)
-{
+void UnicoVFD::setRampDownRate(double rate) {
     Q_UNUSED(rate)
 }
 
-void UnicoVFD::setRampUpRate(double rate)
-{
+void UnicoVFD::setRampUpRate(double rate) {
     Q_UNUSED(rate)
 }
 
-double UnicoVFD::getSpeed()
-{
+double UnicoVFD::getSpeed() {
     if (!m_modbusDevice)
         return -1;
 
@@ -188,6 +170,10 @@ bool UnicoVFD::connectDevice() {
         }
     // disconnect the device if it was already connected
     } else {
+        // stop the VFD first before disconnect it
+        setSpeed(0);
+        setDirection(0);
+
         m_modbusDevice->disconnectDevice();
         emit statusChanged("Disconnected to device on " + m_settingDialog->settings().portName);
         return false;
@@ -195,9 +181,7 @@ bool UnicoVFD::connectDevice() {
 }
 
 void UnicoVFD::configDevice() {
-    if (m_settingDialog) {
-        m_settingDialog->show();
-    }
+    if (m_settingDialog) m_settingDialog->show();
 }
 
 void UnicoVFD::initDevice() {
@@ -224,8 +208,7 @@ bool UnicoVFD::isConnected() {
     return m_isConnected;
 }
 
-void UnicoVFD::onReadReady()
-{
+void UnicoVFD::onReadReady() {
     auto reply = qobject_cast<QModbusReply *>(sender());
     if (!reply)
         return;
@@ -259,8 +242,7 @@ void UnicoVFD::onReadReady()
     reply->deleteLater();
 }
 
-void UnicoVFD::onModelDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight)
-{
+void UnicoVFD::onModelDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight) {
     Q_UNUSED(bottomRight)
 
     if (!topLeft.isValid()) return;
@@ -274,7 +256,12 @@ void UnicoVFD::onModelDataChanged(const QModelIndex &topLeft, const QModelIndex 
         m_speedRamp->setTargetValue(data);
         break;
     case static_cast<int>(VFDDataColumn::Direction):
-        if (data == 0) m_speedRamp->reset();
+        if (data == 0) {
+            m_speedRamp->reset();
+            m_speedRamp->setEnable(false);
+        } else {
+            m_speedRamp->setEnable(true);
+        }
         break;
     case static_cast<int>(VFDDataColumn::Acceleration):
         m_speedRamp->setRampUpRate(normalizeRampRate(data));
@@ -285,15 +272,13 @@ void UnicoVFD::onModelDataChanged(const QModelIndex &topLeft, const QModelIndex 
     }
 }
 
-double UnicoVFD::normalizeRampRate(double rate)
-{
+double UnicoVFD::normalizeRampRate(double rate) {
     if (!m_paceMaker) return 1;
     double pacemakerRate = m_paceMaker->interval();
     return rate * pacemakerRate / 1000;
 }
 
-double UnicoVFD::getFeedbackSpeed(double fbSpeed, uint direction)
-{
+double UnicoVFD::getFeedbackSpeed(double fbSpeed, uint direction) {
     double result = -1;
 
     if (direction == 0)
@@ -308,8 +293,7 @@ double UnicoVFD::getFeedbackSpeed(double fbSpeed, uint direction)
     return result;
 }
 
-void UnicoVFD::onUpdateRequest()
-{
+void UnicoVFD::onUpdateRequest() {
     if (!m_speedRamp) return;
     if (!m_vfdModel) return;
 
