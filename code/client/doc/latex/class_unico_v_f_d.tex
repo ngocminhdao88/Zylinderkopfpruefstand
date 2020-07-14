@@ -18,22 +18,18 @@ Inheritance diagram for Unico\+V\+FD\+:\begin{figure}[H]
 \doxysubsection*{Public Slots}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{class_unico_v_f_d_a843f8c033946935dbd0806c26862fb31}{on\+Update\+Request}} ()
-\begin{DoxyCompactList}\small\item\em Handle update request from mainwindow. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_unico_v_f_d_a0cc843ef51147e9cc3a3fec2eeca5a14}{on\+Update\+Request}} () override
+\begin{DoxyCompactList}\small\item\em Handle V\+FD update request. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_unico_v_f_d_ac6eb24d88450f0b3c56e659847ed4356}{Unico\+V\+FD}} (Q\+Modbus\+Client $\ast$modbus\+Device=0, Q\+Abstract\+Item\+Model $\ast$model=0, Q\+Timer $\ast$pacemaker=0, Q\+Object $\ast$parent=0)
+\mbox{\hyperlink{class_unico_v_f_d_ad20b59a3298ad121415a3a12b95cc658}{Unico\+V\+FD}} (Q\+Abstract\+Item\+Model $\ast$model=0, Q\+Object $\ast$parent=0)
 \begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_unico_v_f_d_ab35b05d9bb674bb95907b975aa0a232d}\label{class_unico_v_f_d_ab35b05d9bb674bb95907b975aa0a232d}} 
 \mbox{\hyperlink{class_unico_v_f_d_ab35b05d9bb674bb95907b975aa0a232d}{$\sim$\+Unico\+V\+FD}} () override
 \begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_unico_v_f_d_a3597534637949968ca5af9f56b5be5ed}{set\+Device}} (Q\+Modbus\+Client $\ast$device)
-\begin{DoxyCompactList}\small\item\em Set the serial modbus device for this V\+FD. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_unico_v_f_d_ad772a2e70aec719ddcac3c7a445b27d0}{set\+Model}} (Q\+Abstract\+Item\+Model $\ast$model)
 \begin{DoxyCompactList}\small\item\em Set the vfd data model for this V\+FD. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_unico_v_f_d_aca0ac6df05922f63bd82ce25a6a4013e}{set\+Pacemaker}} (Q\+Timer $\ast$pacemaker)
-\begin{DoxyCompactList}\small\item\em Set the pacemaker (update clock) for this V\+FD. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_unico_v_f_d_a4c33205fd829133ea9626324669270eb}{set\+Speed}} (double speed) override
 \begin{DoxyCompactList}\small\item\em Set V\+FD speed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_unico_v_f_d_a654587d1a572fd55c50aa7f019721a7e}{set\+Direction}} (double dir) override
@@ -46,11 +42,16 @@ void \mbox{\hyperlink{class_unico_v_f_d_ab6ae0398322760bc8a4269adc1ca228b}{set\+
 \begin{DoxyCompactList}\small\item\em Set V\+FD ramp down rate. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{class_unico_v_f_d_af93e2c8bf2be175c0acd342f6a03eb41}{get\+Speed}} () override
 \begin{DoxyCompactList}\small\item\em Get the motor\textquotesingle{}s speed from V\+FD reading. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_unico_v_f_d_a7f55a3e164f7e4e8f3dc734dfd795520}\label{class_unico_v_f_d_a7f55a3e164f7e4e8f3dc734dfd795520}} 
-void \mbox{\hyperlink{class_unico_v_f_d_a7f55a3e164f7e4e8f3dc734dfd795520}{connect\+Device}} () override
+\mbox{\Hypertarget{class_unico_v_f_d_a7f21f761938e7cc6d881a57a250be27a}\label{class_unico_v_f_d_a7f21f761938e7cc6d881a57a250be27a}} 
+bool \mbox{\hyperlink{class_unico_v_f_d_a7f21f761938e7cc6d881a57a250be27a}{connect\+Device}} () override
 \begin{DoxyCompactList}\small\item\em Connect to the Unico V\+FD using Serial Modbus. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_unico_v_f_d_af8abcb629bf2350d03d22edf070337f5}{config\+Device}} () override
-\begin{DoxyCompactList}\small\item\em Configure the Unico V\+FD device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Configure the Unico V\+FD device. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_unico_v_f_d_acc4ad5c436eb751b065de1f0c8f88f79}{init\+Device}} () override
+\begin{DoxyCompactList}\small\item\em Initiate the V\+FD device. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_unico_v_f_d_a5574859865938f8b7e2bc923128bdce9}{is\+Connected}} () override
+\begin{DoxyCompactList}\small\item\em Indicate if the host pc is connected to the V\+FD device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
@@ -62,11 +63,11 @@ Ngoc Minh Dao
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_unico_v_f_d_ac6eb24d88450f0b3c56e659847ed4356}\label{class_unico_v_f_d_ac6eb24d88450f0b3c56e659847ed4356}} 
+\mbox{\Hypertarget{class_unico_v_f_d_ad20b59a3298ad121415a3a12b95cc658}\label{class_unico_v_f_d_ad20b59a3298ad121415a3a12b95cc658}} 
 \index{UnicoVFD@{UnicoVFD}!UnicoVFD@{UnicoVFD}}
 \index{UnicoVFD@{UnicoVFD}!UnicoVFD@{UnicoVFD}}
 \doxysubsubsection{\texorpdfstring{UnicoVFD()}{UnicoVFD()}}
-{\footnotesize\ttfamily Unico\+V\+F\+D\+::\+Unico\+V\+FD (\begin{DoxyParamCaption}\item[{Q\+Modbus\+Client $\ast$}]{modbus\+Device = {\ttfamily 0},  }\item[{Q\+Abstract\+Item\+Model $\ast$}]{model = {\ttfamily 0},  }\item[{Q\+Timer $\ast$}]{pacemaker = {\ttfamily 0},  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Unico\+V\+F\+D\+::\+Unico\+V\+FD (\begin{DoxyParamCaption}\item[{Q\+Abstract\+Item\+Model $\ast$}]{model = {\ttfamily 0},  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})}
 
 
 
@@ -117,32 +118,48 @@ Motor\textquotesingle{}s speed
 
 Implements \mbox{\hyperlink{class_abstract_v_f_d_aae5cfbba1d3e73db7d92998343747ed9}{Abstract\+V\+FD}}.
 
-\mbox{\Hypertarget{class_unico_v_f_d_a843f8c033946935dbd0806c26862fb31}\label{class_unico_v_f_d_a843f8c033946935dbd0806c26862fb31}} 
+\mbox{\Hypertarget{class_unico_v_f_d_acc4ad5c436eb751b065de1f0c8f88f79}\label{class_unico_v_f_d_acc4ad5c436eb751b065de1f0c8f88f79}} 
+\index{UnicoVFD@{UnicoVFD}!initDevice@{initDevice}}
+\index{initDevice@{initDevice}!UnicoVFD@{UnicoVFD}}
+\doxysubsubsection{\texorpdfstring{initDevice()}{initDevice()}}
+{\footnotesize\ttfamily void Unico\+V\+F\+D\+::init\+Device (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Initiate the V\+FD device. 
+
+Create a serial modbus client object to handle the communication between host pc and the vfd device 
+
+Implements \mbox{\hyperlink{class_abstract_v_f_d_a71251545a448527d4bea6b91ae8f6c6f}{Abstract\+V\+FD}}.
+
+\mbox{\Hypertarget{class_unico_v_f_d_a5574859865938f8b7e2bc923128bdce9}\label{class_unico_v_f_d_a5574859865938f8b7e2bc923128bdce9}} 
+\index{UnicoVFD@{UnicoVFD}!isConnected@{isConnected}}
+\index{isConnected@{isConnected}!UnicoVFD@{UnicoVFD}}
+\doxysubsubsection{\texorpdfstring{isConnected()}{isConnected()}}
+{\footnotesize\ttfamily bool Unico\+V\+F\+D\+::is\+Connected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Indicate if the host pc is connected to the V\+FD device. 
+
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_abstract_v_f_d_a2630722a90519169f310722118336a44}{Abstract\+V\+FD}}.
+
+\mbox{\Hypertarget{class_unico_v_f_d_a0cc843ef51147e9cc3a3fec2eeca5a14}\label{class_unico_v_f_d_a0cc843ef51147e9cc3a3fec2eeca5a14}} 
 \index{UnicoVFD@{UnicoVFD}!onUpdateRequest@{onUpdateRequest}}
 \index{onUpdateRequest@{onUpdateRequest}!UnicoVFD@{UnicoVFD}}
 \doxysubsubsection{\texorpdfstring{onUpdateRequest}{onUpdateRequest}}
-{\footnotesize\ttfamily void Unico\+V\+F\+D\+::on\+Update\+Request (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+{\footnotesize\ttfamily void Unico\+V\+F\+D\+::on\+Update\+Request (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [slot]}}
 
 
 
-Handle update request from mainwindow. 
+Handle V\+FD update request. 
 
-Update the new motors control speed and turn direction \mbox{\Hypertarget{class_unico_v_f_d_a3597534637949968ca5af9f56b5be5ed}\label{class_unico_v_f_d_a3597534637949968ca5af9f56b5be5ed}} 
-\index{UnicoVFD@{UnicoVFD}!setDevice@{setDevice}}
-\index{setDevice@{setDevice}!UnicoVFD@{UnicoVFD}}
-\doxysubsubsection{\texorpdfstring{setDevice()}{setDevice()}}
-{\footnotesize\ttfamily void Unico\+V\+F\+D\+::set\+Device (\begin{DoxyParamCaption}\item[{Q\+Modbus\+Client $\ast$}]{device }\end{DoxyParamCaption})}
-
-
-
-Set the serial modbus device for this V\+FD. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em device} & A modbus device, which is used to connect to the V\+FD \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_unico_v_f_d_a654587d1a572fd55c50aa7f019721a7e}\label{class_unico_v_f_d_a654587d1a572fd55c50aa7f019721a7e}} 
+The pacemaker timer (in mainwindow) timeout signal will trigger this slot. The speed ramp output will be calculated and sent to V\+FD. The motor speed will be readed from V\+FD and motors direction. \mbox{\Hypertarget{class_unico_v_f_d_a654587d1a572fd55c50aa7f019721a7e}\label{class_unico_v_f_d_a654587d1a572fd55c50aa7f019721a7e}} 
 \index{UnicoVFD@{UnicoVFD}!setDirection@{setDirection}}
 \index{setDirection@{setDirection}!UnicoVFD@{UnicoVFD}}
 \doxysubsubsection{\texorpdfstring{setDirection()}{setDirection()}}
@@ -174,21 +191,6 @@ Set the vfd data model for this V\+FD.
 
 \begin{DoxyParams}{Parameters}
 {\em model} & A model holds all data of the V\+FD \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_unico_v_f_d_aca0ac6df05922f63bd82ce25a6a4013e}\label{class_unico_v_f_d_aca0ac6df05922f63bd82ce25a6a4013e}} 
-\index{UnicoVFD@{UnicoVFD}!setPacemaker@{setPacemaker}}
-\index{setPacemaker@{setPacemaker}!UnicoVFD@{UnicoVFD}}
-\doxysubsubsection{\texorpdfstring{setPacemaker()}{setPacemaker()}}
-{\footnotesize\ttfamily void Unico\+V\+F\+D\+::set\+Pacemaker (\begin{DoxyParamCaption}\item[{Q\+Timer $\ast$}]{pacemaker }\end{DoxyParamCaption})}
-
-
-
-Set the pacemaker (update clock) for this V\+FD. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em pacemaker} & A clock which shows how often vfds data are updated \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_unico_v_f_d_a4c33205fd829133ea9626324669270eb}\label{class_unico_v_f_d_a4c33205fd829133ea9626324669270eb}} 

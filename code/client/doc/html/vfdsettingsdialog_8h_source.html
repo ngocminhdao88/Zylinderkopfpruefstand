@@ -86,31 +86,32 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="struct_vfd_settings_dialog_1_1_setting__t.html">   27</a></span>&#160;    <span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordtype">int</span> parity = QSerialPort::NoParity;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordtype">int</span> baud = QSerialPort::Baud9600;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordtype">int</span> dataBits = QSerialPort::Data8;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordtype">int</span> stopBits = QSerialPort::OneStop;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordtype">int</span> responseTime = 1000;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">int</span> numberOfRetries = 3;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    } <a class="code" href="struct_vfd_settings_dialog_1_1_setting__t.html">Setting_t</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_vfd_settings_dialog.html#ae4c34f047101570cbc55b12582473955">VfdSettingsDialog</a>(QWidget *parent = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="class_vfd_settings_dialog.html#a2f4814eed080e2ed20b3d06b5ef364bc">~VfdSettingsDialog</a>();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="struct_vfd_settings_dialog_1_1_setting__t.html">Setting_t</a> <a class="code" href="class_vfd_settings_dialog.html#ad41a989a349b7516da69cc9631e5913c">settings</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="struct_vfd_settings_dialog_1_1_setting__t.html">Setting_t</a> m_settings;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    Ui::VfdSettingsDialog *ui;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif // VFDSETTINGSDIALOG_H</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        QString portName = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordtype">int</span> parity = QSerialPort::NoParity;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordtype">int</span> baud = QSerialPort::Baud9600;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordtype">int</span> dataBits = QSerialPort::Data8;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordtype">int</span> stopBits = QSerialPort::OneStop;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">int</span> responseTime = 1000;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">int</span> numberOfRetries = 3;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    } <a class="code" href="struct_vfd_settings_dialog_1_1_setting__t.html">Setting_t</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="class_vfd_settings_dialog.html#ad342f27d80ac2ba8cf5a061cdd7b5d3a">VfdSettingsDialog</a>(QWidget *parent = 0);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="class_vfd_settings_dialog.html#a2f4814eed080e2ed20b3d06b5ef364bc">~VfdSettingsDialog</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="struct_vfd_settings_dialog_1_1_setting__t.html">Setting_t</a> <a class="code" href="class_vfd_settings_dialog.html#ad41a989a349b7516da69cc9631e5913c">settings</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="struct_vfd_settings_dialog_1_1_setting__t.html">Setting_t</a> m_settings;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    Ui::VfdSettingsDialog *ui;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif // VFDSETTINGSDIALOG_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_vfd_settings_dialog_html_ae4c34f047101570cbc55b12582473955"><div class="ttname"><a href="class_vfd_settings_dialog.html#ae4c34f047101570cbc55b12582473955">VfdSettingsDialog::VfdSettingsDialog</a></div><div class="ttdeci">VfdSettingsDialog(QWidget *parent=nullptr)</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition:</b> vfdsettingsdialog.cpp:4</div></div>
 <div class="ttc" id="aclass_vfd_settings_dialog_html"><div class="ttname"><a href="class_vfd_settings_dialog.html">VfdSettingsDialog</a></div><div class="ttdoc">Display a window. It shows all settings for VFD.</div><div class="ttdef"><b>Definition:</b> vfdsettingsdialog.h:20</div></div>
-<div class="ttc" id="aclass_vfd_settings_dialog_html_a2f4814eed080e2ed20b3d06b5ef364bc"><div class="ttname"><a href="class_vfd_settings_dialog.html#a2f4814eed080e2ed20b3d06b5ef364bc">VfdSettingsDialog::~VfdSettingsDialog</a></div><div class="ttdeci">~VfdSettingsDialog()</div><div class="ttdoc">Default deconstructor.</div><div class="ttdef"><b>Definition:</b> vfdsettingsdialog.cpp:33</div></div>
-<div class="ttc" id="aclass_vfd_settings_dialog_html_ad41a989a349b7516da69cc9631e5913c"><div class="ttname"><a href="class_vfd_settings_dialog.html#ad41a989a349b7516da69cc9631e5913c">VfdSettingsDialog::settings</a></div><div class="ttdeci">Setting_t settings() const</div><div class="ttdoc">Return the vfd's settings.</div><div class="ttdef"><b>Definition:</b> vfdsettingsdialog.cpp:38</div></div>
+<div class="ttc" id="aclass_vfd_settings_dialog_html_ad342f27d80ac2ba8cf5a061cdd7b5d3a"><div class="ttname"><a href="class_vfd_settings_dialog.html#ad342f27d80ac2ba8cf5a061cdd7b5d3a">VfdSettingsDialog::VfdSettingsDialog</a></div><div class="ttdeci">VfdSettingsDialog(QWidget *parent=0)</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition:</b> vfdsettingsdialog.cpp:5</div></div>
+<div class="ttc" id="aclass_vfd_settings_dialog_html_a2f4814eed080e2ed20b3d06b5ef364bc"><div class="ttname"><a href="class_vfd_settings_dialog.html#a2f4814eed080e2ed20b3d06b5ef364bc">VfdSettingsDialog::~VfdSettingsDialog</a></div><div class="ttdeci">~VfdSettingsDialog()</div><div class="ttdoc">Default deconstructor.</div><div class="ttdef"><b>Definition:</b> vfdsettingsdialog.cpp:44</div></div>
+<div class="ttc" id="aclass_vfd_settings_dialog_html_ad41a989a349b7516da69cc9631e5913c"><div class="ttname"><a href="class_vfd_settings_dialog.html#ad41a989a349b7516da69cc9631e5913c">VfdSettingsDialog::settings</a></div><div class="ttdeci">Setting_t settings() const</div><div class="ttdoc">Return the vfd's settings.</div><div class="ttdef"><b>Definition:</b> vfdsettingsdialog.cpp:49</div></div>
 <div class="ttc" id="astruct_vfd_settings_dialog_1_1_setting__t_html"><div class="ttname"><a href="struct_vfd_settings_dialog_1_1_setting__t.html">VfdSettingsDialog::Setting_t</a></div><div class="ttdoc">A Setting data type. It holds the settings data for VFD.</div><div class="ttdef"><b>Definition:</b> vfdsettingsdialog.h:27</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

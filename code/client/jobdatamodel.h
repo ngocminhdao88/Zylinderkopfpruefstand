@@ -9,7 +9,6 @@
  */
 class JobDataModel : public QAbstractTableModel
 {
-
     Q_OBJECT
 public:
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>952</width>
-    <height>686</height>
+    <width>1321</width>
+    <height>688</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,9 +33,9 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>750</x>
       <y>30</y>
-      <width>561</width>
+      <width>540</width>
       <height>581</height>
      </rect>
     </property>
@@ -380,16 +380,16 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>110</y>
-      <width>301</width>
-      <height>191</height>
+      <y>70</y>
+      <width>681</width>
+      <height>261</height>
      </rect>
     </property>
     <property name="autoFillBackground">
      <bool>true</bool>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="manualTab">
      <property name="toolTip">
@@ -406,8 +406,8 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>271</width>
-        <height>151</height>
+        <width>661</width>
+        <height>221</height>
        </rect>
       </property>
      </widget>
@@ -422,120 +422,14 @@ p, li { white-space: pre-wrap; }
      <attribute name="title">
       <string>Automation</string>
      </attribute>
-     <widget class="QToolButton" name="testProfileButton">
-      <property name="geometry">
-       <rect>
-        <x>190</x>
-        <y>20</y>
-        <width>25</width>
-        <height>19</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>Choose profile</string>
-      </property>
-      <property name="text">
-       <string>...</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_9">
+     <widget class="TestSequencer" name="testSequencer" native="true">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>20</y>
-        <width>54</width>
-        <height>16</height>
+        <y>10</y>
+        <width>651</width>
+        <height>221</height>
        </rect>
-      </property>
-      <property name="text">
-       <string>Test Profile</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="testProfileEdit">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>20</y>
-        <width>101</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="commandDescriptionEdit">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>70</y>
-        <width>113</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_12">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>70</y>
-        <width>71</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Current Step</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="runProfileButton">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>110</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>Start test profile</string>
-      </property>
-      <property name="text">
-       <string>Run Profile</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="stopProfileButton">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>110</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>Stop test profile</string>
-      </property>
-      <property name="text">
-       <string>Stop Profile</string>
-      </property>
-     </widget>
-     <widget class="QToolButton" name="nextCommandButton">
-      <property name="geometry">
-       <rect>
-        <x>200</x>
-        <y>70</y>
-        <width>23</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>Next step</string>
-      </property>
-      <property name="text">
-       <string>-&gt;</string>
       </property>
      </widget>
     </widget>
@@ -543,9 +437,9 @@ p, li { white-space: pre-wrap; }
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>350</y>
-      <width>291</width>
+      <width>671</width>
       <height>191</height>
      </rect>
     </property>
@@ -557,7 +451,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>271</width>
+       <width>641</width>
        <height>161</height>
       </rect>
      </property>
@@ -585,7 +479,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>952</width>
+     <width>1321</width>
      <height>22</height>
     </rect>
    </property>
@@ -744,6 +638,12 @@ p, li { white-space: pre-wrap; }
    <class>JobEditor</class>
    <extends>QWidget</extends>
    <header>jobeditor.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TestSequencer</class>
+   <extends>QWidget</extends>
+   <header>testsequencer.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -62,6 +62,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-slots">Public Slots</a> &#124;
+<a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_abstract_v_f_d-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -83,6 +85,21 @@ Inheritance diagram for AbstractVFD:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
+Public Slots</h2></td></tr>
+<tr class="memitem:a831fe3a6f9f0ddc81bf90063913d5f4e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_v_f_d.html#a831fe3a6f9f0ddc81bf90063913d5f4e">onUpdateRequest</a> ()=0</td></tr>
+<tr class="memdesc:a831fe3a6f9f0ddc81bf90063913d5f4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle update request from mainwindow.  <a href="class_abstract_v_f_d.html#a831fe3a6f9f0ddc81bf90063913d5f4e">More...</a><br /></td></tr>
+<tr class="separator:a831fe3a6f9f0ddc81bf90063913d5f4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
+Signals</h2></td></tr>
+<tr class="memitem:a7a10c6c3c36da9f5c8eddf858811c6d5"><td class="memItemLeft" align="right" valign="top"><a id="a7a10c6c3c36da9f5c8eddf858811c6d5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>errorOccured</b> (QString errMsg)</td></tr>
+<tr class="separator:a7a10c6c3c36da9f5c8eddf858811c6d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abecc18a108ad55685eeff31cc7408c48"><td class="memItemLeft" align="right" valign="top"><a id="abecc18a108ad55685eeff31cc7408c48"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>statusChanged</b> (QString status)</td></tr>
+<tr class="separator:abecc18a108ad55685eeff31cc7408c48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af51b54299e36bb641e867df0a02736cd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_v_f_d.html#af51b54299e36bb641e867df0a02736cd">AbstractVFD</a> (QObject *parent=0)</td></tr>
@@ -108,14 +125,21 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_v_f_d.html#aae5cfbba1d3e73db7d92998343747ed9">getSpeed</a> ()=0</td></tr>
 <tr class="memdesc:aae5cfbba1d3e73db7d92998343747ed9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get VFD speed. <br /></td></tr>
 <tr class="separator:aae5cfbba1d3e73db7d92998343747ed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14158880e3875406440c01182dd1ec1e"><td class="memItemLeft" align="right" valign="top"><a id="a14158880e3875406440c01182dd1ec1e"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_v_f_d.html#a14158880e3875406440c01182dd1ec1e">connectDevice</a> ()=0</td></tr>
-<tr class="memdesc:a14158880e3875406440c01182dd1ec1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect to the VFD device. <br /></td></tr>
-<tr class="separator:a14158880e3875406440c01182dd1ec1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ed5afee786e8818361b51e69b0b798f"><td class="memItemLeft" align="right" valign="top"><a id="a2ed5afee786e8818361b51e69b0b798f"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_v_f_d.html#a2ed5afee786e8818361b51e69b0b798f">connectDevice</a> ()=0</td></tr>
+<tr class="memdesc:a2ed5afee786e8818361b51e69b0b798f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect to the VFD device. <br /></td></tr>
+<tr class="separator:a2ed5afee786e8818361b51e69b0b798f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9f82e427f57372586c2706c202243f8"><td class="memItemLeft" align="right" valign="top"><a id="aa9f82e427f57372586c2706c202243f8"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_v_f_d.html#aa9f82e427f57372586c2706c202243f8">configDevice</a> ()=0</td></tr>
 <tr class="memdesc:aa9f82e427f57372586c2706c202243f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the VFD device. <br /></td></tr>
 <tr class="separator:aa9f82e427f57372586c2706c202243f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71251545a448527d4bea6b91ae8f6c6f"><td class="memItemLeft" align="right" valign="top"><a id="a71251545a448527d4bea6b91ae8f6c6f"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_v_f_d.html#a71251545a448527d4bea6b91ae8f6c6f">initDevice</a> ()=0</td></tr>
+<tr class="memdesc:a71251545a448527d4bea6b91ae8f6c6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initiate the VFD device. <br /></td></tr>
+<tr class="separator:a71251545a448527d4bea6b91ae8f6c6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2630722a90519169f310722118336a44"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_v_f_d.html#a2630722a90519169f310722118336a44">isConnected</a> ()=0</td></tr>
+<tr class="memdesc:a2630722a90519169f310722118336a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate if the host pc is connected with the VFD device.  <a href="class_abstract_v_f_d.html#a2630722a90519169f310722118336a44">More...</a><br /></td></tr>
+<tr class="separator:a2630722a90519169f310722118336a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="class_abstract_v_f_d.html" title="The AbstractVFD class.">AbstractVFD</a> class. </p>
@@ -152,6 +176,65 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2630722a90519169f310722118336a44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2630722a90519169f310722118336a44">&#9670;&nbsp;</a></span>isConnected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool AbstractVFD::isConnected </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Indicate if the host pc is connected with the VFD device. </p>
+<dl class="section return"><dt>Returns</dt><dd>bool </dd></dl>
+
+<p>Implemented in <a class="el" href="class_unico_v_f_d.html#a5574859865938f8b7e2bc923128bdce9">UnicoVFD</a>.</p>
+
+</div>
+</div>
+<a id="a831fe3a6f9f0ddc81bf90063913d5f4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a831fe3a6f9f0ddc81bf90063913d5f4e">&#9670;&nbsp;</a></span>onUpdateRequest</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void AbstractVFD::onUpdateRequest </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handle update request from mainwindow. </p>
+<p>Handle the VFD update request </p>
 
 </div>
 </div>

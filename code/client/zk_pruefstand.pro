@@ -25,6 +25,9 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     rampgenerator.cpp \
+    testprofiledata.cpp \
+    testprofilemodel.cpp \
+    testsequencer.cpp \
     unicovfd.cpp \
     vfddatamodel.cpp \
     vfdeditor.cpp \
@@ -37,6 +40,9 @@ HEADERS += \
     jobeditor.h \
     mainwindow.h \
     rampgenerator.h \
+    testprofiledata.h \
+    testprofilemodel.h \
+    testsequencer.h \
     unicovfd.h \
     vfddatamodel.h \
     vfdeditor.h \
@@ -45,6 +51,7 @@ HEADERS += \
 FORMS += \
     jobeditor.ui \
     mainwindow.ui \
+    testsequencer.ui \
     vfdeditor.ui \
     vfdsettingsdialog.ui
 

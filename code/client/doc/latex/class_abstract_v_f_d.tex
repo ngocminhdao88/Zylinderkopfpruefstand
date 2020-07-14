@@ -15,6 +15,20 @@ Inheritance diagram for Abstract\+V\+FD\+:\begin{figure}[H]
 \includegraphics[height=3.000000cm]{class_abstract_v_f_d}
 \end{center}
 \end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_abstract_v_f_d_a831fe3a6f9f0ddc81bf90063913d5f4e}{on\+Update\+Request}} ()=0
+\begin{DoxyCompactList}\small\item\em Handle update request from mainwindow. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_abstract_v_f_d_a7a10c6c3c36da9f5c8eddf858811c6d5}\label{class_abstract_v_f_d_a7a10c6c3c36da9f5c8eddf858811c6d5}} 
+void {\bfseries error\+Occured} (Q\+String err\+Msg)
+\item 
+\mbox{\Hypertarget{class_abstract_v_f_d_abecc18a108ad55685eeff31cc7408c48}\label{class_abstract_v_f_d_abecc18a108ad55685eeff31cc7408c48}} 
+void {\bfseries status\+Changed} (Q\+String status)
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -35,12 +49,17 @@ virtual void \mbox{\hyperlink{class_abstract_v_f_d_a9815790b602d7d01f4ebb75a3a22
 \mbox{\Hypertarget{class_abstract_v_f_d_aae5cfbba1d3e73db7d92998343747ed9}\label{class_abstract_v_f_d_aae5cfbba1d3e73db7d92998343747ed9}} 
 virtual double \mbox{\hyperlink{class_abstract_v_f_d_aae5cfbba1d3e73db7d92998343747ed9}{get\+Speed}} ()=0
 \begin{DoxyCompactList}\small\item\em Get V\+FD speed. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_abstract_v_f_d_a14158880e3875406440c01182dd1ec1e}\label{class_abstract_v_f_d_a14158880e3875406440c01182dd1ec1e}} 
-virtual void \mbox{\hyperlink{class_abstract_v_f_d_a14158880e3875406440c01182dd1ec1e}{connect\+Device}} ()=0
+\mbox{\Hypertarget{class_abstract_v_f_d_a2ed5afee786e8818361b51e69b0b798f}\label{class_abstract_v_f_d_a2ed5afee786e8818361b51e69b0b798f}} 
+virtual bool \mbox{\hyperlink{class_abstract_v_f_d_a2ed5afee786e8818361b51e69b0b798f}{connect\+Device}} ()=0
 \begin{DoxyCompactList}\small\item\em Connect to the V\+FD device. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_abstract_v_f_d_aa9f82e427f57372586c2706c202243f8}\label{class_abstract_v_f_d_aa9f82e427f57372586c2706c202243f8}} 
 virtual void \mbox{\hyperlink{class_abstract_v_f_d_aa9f82e427f57372586c2706c202243f8}{config\+Device}} ()=0
-\begin{DoxyCompactList}\small\item\em Configure the V\+FD device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Configure the V\+FD device. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_abstract_v_f_d_a71251545a448527d4bea6b91ae8f6c6f}\label{class_abstract_v_f_d_a71251545a448527d4bea6b91ae8f6c6f}} 
+virtual void \mbox{\hyperlink{class_abstract_v_f_d_a71251545a448527d4bea6b91ae8f6c6f}{init\+Device}} ()=0
+\begin{DoxyCompactList}\small\item\em Initiate the V\+FD device. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_abstract_v_f_d_a2630722a90519169f310722118336a44}{is\+Connected}} ()=0
+\begin{DoxyCompactList}\small\item\em Indicate if the host pc is connected with the V\+FD device. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -65,6 +84,36 @@ Constructor for the \mbox{\hyperlink{class_abstract_v_f_d}{Abstract\+V\+FD}} cla
 \hline
 \end{DoxyParams}
 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_abstract_v_f_d_a2630722a90519169f310722118336a44}\label{class_abstract_v_f_d_a2630722a90519169f310722118336a44}} 
+\index{AbstractVFD@{AbstractVFD}!isConnected@{isConnected}}
+\index{isConnected@{isConnected}!AbstractVFD@{AbstractVFD}}
+\doxysubsubsection{\texorpdfstring{isConnected()}{isConnected()}}
+{\footnotesize\ttfamily virtual bool Abstract\+V\+F\+D\+::is\+Connected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Indicate if the host pc is connected with the V\+FD device. 
+
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_unico_v_f_d_a5574859865938f8b7e2bc923128bdce9}{Unico\+V\+FD}}.
+
+\mbox{\Hypertarget{class_abstract_v_f_d_a831fe3a6f9f0ddc81bf90063913d5f4e}\label{class_abstract_v_f_d_a831fe3a6f9f0ddc81bf90063913d5f4e}} 
+\index{AbstractVFD@{AbstractVFD}!onUpdateRequest@{onUpdateRequest}}
+\index{onUpdateRequest@{onUpdateRequest}!AbstractVFD@{AbstractVFD}}
+\doxysubsubsection{\texorpdfstring{onUpdateRequest}{onUpdateRequest}}
+{\footnotesize\ttfamily virtual void Abstract\+V\+F\+D\+::on\+Update\+Request (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [slot]}}
+
+
+
+Handle update request from mainwindow. 
+
+Handle the V\+FD update request 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

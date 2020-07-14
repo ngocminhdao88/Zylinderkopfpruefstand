@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rampgenerator_48',['RampGenerator',['../class_ramp_generator.html',1,'']]]
+  ['rampgenerator_60',['RampGenerator',['../class_ramp_generator.html',1,'']]]
 ];

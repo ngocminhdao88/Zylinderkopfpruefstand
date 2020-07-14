@@ -14,7 +14,7 @@ class VFDEditor : public QWidget
     Q_OBJECT
 
 public:
-    explicit VFDEditor(QWidget *parent = nullptr);
+    explicit VFDEditor(QWidget *parent = 0);
     ~VFDEditor();
 
     /*
@@ -23,9 +23,9 @@ public:
     void setModel(QAbstractItemModel *model);
 
 private:
-    Ui::VFDEditor *ui = nullptr;
-    QDataWidgetMapper *mapper = nullptr;
-    QAbstractItemModel *m_model = nullptr;
+    Ui::VFDEditor *ui = 0;
+    QDataWidgetMapper *mapper = 0;
+    QAbstractItemModel *m_model = 0;
 };
 
 #endif // VFDEDITOR_H

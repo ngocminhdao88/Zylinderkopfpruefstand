@@ -1,0 +1,91 @@
+\hypertarget{class_test_profile_model}{}\doxysection{Test\+Profile\+Model Class Reference}
+\label{class_test_profile_model}\index{TestProfileModel@{TestProfileModel}}
+
+
+The Test\+Profile\+Data\+Model class holds the information about the test profile.  
+
+
+
+
+{\ttfamily \#include $<$testprofilemodel.\+h$>$}
+
+Inheritance diagram for Test\+Profile\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_test_profile_model}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_test_profile_model_a8a67a3bce208419222495a9e1385b540}{Test\+Profile\+Model}} (Q\+Object $\ast$parent=0)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_test_profile_model_a29642b0deadd42991b52e5d4e15cb46c}\label{class_test_profile_model_a29642b0deadd42991b52e5d4e15cb46c}} 
+int \mbox{\hyperlink{class_test_profile_model_a29642b0deadd42991b52e5d4e15cb46c}{row\+Count}} (const Q\+Model\+Index \&parent=Q\+Model\+Index()) const override
+\begin{DoxyCompactList}\small\item\em Override row\+Count function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_test_profile_model_a35e620348c140da4573d4831f20be7a5}\label{class_test_profile_model_a35e620348c140da4573d4831f20be7a5}} 
+int \mbox{\hyperlink{class_test_profile_model_a35e620348c140da4573d4831f20be7a5}{column\+Count}} (const Q\+Model\+Index \&parent=Q\+Model\+Index()) const override
+\begin{DoxyCompactList}\small\item\em Override column\+Count function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_test_profile_model_a0ffb948b92856641e284c2dfa7da5638}\label{class_test_profile_model_a0ffb948b92856641e284c2dfa7da5638}} 
+Q\+Variant \mbox{\hyperlink{class_test_profile_model_a0ffb948b92856641e284c2dfa7da5638}{data}} (const Q\+Model\+Index \&index, int role=Qt\+::\+Display\+Role) const override
+\begin{DoxyCompactList}\small\item\em Override data function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_test_profile_model_a7432560d52a751e5205a64a65dff89f6}\label{class_test_profile_model_a7432560d52a751e5205a64a65dff89f6}} 
+Q\+Variant \mbox{\hyperlink{class_test_profile_model_a7432560d52a751e5205a64a65dff89f6}{header\+Data}} (int section, Qt\+::\+Orientation orientation, int role=Qt\+::\+Display\+Role) const override
+\begin{DoxyCompactList}\small\item\em Override header\+Data function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_test_profile_model_afab1e385889c5eb4b35b2e31692654b9}\label{class_test_profile_model_afab1e385889c5eb4b35b2e31692654b9}} 
+bool \mbox{\hyperlink{class_test_profile_model_afab1e385889c5eb4b35b2e31692654b9}{set\+Data}} (const Q\+Model\+Index \&index, const Q\+Variant \&value, int role=Qt\+::\+Edit\+Role) override
+\begin{DoxyCompactList}\small\item\em Override set\+Data function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_test_profile_model_ab1494ec92da381f8856ad8ac544e25de}\label{class_test_profile_model_ab1494ec92da381f8856ad8ac544e25de}} 
+Qt\+::\+Item\+Flags \mbox{\hyperlink{class_test_profile_model_ab1494ec92da381f8856ad8ac544e25de}{flags}} (const Q\+Model\+Index \&index) const override
+\begin{DoxyCompactList}\small\item\em Override flags function in Q\+Abstract\+Table\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_test_profile_model_add6dc61c1295f80976ceee409fa33041}\label{class_test_profile_model_add6dc61c1295f80976ceee409fa33041}} 
+bool {\bfseries insert\+Rows} (int position, int rows, const Q\+Model\+Index \&index=Q\+Model\+Index()) override
+\item 
+\mbox{\Hypertarget{class_test_profile_model_a9d0be97512f63c9d959c7fff928825ee}\label{class_test_profile_model_a9d0be97512f63c9d959c7fff928825ee}} 
+bool {\bfseries remove\+Rows} (int position, int rows, const Q\+Model\+Index \&index=Q\+Model\+Index()) override
+\item 
+const Q\+Vector$<$ \mbox{\hyperlink{class_test_profile_data}{Test\+Profile\+Data}} $>$ \& \mbox{\hyperlink{class_test_profile_model_a1d5bf9567033a5562f0924a0119741b4}{get\+Test\+Profile}} () const
+\begin{DoxyCompactList}\small\item\em Get the whole test profile with all the steps. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The Test\+Profile\+Data\+Model class holds the information about the test profile. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_test_profile_model_a8a67a3bce208419222495a9e1385b540}\label{class_test_profile_model_a8a67a3bce208419222495a9e1385b540}} 
+\index{TestProfileModel@{TestProfileModel}!TestProfileModel@{TestProfileModel}}
+\index{TestProfileModel@{TestProfileModel}!TestProfileModel@{TestProfileModel}}
+\doxysubsubsection{\texorpdfstring{TestProfileModel()}{TestProfileModel()}}
+{\footnotesize\ttfamily Test\+Profile\+Model\+::\+Test\+Profile\+Model (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & -\/ A Q\+Object, which owns this \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_test_profile_model_a1d5bf9567033a5562f0924a0119741b4}\label{class_test_profile_model_a1d5bf9567033a5562f0924a0119741b4}} 
+\index{TestProfileModel@{TestProfileModel}!getTestProfile@{getTestProfile}}
+\index{getTestProfile@{getTestProfile}!TestProfileModel@{TestProfileModel}}
+\doxysubsubsection{\texorpdfstring{getTestProfile()}{getTestProfile()}}
+{\footnotesize\ttfamily const Q\+Vector$<$\mbox{\hyperlink{class_test_profile_data}{Test\+Profile\+Data}}$>$\& Test\+Profile\+Model\+::get\+Test\+Profile (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the whole test profile with all the steps. 
+
+\begin{DoxyReturn}{Returns}
+A const reference of Q\+Vector$<$\+Test\+Profile\+Data$>$
+\end{DoxyReturn}
+The const after \mbox{\hyperlink{class_test_profile_model_a1d5bf9567033a5562f0924a0119741b4}{get\+Test\+Profile()}} function means, that this function does not modify member variables of the class 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+testprofilemodel.\+h\item 
+testprofilemodel.\+cpp\end{DoxyCompactItemize}
