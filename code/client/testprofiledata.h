@@ -7,24 +7,24 @@ class TestProfileData {
 public:
     /**
      * @brief Default constructor
+     */
+    TestProfileData();
+
+    /**
+     * @brief Constructor
      * @param step - Index number? in the whole test profile
      * @param duration - How long should this step run
      * @param speed - Motors speed
      * @param direction - Motors direction
      * @param comment - Users comment
      */
-    TestProfileData(int step, int duration, int speed, int direction, QString comment);
+    TestProfileData(int duration, int speed, int direction, QString comment);
 
     /**
      * @brief Copy constructor
      * @param another
      */
     TestProfileData(const TestProfileData &another);
-
-    /**
-     * @brief Get the step number
-     */
-    int getStep() const;
 
     /**
      * @brief Get the steps duration
@@ -47,11 +47,6 @@ public:
     QString getComment() const;
 
     /**
-     * @brief Set the step number
-     */
-    void setStep(int m_step);
-
-    /**
      * @brief Set the steps duration
      */
     void setDuration(int m_duration);
@@ -72,7 +67,6 @@ public:
     void setComment(QString m_comment);
 
 private:
-    int m_step;
     int m_duration;
     int m_speed;
     int m_direction;

@@ -12,7 +12,7 @@ int TestProfileModel::rowCount(const QModelIndex &parent) const {
 }
 
 int TestProfileModel::columnCount(const QModelIndex &parent) const {
-    return parent.isValid() ? 0 : 5;
+    return parent.isValid() ? 0 : 4;
 }
 
 QVariant TestProfileModel::data(const QModelIndex &index, int role) const {
@@ -27,14 +27,12 @@ QVariant TestProfileModel::data(const QModelIndex &index, int role) const {
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
         switch (index.column()) {
         case 0:
-            return currentStep.getStep();
-        case 1:
             return currentStep.getDuration();
-        case 2:
+        case 1:
             return currentStep.getSpeed();
-        case 3:
+        case 2:
             return currentStep.getDirection();
-        case 4:
+        case 3:
             return currentStep.getComment();
         default:
             break;
@@ -50,19 +48,21 @@ QVariant TestProfileModel::headerData(int section, Qt::Orientation orientation, 
     if (orientation == Qt::Horizontal) {
         switch (section) {
         case 0:
-            return "Step";
-        case 1:
             return "Duration [s]";
-        case 2:
+        case 1:
             return "Speed [1/min]";
-        case 3:
+        case 2:
             return "Direction";
-        case 4:
+        case 3:
             return "Comment";
         default:
             break;
         }
+    } else {
+        // rown number
+        return section;
     }
+
     return QVariant();
 }
 
@@ -75,18 +75,15 @@ bool TestProfileModel::setData(const QModelIndex &index, const QVariant &value, 
 
         switch (index.column()) {
         case 0:
-            currentStep.setStep(value.toInt());
-            break;
-        case 1:
             currentStep.setDuration(value.toInt());
             break;
-        case 2:
+        case 1:
             currentStep.setSpeed(value.toInt());
             break;
-        case 3:
+        case 2:
             currentStep.setDirection(value.toInt());
             break;
-        case 4:
+        case 3:
             currentStep.setComment(value.toString());
             break;
         default:
@@ -112,7 +109,7 @@ bool TestProfileModel::insertRows(int position, int rows, const QModelIndex &ind
     beginInsertRows(QModelIndex(), position, position + rows - 1);
 
     for (int row = 0; row < rows; ++row)
-        m_testProfile.insert(position, TestProfileData(0, 1, 0, 0, "Replace me"));
+        m_testProfile.insert(position, TestProfileData(1, 0, 0, "Replace me"));
 
     endInsertRows();
     return true;
@@ -129,7 +126,6 @@ bool TestProfileModel::removeRows(int position, int rows, const QModelIndex &ind
     return true;
 }
 
-const QVector<TestProfileData> &TestProfileModel::getTestProfile() const
-{
-
+const QVector<TestProfileData> &TestProfileModel::getTestProfile() const {
+    return m_testProfile;
 }

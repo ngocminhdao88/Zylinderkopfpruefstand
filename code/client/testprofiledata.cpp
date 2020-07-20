@@ -1,7 +1,9 @@
 #include "testprofiledata.h"
 
-TestProfileData::TestProfileData(int step, int duration, int speed, int direction, QString comment) :
-    m_step(step),
+TestProfileData::TestProfileData() {
+}
+
+TestProfileData::TestProfileData(int duration, int speed, int direction, QString comment) :
     m_duration(duration),
     m_speed(speed),
     m_direction(direction),
@@ -11,15 +13,10 @@ TestProfileData::TestProfileData(int step, int duration, int speed, int directio
 }
 
 TestProfileData::TestProfileData(const TestProfileData &another) {
-    m_step = another.getStep();
     m_duration = another.getDuration();
     m_speed = another.getSpeed();
     m_direction = another.getDuration();
     m_comment = another.getComment();
-}
-
-int TestProfileData::getStep() const {
-    return m_step;
 }
 
 int TestProfileData::getDuration() const {
@@ -36,11 +33,6 @@ int TestProfileData::getDirection() const {
 
 QString TestProfileData::getComment() const {
     return m_comment;
-}
-
-void TestProfileData::setStep(int step) {
-    if (step != m_step)
-        m_step = step;
 }
 
 void TestProfileData::setDuration(int duration) {

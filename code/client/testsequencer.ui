@@ -34,7 +34,7 @@
      <item>
       <widget class="QLabel" name="testProfileLabel">
        <property name="text">
-        <string>TextLabel</string>
+        <string>current test profile</string>
        </property>
       </widget>
      </item>
@@ -51,12 +51,46 @@
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Loop:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="currentLoopLabel">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>/</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="spinBox">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
     <widget class="QTableView" name="testProfileTableView">
      <property name="toolTip">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Test profile&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="cornerButtonEnabled">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -73,32 +107,22 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="addStepButton">
+      <widget class="QPushButton" name="saveButton">
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Load test profile&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string>+ Step</string>
+        <string>Save</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="minusStepButton">
+      <widget class="QPushButton" name="plotButton">
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Load test profile&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string>- Step</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="saveAsButton">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Load test profile&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string>Save As</string>
+        <string>Plot</string>
        </property>
       </widget>
      </item>
@@ -164,7 +188,7 @@
      <item>
       <widget class="QLabel" name="testStatusLabel">
        <property name="text">
-        <string>TextLabel</string>
+        <string>current test status</string>
        </property>
       </widget>
      </item>
