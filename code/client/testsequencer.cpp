@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QState>
 #include <QCursor>
+#include "testprofiledata.h"
 
 TestSequencer::TestSequencer(QWidget *parent) :
     QWidget(parent),
@@ -151,7 +152,11 @@ void TestSequencer::onParseStateEntered() {
     // Update the status to Parse and parse the current step in test profile
     updateStatus("Parse");
 
+    TestProfileData testStep = m_testProfileDataModel->getTestProfile().at(m_stepIndex);
+
     // Rearm the step timer
+    m_stepTimer->setInterval(testStep.getDuration() * 1000);
+    m_stepTimer->start();
 }
 
 void TestSequencer::onParseStateExited() {
