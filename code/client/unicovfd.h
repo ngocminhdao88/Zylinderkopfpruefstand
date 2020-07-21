@@ -28,8 +28,7 @@ public:
      * @param pacemaker - A clock/timer, which determines how often data are sended to VFD
      * @param parent - A QObject, which owns this
      */
-    UnicoVFD(QAbstractItemModel *model = 0,
-             QObject *parent = 0);
+    UnicoVFD(QObject *parent = 0, QAbstractItemModel *model = 0);
 
     /**
       * @brief Default destructor
@@ -48,24 +47,24 @@ public:
      *
      * @param speed Wanted motor speed
      */
-    void setSpeed(double speed) override;
+    void setSpeed(int speed) override;
 
     /**
      * @brief Set the motor turn direction
      *
      * @param dir Motor's turn direction. 0 -> STOP, 1 -> CCW and 2 -> CW.
      */
-    void setDirection(double dir) override;
+    void setDirection(int dir) override;
 
-    void setRampUpRate(double rate) override;
-    void setRampDownRate(double rate) override;
+    void setRampUpRate(int rate) override;
+    void setRampDownRate(int rate) override;
 
     /**
      * @brief Get the motor's speed from VFD reading
      *
      * @return Motor's speed
      */
-    double getSpeed() override;
+    int getSpeed() override;
 
     /**
      * @brief Connect to the Unico VFD using Serial Modbus
@@ -127,7 +126,7 @@ private:
      * @param rate Users desired ramp rate
      * @return double Scaled ramp rate with pacemaker update clock
      */
-    double normalizeRampRate(double rate);
+    int normalizeRampRate(int rate);
 
     /**
      * @brief Parsing the feedback speed from VFD
@@ -135,7 +134,7 @@ private:
      * @param fbSpeed Raw speed feedback from the VFD
      * @param direction Motors turn direction
      */
-    double getFeedbackSpeed(double fbSpeed, uint direction);
+    int getFeedbackSpeed(int fbSpeed, int direction);
 
 private:
     QModbusClient * m_modbusDevice = 0;

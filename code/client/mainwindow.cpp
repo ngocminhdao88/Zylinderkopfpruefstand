@@ -38,7 +38,7 @@ void MainWindow::initVfdDevice()
     vfdDataModel = new VFDDataModel(this);
     ui->vfdEditor->setModel(vfdDataModel);
 
-    m_vfdDevice = new UnicoVFD(vfdDataModel, this);
+    m_vfdDevice = new UnicoVFD(this, vfdDataModel);
 }
 
 void MainWindow::initJobDataModel()

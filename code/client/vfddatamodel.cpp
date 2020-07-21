@@ -1,11 +1,6 @@
 #include "global.h"
 #include "vfddatamodel.h"
 
-enum {
-    ColumnCount = 6,
-    RowCount = 1,
-};
-
 VFDDataModel::VFDDataModel(QObject *parent) :
     QAbstractTableModel(parent)
 {
@@ -14,35 +9,35 @@ VFDDataModel::VFDDataModel(QObject *parent) :
 int VFDDataModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    return RowCount;
+    return 1;
 }
 
 int VFDDataModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    return ColumnCount;
+    return TestProfileEnum::COLUMN_COUNT;
 }
 
 QVariant VFDDataModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || index.row() >= RowCount || index.column() >= ColumnCount)
+    if (!index.isValid())
+        return QVariant();
+
+    if (index.row() >= 1 || index.row() < 0)
         return QVariant();
 
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
-        if (index.column() == static_cast<int>(VFDDataColumn::ControlSpeed))
-            return m_vfdData.controlSpeed;
-        if (index.column() == static_cast<int>(VFDDataColumn::RampSpeed))
-            return m_vfdData.rampSpeed;
-        if (index.column() == static_cast<int>(VFDDataColumn::FeedbackSpeed))
-            return m_vfdData.feedbackSpeed;
-        if (index.column() == static_cast<int>(VFDDataColumn::Direction))
-            return m_vfdData.turnDirection;
-        if (index.column() == static_cast<int>(VFDDataColumn::Acceleration))
-            return m_vfdData.acceleration;
-        if (index.column() == static_cast<int>(VFDDataColumn::Deceleration))
-            return m_vfdData.deceleration;
+        switch (index.column()) {
+        case TestProfileEnum::SPEED_COL:
+            return m_vfdData.getSpeed();
+        case TestProfileEnum::FB_SPEED_COL:
+            return m_vfdData.getFbSpeed();
+        case TestProfileEnum::DIRECTION_COL:
+            return m_vfdData.getDirection();
+        default:
+            break;
+        }
     }
-
     return QVariant();
 }
 
@@ -52,49 +47,41 @@ QVariant VFDDataModel::headerData(int section, Qt::Orientation orientation, int 
         return QVariant();
 
     if (orientation == Qt::Horizontal) {
-        if (section == static_cast<int>(VFDDataColumn::ControlSpeed))
-            return "ControlSpeed";
-        if (section == static_cast<int>(VFDDataColumn::RampSpeed))
-            return "RampSpeed";
-        if (section == static_cast<int>(VFDDataColumn::FeedbackSpeed))
+        switch (section) {
+        case TestProfileEnum::SPEED_COL:
+            return "Speed";
+        case TestProfileEnum::FB_SPEED_COL:
             return "FeedbackSpeed";
-        if (section == static_cast<int>(VFDDataColumn::Direction))
-            return "TurnDirection";
-        if (section == static_cast<int>(VFDDataColumn::Acceleration))
-            return "Acceleration";
-        if (section == static_cast<int>(VFDDataColumn::Deceleration))
-            return "Deceleration";
+        case TestProfileEnum::DIRECTION_COL:
+            return "Direction";
+        default:
+            break;
+        }
     }
-
     return QVariant();
 }
 
 bool VFDDataModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    if (!index.isValid() || index.row() >= RowCount || index.column() >= ColumnCount)
-        return false;
+    if (index.isValid() && role == Qt::EditRole) {
+        switch (index.column()) {
+        case TestProfileEnum::SPEED_COL:
+            m_vfdData.setSpeed(value.toInt());
+            break;
+        case TestProfileEnum::FB_SPEED_COL:
+            m_vfdData.setFeedbackSpeed(value.toInt());
+            break;
+        case TestProfileEnum::DIRECTION_COL:
+            m_vfdData.setDirection(value.toInt());
+            break;
+        default:
+            return false;
+        }
+        emit dataChanged(index, index);
 
-    if (role != Qt::EditRole)
-        return false;
-
-    const int col = index.column();
-
-    if (col == static_cast<int>(VFDDataColumn::ControlSpeed))
-        m_vfdData.controlSpeed = value.toDouble();
-    if (col == static_cast<int>(VFDDataColumn::RampSpeed))
-        m_vfdData.rampSpeed = value.toDouble();
-    if (col == static_cast<int>(VFDDataColumn::FeedbackSpeed))
-        m_vfdData.feedbackSpeed = value.toDouble();
-    if (col == static_cast<int>(VFDDataColumn::Direction))
-        m_vfdData.turnDirection = value.toDouble();
-    if (col == static_cast<int>(VFDDataColumn::Acceleration))
-        m_vfdData.acceleration = value.toDouble();
-    if (col == static_cast<int>(VFDDataColumn::Deceleration))
-        m_vfdData.deceleration = value.toDouble();
-
-    emit dataChanged(index, index);
-
-    return true;
+        return true;
+    }
+    return false;
 }
 
 Qt::ItemFlags VFDDataModel::flags(const QModelIndex &index) const
@@ -105,7 +92,7 @@ Qt::ItemFlags VFDDataModel::flags(const QModelIndex &index) const
     return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
 }
 
-VFDDataModel::VFDData_t VFDDataModel::getVFDData() const
+TestProfileData VFDDataModel::getVFDData() const
 {
     return m_vfdData;
 }

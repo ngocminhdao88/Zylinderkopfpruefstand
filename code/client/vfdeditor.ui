@@ -14,13 +14,6 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Ramp-up Rate</string>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
@@ -28,10 +21,16 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Feedback Speed</string>
+   <item row="0" column="1">
+    <widget class="QDoubleSpinBox" name="controlSpeedSpinbox">
+     <property name="buttonSymbols">
+      <enum>QAbstractSpinBox::NoButtons</enum>
+     </property>
+     <property name="keyboardTracking">
+      <bool>false</bool>
+     </property>
+     <property name="maximum">
+      <double>7000.000000000000000</double>
      </property>
     </widget>
    </item>
@@ -48,30 +47,10 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>Ramp-down Rate</string>
-     </property>
-    </widget>
-   </item>
    <item row="2" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
       <string>Turn Direction</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QDoubleSpinBox" name="controlSpeedSpinbox">
-     <property name="buttonSymbols">
-      <enum>QAbstractSpinBox::NoButtons</enum>
-     </property>
-     <property name="keyboardTracking">
-      <bool>false</bool>
-     </property>
-     <property name="maximum">
-      <double>7000.000000000000000</double>
      </property>
     </widget>
    </item>
@@ -91,35 +70,10 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="1">
-    <widget class="QDoubleSpinBox" name="rampUpRateSpinbox">
-     <property name="buttonSymbols">
-      <enum>QAbstractSpinBox::NoButtons</enum>
-     </property>
-     <property name="keyboardTracking">
-      <bool>false</bool>
-     </property>
-     <property name="minimum">
-      <double>1.000000000000000</double>
-     </property>
-     <property name="maximum">
-      <double>1000.000000000000000</double>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="QDoubleSpinBox" name="rampDownRateSpinbox">
-     <property name="buttonSymbols">
-      <enum>QAbstractSpinBox::NoButtons</enum>
-     </property>
-     <property name="keyboardTracking">
-      <bool>false</bool>
-     </property>
-     <property name="minimum">
-      <double>1.000000000000000</double>
-     </property>
-     <property name="maximum">
-      <double>1000.000000000000000</double>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Feedback Speed</string>
      </property>
     </widget>
    </item>

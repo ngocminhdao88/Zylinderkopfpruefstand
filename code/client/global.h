@@ -3,13 +3,31 @@
 
 #define PACE_MAKER_RATE 250
 
-enum class VFDDataColumn : int {
-    ControlSpeed = 0,
-    RampSpeed = 1,
-    FeedbackSpeed = 2,
-    Direction = 3,
-    Acceleration = 4,
-    Deceleration = 5,
+struct TestProfileEnum {
+    enum {
+        COLUMN_COUNT = 5,
+
+        DURATION_COL = 0,
+        SPEED_COL = 1,
+        FB_SPEED_COL = 2,
+        DIRECTION_COL = 3,
+        COMMENT_COL = 4,
+    };
+};
+
+struct UnicoDataEnum {
+    enum {
+        MAX_SPEED = 7000, //[RPM]
+        DEV_ID = 1,
+        RAMP_RATE_MAX = 1000, //[RPM/s]
+
+        //VFD holding registers
+        SPEED_R = 84,
+        FB_SPEED_R = 222,
+        DIR_R = 427,
+        ACC_R = 86,
+        DEC_R = 87,
+    };
 };
 
 enum class JobDataEnum : int {

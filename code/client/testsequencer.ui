@@ -20,21 +20,21 @@
       <widget class="QLabel" name="label">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>8</pointsize>
          <weight>75</weight>
          <bold>true</bold>
          <kerning>false</kerning>
         </font>
        </property>
        <property name="text">
-        <string>Test profile:</string>
+        <string>Profile:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="profileLabel">
+      <widget class="QLabel" name="profileNameLabel">
        <property name="text">
-        <string>name of the profile</string>
+        <string>...</string>
        </property>
       </widget>
      </item>
@@ -50,6 +50,26 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Progress:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="progressLabel">
+       <property name="text">
+        <string>0/0</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_3">
@@ -177,7 +197,7 @@
       <widget class="QLabel" name="label_2">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>8</pointsize>
          <weight>75</weight>
          <bold>true</bold>
          <kerning>false</kerning>

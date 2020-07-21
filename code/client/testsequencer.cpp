@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <QState>
 #include <QCursor>
+#include <QFileDialog>
+#include <QFileInfo>
 #include "testprofiledata.h"
 
 TestSequencer::TestSequencer(QWidget *parent) :
@@ -39,6 +41,15 @@ QTimer *TestSequencer::getTimer() {
 }
 
 void TestSequencer::onLoadButtonClicked() {
+    QString testProfileName = QFileDialog::getOpenFileName(this, "Open test profile",
+                                                           ".",
+                                                           "Test Profile (*.csv)");
+
+    if (testProfileName.length() > 0) {
+
+        QFileInfo fi(testProfileName);
+        ui->profileNameLabel->setText(fi.fileName());
+    }
 }
 
 void TestSequencer::onPlotButtonClicked() {
@@ -125,7 +136,7 @@ void TestSequencer::initStateMachine() {
 
 void TestSequencer::onIdleStateEntered() {
     // Update the status to Idle and enable the total loop spinbox
-    updateStatus("Idle");
+    updateTestStatus("Idle");
     ui->loopSpinBox->setEnabled(true);
 }
 
@@ -135,12 +146,12 @@ void TestSequencer::onIdleStateExited() {
     m_stepTimer->setInterval(1000);
     m_stepTimer->start();
 
-    updateLoopCount(0);
+    updateTestLoopCount(0);
 }
 
 void TestSequencer::onRunStateEntered() {
     // Update the status to Run and disable the total loop spinbox
-    updateStatus("Run");
+    updateTestStatus("Run");
     ui->loopSpinBox->setEnabled(false);
 
 //    qDebug() << QString("stepindex %1").arg(m_stepIndex);
@@ -150,13 +161,15 @@ void TestSequencer::onRunStateEntered() {
 
 void TestSequencer::onParseStateEntered() {
     // Update the status to Parse and parse the current step in test profile
-    updateStatus("Parse");
+    updateTestStatus("Parse");
 
     TestProfileData testStep = m_testProfileDataModel->getTestProfile().at(m_stepIndex);
 
     // Rearm the step timer
     m_stepTimer->setInterval(testStep.getDuration() * 1000);
     m_stepTimer->start();
+
+    updateTestProgress();
 }
 
 void TestSequencer::onParseStateExited() {
@@ -165,14 +178,14 @@ void TestSequencer::onParseStateExited() {
 
 void TestSequencer::onStopStateEntered() {
     // Update the status to Stop and reset all the test sequencer counter
-    updateStatus("Stop");
+    updateTestStatus("Stop");
 }
 
 void TestSequencer::onPauseStateEntered() {
     ui->pauseButton->setText("Resume");
 
     // Update the status to Pause and take a snap shot of current step run time
-    updateStatus("Pause");
+    updateTestStatus("Pause");
 
     // Calculate the time left for current step
     m_stepTimeLeft = m_stepTimer->interval() - m_stepTimer->remainingTime();
@@ -191,10 +204,10 @@ void TestSequencer::onPauseStateExited() {
 
 void TestSequencer::onEndLoopEntered() {
     // Update the status to Endloop
-    updateStatus("Endloop");
+    updateTestStatus("Endloop");
 
     m_stepIndex = 0;
-    updateLoopCount(++m_loopIndex);
+    updateTestLoopCount(++m_loopIndex);
 
     ui->loopLabel->setNum(m_loopIndex);
 
@@ -209,7 +222,7 @@ void TestSequencer::onEndLoopExited() {
     // Do something about this
 }
 
-void TestSequencer::updateStatus(const QString &status) {
+void TestSequencer::updateTestStatus(const QString &status) {
     QString currentStatus = ui->statusEdit->text();
     ui->statusEdit->setText(status + ", " + currentStatus);
 
@@ -217,7 +230,14 @@ void TestSequencer::updateStatus(const QString &status) {
     ui->statusEdit->setCursorPosition(0);
 }
 
-void TestSequencer::updateLoopCount(const int count) {
+void TestSequencer::updateTestLoopCount(const int count) {
     m_loopIndex = count;
     ui->loopLabel->setNum(count);
+}
+
+void TestSequencer::updateTestProgress() {
+    int finishedSteps = m_testProfileDataModel->rowCount() * m_loopIndex + m_stepIndex + 1;
+    int totalSteps = m_testProfileDataModel->rowCount() * ui->loopSpinBox->value();
+
+    ui->progressLabel->setText(QString("%1/%2").arg(finishedSteps).arg(totalSteps));
 }

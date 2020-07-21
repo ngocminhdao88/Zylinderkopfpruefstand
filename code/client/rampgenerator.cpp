@@ -60,13 +60,13 @@ void RampGenerator::calculateRamp() {
         emit valueReached();
 }
 
-void RampGenerator::setTargetValue(double target)
+void RampGenerator::setTargetValue(int target)
 {
     if (m_targetValue != target)
         m_targetValue = target;
 }
 
-void RampGenerator::setRampUpRate(double rate)
+void RampGenerator::setRampUpRate(int rate)
 {
     if (rate < 0)
         return;
@@ -75,7 +75,7 @@ void RampGenerator::setRampUpRate(double rate)
         m_rampUpRate = rate;
 }
 
-void RampGenerator::setRampDownRate(double rate)
+void RampGenerator::setRampDownRate(int rate)
 {
     if (rate < 0)
         return;
@@ -84,13 +84,13 @@ void RampGenerator::setRampDownRate(double rate)
         m_rampDownRate = rate;
 }
 
-void RampGenerator::setStartValue(double value)
+void RampGenerator::setStartValue(int value)
 {
     if (m_startValue != value)
         m_startValue = value;
 }
 
-double RampGenerator::output()
+int RampGenerator::output()
 {
     return m_lastOuput;
 }

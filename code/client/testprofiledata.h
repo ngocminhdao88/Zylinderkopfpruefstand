@@ -36,6 +36,10 @@ public:
      */
     int getSpeed() const;
 
+    int getFbSpeed() const;
+    int getAcceleration() const;
+    int getDeceleration() const;
+
     /**
      * @brief Get motors direction in this step
      */
@@ -54,7 +58,10 @@ public:
     /**
      * @brief Set the motors speed for this step
      */
-    void setSpeed(int m_speed);
+    void setSpeed(int speed);
+    void setFeedbackSpeed(int speed);
+    void setAcceleration(int acc);
+    void setDeceleration(int dec);
 
     /**
      * @brief Set motors direction for this step
@@ -69,7 +76,10 @@ public:
 private:
     int m_duration;
     int m_speed;
+    int m_feedback_speed;
     int m_direction;
+    int m_acceleration;
+    int m_deceleration;
     QString m_comment;
 };
 

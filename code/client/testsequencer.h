@@ -46,26 +46,70 @@ private:
      */
     void initStateMachine();
 
+    /**
+     * @brief Slot for entered signal of idle state
+     */
     void onIdleStateEntered();
+
+    /**
+     * @brief Slot for exited signal of idle state
+     */
     void onIdleStateExited();
+
+    /**
+     * @brief Slot for entered signal of run state
+     */
     void onRunStateEntered();
+
+    /**
+     * @brief Slot for entered signal of parse state
+     */
     void onParseStateEntered();
+
+    /**
+     * @brief Slot for exited signal of parse state
+     */
     void onParseStateExited();
+
+    /**
+     * @brief Slot for entered signal of stop state
+     */
     void onStopStateEntered();
+
+    /**
+     * @brief Slot for entered signal of pause state
+     */
     void onPauseStateEntered();
+
+    /**
+     * @brief Slot for exited signal of pause state
+     */
     void onPauseStateExited();
+
+    /**
+     * @brief Slot for entered signal of endloop state
+     */
     void onEndLoopEntered();
+
+    /**
+     * @brief Slot for exited signal of endloop state
+     */
     void onEndLoopExited();
 
     /**
      * @brief Update the test status
      */
-    void updateStatus(const QString &status);
+    void updateTestStatus(const QString &status);
 
     /**
      * @brief Update the loop counter
      */
-    void updateLoopCount(const int count);
+    void updateTestLoopCount(const int count);
+
+    /**
+     * @brief Update the tests progress
+     */
+    void updateTestProgress();
 
 signals:
     /**

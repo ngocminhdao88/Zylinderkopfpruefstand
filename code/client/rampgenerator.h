@@ -45,7 +45,7 @@ public:
      *
      * @return double Calculated ramp value
      */
-    double output();
+    int output();
 
     /**
      * @brief Reset the ramp output to its initiate value
@@ -73,7 +73,7 @@ public slots:
      * The ramps output will be capped at this target value.
      * @param target - Target value of the ramp generator
      */
-    void setTargetValue(double target);
+    void setTargetValue(int target);
 
     /**
      * @brief Set the ramp up rate
@@ -81,7 +81,7 @@ public slots:
      * This sets how fast the ramp reaches its target value
      * when the current output is less than wanted output.
      */
-    void setRampUpRate(double rate);
+    void setRampUpRate(int rate);
 
     /**
      * @brief Set the ramp down rate
@@ -89,14 +89,14 @@ public slots:
      * This sets how fast the ramp reaches its target value
      * when the current output is greater than wanted output.
      */
-    void setRampDownRate(double rate);
+    void setRampDownRate(int rate);
 
     /**
      * @brief Set the ramp start value
      *
      * Set the initiate output value of the ramp when it first started
      */
-    void setStartValue(double rate);
+    void setStartValue(int rate);
 
 signals:
     /**
@@ -105,7 +105,7 @@ signals:
      * This signal will be emitted when the ramp generates a new value
      * @param newValue This is the new ramp output value
      */
-    void outputChanged(double newValue);
+    void outputChanged(int newValue);
 
     /**
      * @brief Signal valueReached
@@ -117,11 +117,11 @@ signals:
 
 private:
     bool m_firstRun = true;
-    double m_lastOuput = 0;
-    double m_startValue = 0;
-    double m_targetValue = 0;
-    double m_rampUpRate = 1; //[unit/s]
-    double m_rampDownRate = 1; //[unit/s]
+    int m_lastOuput = 0;
+    int m_startValue = 0;
+    int m_targetValue = 0;
+    int m_rampUpRate = 1; //[unit/s]
+    int m_rampDownRate = 1; //[unit/s]
     bool m_valueReached = false;
     bool m_enable = false;
 };

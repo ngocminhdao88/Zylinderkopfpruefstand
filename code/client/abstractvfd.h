@@ -23,27 +23,27 @@ public:
     /**
      * @brief Set VFD speed
      */
-     virtual void setSpeed(double speed) = 0;
+     virtual void setSpeed(int speed) = 0;
 
     /**
      * @brief Set VFD turn direction
      */
-     virtual void setDirection(double dir) = 0;
+     virtual void setDirection(int dir) = 0;
 
     /**
      * @brief Set VFD ramp rate
      */
-     virtual void setRampUpRate(double rate) = 0;
+     virtual void setRampUpRate(int rate) = 0;
 
     /**
      * @brief Set VFD ramp down rate
      */
-     virtual void setRampDownRate(double rate) = 0;
+     virtual void setRampDownRate(int rate) = 0;
 
     /**
      * @brief Get VFD speed
      */
-     virtual double getSpeed() = 0;
+     virtual int getSpeed() = 0;
 
     /**
      * @brief Connect to the VFD device

@@ -15,6 +15,7 @@
 #define VFDDATAMODEL_H
 
 #include <QAbstractItemModel>
+#include "testprofiledata.h"
 
 /**
  * @brief A VFDDataModel. It holds all VFDs data like speed, ramp, turn direction etc...
@@ -26,14 +27,6 @@ public:
     /**
       * @brief A VFDData type
       */
-    typedef struct {
-        double controlSpeed;
-        double rampSpeed;
-        double feedbackSpeed;
-        double turnDirection;
-        double acceleration;
-        double deceleration;
-    } VFDData_t;
 
     /**
      * @brief Default constructor
@@ -77,10 +70,10 @@ public:
      *
      * @return VFDData
      */
-    VFDData_t getVFDData() const;
+    TestProfileData getVFDData() const;
 
 private:
-    VFDData_t m_vfdData;
+    TestProfileData m_vfdData;
 };
 
 #endif // VFDDATAMODEL_H

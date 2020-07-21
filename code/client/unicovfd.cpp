@@ -8,26 +8,16 @@
 #include "vfddatamodel.h"
 #include "vfdsettingsdialog.h"
 
-enum {
-    MaxSpeed = 7000, //[RPM]
-    DeviceID = 1,
-    MaxRampRate = 1000, //[RPM/s]
-
-    //VFD holding registers
-    SpeedRegister = 84,
-    FeedbackSpeedRegister = 222,
-    DirectionRegister = 427,
-    AccelerationRegister = 86,
-    DecelerationRegister = 87,
-};
-
-UnicoVFD::UnicoVFD(QAbstractItemModel *model, QObject *parent) :
+UnicoVFD::UnicoVFD(QObject *parent, QAbstractItemModel *model) :
     AbstractVFD(parent),
     m_settingDialog(new VfdSettingsDialog()),
     m_speedRamp(new RampGenerator(this))
 {
     initDevice();
     setModel(model);
+
+    m_speedRamp->setRampUpRate(100);
+    m_speedRamp->setRampDownRate(100);
 }
 
 UnicoVFD::~UnicoVFD() {
@@ -48,23 +38,23 @@ void UnicoVFD::setModel(QAbstractItemModel *model) {
             this, &UnicoVFD::onModelDataChanged);
 }
 
-void UnicoVFD::setSpeed(double speed) {
+void UnicoVFD::setSpeed(int speed) {
     if (!m_modbusDevice)
         return;
 
     if (m_modbusDevice->state() != QModbusDevice::ConnectedState)
         return;
 
-    if (speed > MaxSpeed)
+    if (speed > UnicoDataEnum::MAX_SPEED)
         return;
 
     int speedFixPoint = speed * 10;
 
     QModbusDataUnit data = QModbusDataUnit(QModbusDataUnit::HoldingRegisters,
-                                           SpeedRegister,
+                                           UnicoDataEnum::SPEED_R,
                                            QVector<quint16>() << speedFixPoint);
 
-    if (auto *reply = m_modbusDevice->sendWriteRequest(data, DeviceID)) {
+    if (auto *reply = m_modbusDevice->sendWriteRequest(data, UnicoDataEnum::DEV_ID)) {
         if (!reply->isFinished()) {
             connect(reply, &QModbusReply::finished, this, &UnicoVFD::onReadReady);
         } else {
@@ -76,7 +66,7 @@ void UnicoVFD::setSpeed(double speed) {
     }
 }
 
-void UnicoVFD::setDirection(double dir) {
+void UnicoVFD::setDirection(int dir) {
     if (!m_modbusDevice) return;
 
     if (m_modbusDevice->state() != QModbusDevice::ConnectedState) return;
@@ -85,9 +75,9 @@ void UnicoVFD::setDirection(double dir) {
     if (dir > 2) return;
 
     QModbusDataUnit data = QModbusDataUnit(QModbusDataUnit::HoldingRegisters,
-                                           DirectionRegister,
+                                           UnicoDataEnum::DIR_R,
                                            QVector<quint16>() << dir);
-    if (auto *reply = m_modbusDevice->sendWriteRequest(data, DeviceID)) {
+    if (auto *reply = m_modbusDevice->sendWriteRequest(data, UnicoDataEnum::DEV_ID)) {
         if (!reply->isFinished()) {
             connect(reply, &QModbusReply::finished, this, &UnicoVFD::onReadReady);
         } else {
@@ -99,15 +89,17 @@ void UnicoVFD::setDirection(double dir) {
     }
 }
 
-void UnicoVFD::setRampDownRate(double rate) {
-    Q_UNUSED(rate)
+void UnicoVFD::setRampDownRate(int rate) {
+    if (m_speedRamp)
+        m_speedRamp->setRampDownRate(rate);
 }
 
-void UnicoVFD::setRampUpRate(double rate) {
-    Q_UNUSED(rate)
+void UnicoVFD::setRampUpRate(int rate) {
+    if (m_speedRamp)
+        m_speedRamp->setRampUpRate(rate);
 }
 
-double UnicoVFD::getSpeed() {
+int UnicoVFD::getSpeed() {
     if (!m_modbusDevice)
         return -1;
 
@@ -115,10 +107,10 @@ double UnicoVFD::getSpeed() {
         return -1;
 
     QModbusDataUnit data = QModbusDataUnit(QModbusDataUnit::HoldingRegisters,
-                                           FeedbackSpeedRegister,
+                                           UnicoDataEnum::FB_SPEED_R,
                                            1);
 
-    if (auto *reply = m_modbusDevice->sendReadRequest(data, DeviceID)) {
+    if (auto *reply = m_modbusDevice->sendReadRequest(data, UnicoDataEnum::DEV_ID)) {
         if (!reply->isFinished()) {
             connect(reply, &QModbusReply::finished, this, &UnicoVFD::onReadReady);
         } else {
@@ -172,7 +164,8 @@ bool UnicoVFD::connectDevice() {
 }
 
 void UnicoVFD::configDevice() {
-    if (m_settingDialog) m_settingDialog->show();
+    if (m_settingDialog)
+        m_settingDialog->show();
 }
 
 void UnicoVFD::initDevice() {
@@ -208,16 +201,16 @@ void UnicoVFD::onReadReady() {
         //No error -> parse the reply
         const QModbusDataUnit unit = reply->result();
         for (int i = 0, total = int(unit.valueCount()); i < total; i++) {
-            if (unit.startAddress() == FeedbackSpeedRegister) {
-                double rawValue = unit.value(0);
+            if (unit.startAddress() == UnicoDataEnum::FB_SPEED_R) {
+                int rawValue = unit.value(0);
                 if (m_vfdModel) {
                     //get motor's turn direction
-                    QModelIndex directionIndex = m_vfdModel->index(m_vfdModel->rowCount() - 1, static_cast<int>(VFDDataColumn::Direction));
+                    QModelIndex directionIndex = m_vfdModel->index(m_vfdModel->rowCount() - 1, TestProfileEnum::DIRECTION_COL);
                     uint direction = m_vfdModel->data(directionIndex).toUInt();
 
                     //parse feedback speed and update the data model
-                    double feedbackSpeed = getFeedbackSpeed(rawValue, direction);
-                    QModelIndex feedbackSpeedIndex = m_vfdModel->index(m_vfdModel->rowCount() - 1, static_cast<int>(VFDDataColumn::FeedbackSpeed));
+                    int feedbackSpeed = getFeedbackSpeed(rawValue, direction);
+                    QModelIndex feedbackSpeedIndex = m_vfdModel->index(m_vfdModel->rowCount() - 1, TestProfileEnum::FB_SPEED_COL);
                     m_vfdModel->setData(feedbackSpeedIndex, feedbackSpeed);
                 }
             }
@@ -234,19 +227,19 @@ void UnicoVFD::onReadReady() {
 }
 
 void UnicoVFD::onModelDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight) {
-    Q_UNUSED(bottomRight)
-
-    if (!topLeft.isValid()) return;
-    if (!m_speedRamp) return;
+    if (!topLeft.isValid() || !bottomRight.isValid())
+        return;
+    if (!m_speedRamp)
+        return;
 
     int col = topLeft.column();
-    double data = topLeft.data(Qt::DisplayRole).toDouble();
+    int data = topLeft.data(Qt::DisplayRole).toInt();
 
     switch (col) {
-    case static_cast<int>(VFDDataColumn::ControlSpeed):
+    case TestProfileEnum::SPEED_COL:
         m_speedRamp->setTargetValue(data);
         break;
-    case static_cast<int>(VFDDataColumn::Direction):
+    case TestProfileEnum::DIRECTION_COL:
         if (data == 0) {
             m_speedRamp->reset();
             m_speedRamp->setEnable(false);
@@ -254,21 +247,15 @@ void UnicoVFD::onModelDataChanged(const QModelIndex &topLeft, const QModelIndex 
             m_speedRamp->setEnable(true);
         }
         break;
-    case static_cast<int>(VFDDataColumn::Acceleration):
-        m_speedRamp->setRampUpRate(normalizeRampRate(data));
-        break;
-    case static_cast<int>(VFDDataColumn::Deceleration):
-        m_speedRamp->setRampDownRate(normalizeRampRate(data));
-        break;
     }
 }
 
-double UnicoVFD::normalizeRampRate(double rate) {
+int UnicoVFD::normalizeRampRate(int rate) {
     return rate * PACE_MAKER_RATE / 1000;
 }
 
-double UnicoVFD::getFeedbackSpeed(double fbSpeed, uint direction) {
-    double result = -1;
+int UnicoVFD::getFeedbackSpeed(int fbSpeed, int direction) {
+     int result = -1;
 
     if (direction == 0)
         result = -1;
@@ -292,18 +279,11 @@ void UnicoVFD::onUpdateRequest() {
     }
 
     m_speedRamp->calculateRamp();
-
-    //update model
-    QModelIndex rampIndex = m_vfdModel->index(m_vfdModel->rowCount() - 1, static_cast<int>(VFDDataColumn::RampSpeed));
-    m_vfdModel->setData(rampIndex, m_speedRamp->output());
-
     setSpeed(m_speedRamp->output());
     getSpeed();
 
-    //update feedback speed in model is in onReadyRead slot
-
     //setDirection
-    QModelIndex directionIndex = m_vfdModel->index(m_vfdModel->rowCount() - 1, static_cast<int>(VFDDataColumn::Direction));
-    double direction = m_vfdModel->data(directionIndex).toDouble();
+    QModelIndex directionIndex = m_vfdModel->index(m_vfdModel->rowCount() - 1, TestProfileEnum::DIRECTION_COL);
+    int direction = m_vfdModel->data(directionIndex).toInt();
     setDirection(direction);
 }
