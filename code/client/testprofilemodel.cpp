@@ -1,6 +1,9 @@
 #include "testprofilemodel.h"
 #include <QVariant>
 #include <Qt>
+#include <QFile>
+#include <QString>
+#include <QTextStream>
 #include "global.h"
 
 TestProfileModel::TestProfileModel(QObject *parent) :
@@ -130,4 +133,43 @@ bool TestProfileModel::removeRows(int position, int rows, const QModelIndex &ind
 
 const QVector<TestProfileData> &TestProfileModel::getTestProfile() const {
     return m_testProfile;
+}
+
+void TestProfileModel::readCSV(const QString &filePath) {
+    QFile file(filePath);
+    QString line;
+
+    beginResetModel();
+
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        m_testProfile.clear();
+        QTextStream stream(&file);
+
+        line = stream.readLine(); // Ignore the header in csv file
+        while (!stream.atEnd()) {
+            line = stream.readLine();
+            TestProfileData data;
+            data.fromCSVLine(line);
+            m_testProfile.insert(m_testProfile.size(), data);
+        }
+    }
+    endResetModel();
+    file.close();
+}
+
+void TestProfileModel::writeCSV(const QString &filePath) {
+    QFile file(filePath);
+
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream stream(&file);
+
+        QString header("Duration, Speed, FbSpeed, Direction, Comment");
+        stream << header << '\n';
+
+        for (TestProfileData data: m_testProfile) {
+            stream << data.toString() << '\n';
+        }
+
+    }
+    file.close();
 }

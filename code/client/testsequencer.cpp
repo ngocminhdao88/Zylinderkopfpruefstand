@@ -7,6 +7,7 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include "testprofiledata.h"
+#include "global.h"
 
 TestSequencer::TestSequencer(QWidget *parent) :
     QWidget(parent),
@@ -22,6 +23,7 @@ TestSequencer::TestSequencer(QWidget *parent) :
     m_testProfileDataModel = new TestProfileModel(this);
     m_testProfileDataModel->insertRows(0, 2);
     ui->testProfileTableView->setModel(m_testProfileDataModel);
+    ui->testProfileTableView->setColumnHidden(TestProfileEnum::FB_SPEED_COL, true);
 
     // Buttons SIGNAL-SLOT
     connect(ui->loadButton, &QPushButton::clicked, this, &TestSequencer::onLoadButtonClicked);
@@ -53,6 +55,8 @@ void TestSequencer::onLoadButtonClicked() {
 
         QFileInfo fi(testProfileName);
         ui->profileNameLabel->setText(fi.fileName());
+
+        m_testProfileDataModel->readCSV(testProfileName);
     }
 }
 
@@ -60,6 +64,13 @@ void TestSequencer::onPlotButtonClicked() {
 }
 
 void TestSequencer::onSaveButtonClicked() {
+    QString testProfileName = QFileDialog::getSaveFileName(this, "Save test profile",
+                                                           ".",
+                                                           "Test Profile (*.csv)");
+
+    if (testProfileName.length() > 0) {
+        m_testProfileDataModel->writeCSV(testProfileName);
+    }
 }
 
 //void TestSequencer::onStartButtonClicked() {

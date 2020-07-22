@@ -59,6 +59,16 @@ public:
      * does not modify member variables of the class
      */
     const QVector<TestProfileData>& getTestProfile() const;
+
+    /**
+     * @brief Read the test profile from a csv file
+     */
+    void readCSV(const QString &filePath);
+
+    /**
+     * @brief Write a test profile to a csv file
+     */
+    void writeCSV(const QString &filePath);
 private:
     QVector<TestProfileData> m_testProfile;
 };

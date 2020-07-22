@@ -2,6 +2,7 @@
 #define TESTPROFILEDATA_H
 
 #include <QString>
+#include <QTextStream>
 
 class TestProfileData {
 public:
@@ -25,6 +26,11 @@ public:
      * @param another
      */
     TestProfileData(const TestProfileData &another);
+
+    /**
+     * @brief Construct a test profile data from a csv line
+     */
+    void fromCSVLine(QString line);
 
     /**
      * @brief Get the steps duration
@@ -72,6 +78,8 @@ public:
      * @brief Set users comment for this step
      */
     void setComment(QString m_comment);
+
+    QString toString();
 
 private:
     int m_duration;
