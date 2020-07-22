@@ -163,13 +163,14 @@ void TestSequencer::onParseStateEntered() {
     // Update the status to Parse and parse the current step in test profile
     updateTestStatus("Parse");
 
-    TestProfileData testStep = m_testProfileDataModel->getTestProfile().at(m_stepIndex);
+    TestProfileData testStep = getCurrentTestStep();
 
     // Rearm the step timer
     m_stepTimer->setInterval(testStep.getDuration() * 1000);
     m_stepTimer->start();
 
     updateTestProgress();
+    emit testStepChanged(testStep);
 }
 
 void TestSequencer::onParseStateExited() {
@@ -240,4 +241,8 @@ void TestSequencer::updateTestProgress() {
     int totalSteps = m_testProfileDataModel->rowCount() * ui->loopSpinBox->value();
 
     ui->progressLabel->setText(QString("%1/%2").arg(finishedSteps).arg(totalSteps));
+}
+
+const TestProfileData &TestSequencer::getCurrentTestStep() const {
+    return m_testProfileDataModel->getTestProfile().at(m_stepIndex);
 }

@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->connectButton, &QPushButton::clicked, this, &MainWindow::onConnectButtonClicked);
     connect(m_vfdDevice, &AbstractVFD::statusChanged, this, &MainWindow::onVfdStatusChanged);
     connect(m_pacemaker, &QTimer::timeout, m_vfdDevice, &AbstractVFD::onUpdateRequest);
+
+    connect(ui->testSequencer, &TestSequencer::testStepChanged, this, &MainWindow::onTestStepChanged);
 }
 
 MainWindow::~MainWindow() {
@@ -35,10 +37,10 @@ void MainWindow::initActions() {
 
 void MainWindow::initVfdDevice()
 {
-    vfdDataModel = new VFDDataModel(this);
-    ui->vfdEditor->setModel(vfdDataModel);
+    m_vfdDataModel = new VFDDataModel(this);
+    ui->vfdEditor->setModel(m_vfdDataModel);
 
-    m_vfdDevice = new UnicoVFD(this, vfdDataModel);
+    m_vfdDevice = new UnicoVFD(this, m_vfdDataModel);
 }
 
 void MainWindow::initJobDataModel()
@@ -47,7 +49,7 @@ void MainWindow::initJobDataModel()
     ui->jobEditor->setModel(jobDataModel);
 
     ui->tableView->setModel(jobDataModel);
-    ui->tableView_2->setModel(vfdDataModel);
+    ui->tableView_2->setModel(m_vfdDataModel);
 }
 
 void MainWindow::initPacemaker()
@@ -55,6 +57,14 @@ void MainWindow::initPacemaker()
     m_pacemaker = new QTimer(this);
     m_pacemaker->setInterval(PACE_MAKER_RATE); //250ms
     m_pacemaker->start();
+}
+
+void MainWindow::onTestStepChanged(TestProfileData testStep) {
+    QModelIndex speedIndex = m_vfdDataModel->index(0, TestProfileEnum::SPEED_COL);
+    QModelIndex dirIndex = m_vfdDataModel->index(0, TestProfileEnum::DIRECTION_COL);
+
+    m_vfdDataModel->setData(speedIndex, testStep.getSpeed());
+    m_vfdDataModel->setData(dirIndex, testStep.getDirection());
 }
 
 void MainWindow::onVfdStatusChanged(QString status) {

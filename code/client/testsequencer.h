@@ -111,7 +111,13 @@ private:
      */
     void updateTestProgress();
 
+    /**
+     * @brief Return the current test profile step
+     */
+    const TestProfileData &getCurrentTestStep() const;
+
 signals:
+    void testStepChanged(TestProfileData testStep);
     /**
      * @brief loopEnded Signaling current test loop has ended
      */

@@ -6,6 +6,7 @@
 #include "vfddatamodel.h"
 #include "jobdatamodel.h"
 #include "abstractvfd.h"
+#include "testprofiledata.h"
 
 #include <QModbusRtuSerialMaster>
 #include <QStatusBar>
@@ -62,11 +63,15 @@ private:
      */
     void initPacemaker();
 
+    /**
+     * @brief Handle the signal testStepChanged from TestSequencer
+     */
+    void onTestStepChanged(TestProfileData testStep);
 
 private:
     Ui::MainWindow *ui = 0;
 
-    VFDDataModel *vfdDataModel = 0;
+    VFDDataModel *m_vfdDataModel = 0;
     JobDataModel *jobDataModel = 0;
     AbstractVFD *m_vfdDevice = 0;
 

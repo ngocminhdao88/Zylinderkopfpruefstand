@@ -59,7 +59,6 @@ public:
      * does not modify member variables of the class
      */
     const QVector<TestProfileData>& getTestProfile() const;
-
 private:
     QVector<TestProfileData> m_testProfile;
 };
