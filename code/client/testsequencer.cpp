@@ -1,6 +1,7 @@
 #include "testsequencer.h"
 #include "ui_testsequencer.h"
 #include <QDebug>
+#include <QMenu>
 #include <QState>
 #include <QCursor>
 #include <QFileDialog>
@@ -19,7 +20,7 @@ TestSequencer::TestSequencer(QWidget *parent) :
     initStateMachine();
 
     m_testProfileDataModel = new TestProfileModel(this);
-    m_testProfileDataModel->insertRows(0, 5);
+    m_testProfileDataModel->insertRows(0, 2);
     ui->testProfileTableView->setModel(m_testProfileDataModel);
 
     // Buttons SIGNAL-SLOT
@@ -30,6 +31,9 @@ TestSequencer::TestSequencer(QWidget *parent) :
 //    connect(ui->nextButton, &QPushButton::clicked, this, &TestSequencer::onNextButtonClicked);
 //    connect(ui->pauseButton, &QPushButton::clicked, this, &TestSequencer::onPauseButtonClicked);
 //    connect(ui->stopButton, &QPushButton::clicked, this, &TestSequencer::onStopButtonClicked);
+
+    // SIGNAL-SLOT for custom menu on mouse click
+    connect(ui->testProfileTableView, &QTableView::customContextMenuRequested, this, &TestSequencer::onCustomMenuRequested);
 }
 
 TestSequencer::~TestSequencer() {
@@ -241,6 +245,57 @@ void TestSequencer::updateTestProgress() {
     int totalSteps = m_testProfileDataModel->rowCount() * ui->loopSpinBox->value();
 
     ui->progressLabel->setText(QString("%1/%2").arg(finishedSteps).arg(totalSteps));
+}
+
+void TestSequencer::onCustomMenuRequested(const QPoint &pos) {
+    QModelIndex index = ui->testProfileTableView->indexAt(pos);
+
+    QMenu *menu = new QMenu(this);
+
+    QAction *insertBeforeAction = new QAction("Insert before", this);
+    QAction *insertAfterAction = new QAction("Insert after", this);
+    QAction *removeAction = new QAction("Remove", this);
+    QAction *duplicateAction = new QAction("Duplicate", this);
+
+    menu->addAction(insertBeforeAction);
+    menu->addAction(insertAfterAction);
+    menu->addAction(duplicateAction);
+    menu->addAction(removeAction);
+
+    menu->popup(ui->testProfileTableView->viewport()->mapToGlobal(pos));
+
+    // Insert a new row before the selected
+    connect(insertBeforeAction, &QAction::triggered, [this, index]{
+        if (index.row() < 0)
+            return;
+        m_testProfileDataModel->insertRows(index.row(), 1);
+    });
+
+    // Insert a new row after the selected
+    connect(insertAfterAction, &QAction::triggered, [this, index]{
+        m_testProfileDataModel->insertRows(index.row() + 1, 1);
+    });
+
+    // Remove a selected row
+    connect(removeAction, &QAction::triggered, [this, index]{
+        if (index.row() < 0)
+            return;
+        m_testProfileDataModel->removeRows(index.row(), 1);
+    });
+
+    // Duplicate a selected row
+    connect(duplicateAction, &QAction::triggered, [this, index]{
+        if (index.row() < 0)
+            return;
+        m_testProfileDataModel->insertRows(index.row() + 1, 1);
+
+        for (int i = 0; i < m_testProfileDataModel->columnCount(); i++) {
+            QModelIndex oldRowIndex = m_testProfileDataModel->index(index.row(), i);
+            QModelIndex newRowIndex = m_testProfileDataModel->index(index.row() + 1, i);
+
+            m_testProfileDataModel->setData(newRowIndex, oldRowIndex.data());
+        }
+    });
 }
 
 const TestProfileData &TestSequencer::getCurrentTestStep() const {

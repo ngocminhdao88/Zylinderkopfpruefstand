@@ -45,10 +45,10 @@ void MainWindow::initVfdDevice()
 
 void MainWindow::initJobDataModel()
 {
-    jobDataModel = new JobDataModel(this);
-    ui->jobEditor->setModel(jobDataModel);
+    m_jobDataModel = new JobDataModel(this);
+    ui->jobEditor->setModel(m_jobDataModel);
 
-    ui->tableView->setModel(jobDataModel);
+    ui->tableView->setModel(m_jobDataModel);
     ui->tableView_2->setModel(m_vfdDataModel);
 }
 

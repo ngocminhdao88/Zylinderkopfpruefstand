@@ -111,6 +111,8 @@ private:
      */
     void updateTestProgress();
 
+    void onCustomMenuRequested(const QPoint &pos);
+
     /**
      * @brief Return the current test profile step
      */
