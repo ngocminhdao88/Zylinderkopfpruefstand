@@ -4,8 +4,10 @@
 #include <QObject>
 #include <QWidget>
 #include <QStateMachine>
-#include "testprofilemodel.h"
 #include <QTimer>
+#include "testprofilemodel.h"
+#include "testprofileproxymodel.h"
+#include "testprofileplot.h"
 
 namespace Ui {
 class TestSequencer;
@@ -111,6 +113,9 @@ private:
      */
     void updateTestProgress();
 
+    /**
+     * @brief Open a context menu when user right click on the test profile table view
+     */
     void onCustomMenuRequested(const QPoint &pos);
 
     /**
@@ -138,6 +143,8 @@ signals:
 private:
     Ui::TestSequencer *ui = 0;
     TestProfileModel *m_testProfileDataModel = 0;
+    TestProfileProxyModel *m_testProfileProxyModel = 0;
+    TestProfilePlot *m_testProfilePlot = 0;
     QStateMachine m_machine;
     QTimer *m_stepTimer = 0;
     int m_loopIndex = 0;

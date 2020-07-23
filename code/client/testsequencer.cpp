@@ -21,9 +21,15 @@ TestSequencer::TestSequencer(QWidget *parent) :
     initStateMachine();
 
     m_testProfileDataModel = new TestProfileModel(this);
+    m_testProfileProxyModel = new TestProfileProxyModel(this);
     m_testProfileDataModel->insertRows(0, 2);
+    m_testProfileProxyModel->setSourceModel(m_testProfileDataModel);
+
     ui->testProfileTableView->setModel(m_testProfileDataModel);
     ui->testProfileTableView->setColumnHidden(TestProfileEnum::FB_SPEED_COL, true);
+
+    m_testProfilePlot = new TestProfilePlot(this);
+    m_testProfilePlot->setModel(m_testProfileProxyModel);
 
     // Buttons SIGNAL-SLOT
     connect(ui->loadButton, &QPushButton::clicked, this, &TestSequencer::onLoadButtonClicked);
@@ -61,6 +67,8 @@ void TestSequencer::onLoadButtonClicked() {
 }
 
 void TestSequencer::onPlotButtonClicked() {
+    if (m_testProfilePlot)
+        m_testProfilePlot->show();
 }
 
 void TestSequencer::onSaveButtonClicked() {
@@ -153,6 +161,13 @@ void TestSequencer::onIdleStateEntered() {
     // Update the status to Idle and enable the total loop spinbox
     updateTestStatus("Idle");
     ui->loopSpinBox->setEnabled(true);
+    ui->loadButton->setEnabled(true);
+    ui->plotButton->setEnabled(true);
+    ui->saveButton->setEnabled(true);
+    ui->startButton->setEnabled(true);
+    ui->nextButton->setEnabled(false);
+    ui->pauseButton->setEnabled(false);
+    ui->stopButton->setEnabled(false);
 }
 
 void TestSequencer::onIdleStateExited() {
@@ -162,12 +177,19 @@ void TestSequencer::onIdleStateExited() {
     m_stepTimer->start();
 
     updateTestLoopCount(0);
+    ui->loopSpinBox->setEnabled(false);
+    ui->loadButton->setEnabled(false);
+    ui->plotButton->setEnabled(false);
+    ui->saveButton->setEnabled(true);
+    ui->startButton->setEnabled(false);
+    ui->nextButton->setEnabled(true);
+    ui->pauseButton->setEnabled(true);
+    ui->stopButton->setEnabled(true);
 }
 
 void TestSequencer::onRunStateEntered() {
     // Update the status to Run and disable the total loop spinbox
     updateTestStatus("Run");
-    ui->loopSpinBox->setEnabled(false);
 
 //    qDebug() << QString("stepindex %1").arg(m_stepIndex);
     if (m_stepIndex >= m_testProfileDataModel->rowCount())
@@ -198,6 +220,8 @@ void TestSequencer::onStopStateEntered() {
 }
 
 void TestSequencer::onPauseStateEntered() {
+    ui->nextButton->setEnabled(false);
+    ui->stopButton->setEnabled(false);
     ui->pauseButton->setText("Resume");
 
     // Update the status to Pause and take a snap shot of current step run time
@@ -211,6 +235,8 @@ void TestSequencer::onPauseStateEntered() {
 }
 
 void TestSequencer::onPauseStateExited() {
+    ui->nextButton->setEnabled(true);
+    ui->stopButton->setEnabled(true);
     ui->pauseButton->setText("Pause");
 
     // Resume the test from previous pause
@@ -255,6 +281,7 @@ void TestSequencer::updateTestProgress() {
     int finishedSteps = m_testProfileDataModel->rowCount() * m_loopIndex + m_stepIndex + 1;
     int totalSteps = m_testProfileDataModel->rowCount() * ui->loopSpinBox->value();
 
+    ui->stepLabel->setText(QString("%1/%2").arg(m_stepIndex + 1).arg(m_testProfileDataModel->rowCount()));
     ui->progressLabel->setText(QString("%1/%2").arg(finishedSteps).arg(totalSteps));
 }
 
@@ -272,6 +299,7 @@ void TestSequencer::onCustomMenuRequested(const QPoint &pos) {
     menu->addAction(insertAfterAction);
     menu->addAction(duplicateAction);
     menu->addAction(removeAction);
+
 
     menu->popup(ui->testProfileTableView->viewport()->mapToGlobal(pos));
 
