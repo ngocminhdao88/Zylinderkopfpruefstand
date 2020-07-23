@@ -22,6 +22,7 @@ TestSequencer::TestSequencer(QWidget *parent) :
 
     m_testProfileDataModel = new TestProfileModel(this);
     m_testProfileProxyModel = new TestProfileProxyModel(this);
+
     m_testProfileDataModel->insertRows(0, 2);
     m_testProfileProxyModel->setSourceModel(m_testProfileDataModel);
 

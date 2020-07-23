@@ -72,7 +72,7 @@ private:
     Ui::MainWindow *ui = 0;
 
     VFDDataModel *m_vfdDataModel = 0;
-    JobDataModel *m_jobDataModel = 0;
+//    JobDataModel *m_jobDataModel = 0;
     AbstractVFD *m_vfdDevice = 0;
 
     QTimer *m_pacemaker = 0;

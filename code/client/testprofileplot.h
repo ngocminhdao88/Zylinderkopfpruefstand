@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QObject>
 #include <QAbstractItemModel>
+#include <QtCharts/QValueAxis>
+#include <QtCharts/QLineSeries>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -30,8 +32,14 @@ public:
     void setModel(QAbstractItemModel *model = 0);
 
 private:
+    void initChart();
+
+private:
     Ui::TestProfilePlot *ui;
     QAbstractItemModel *m_model;
+//    QtCharts::QValueAxis *m_axisX;
+//    QtCharts::QValueAxis *m_axisY;
+//    QtCharts::QLineSeries *m_serie;
 };
 
 #endif // TESTPROFILEPLOT_H

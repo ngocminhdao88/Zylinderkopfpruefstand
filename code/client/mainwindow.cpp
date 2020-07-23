@@ -43,13 +43,7 @@ void MainWindow::initVfdDevice()
     m_vfdDevice = new UnicoVFD(this, m_vfdDataModel);
 }
 
-void MainWindow::initJobDataModel()
-{
-    m_jobDataModel = new JobDataModel(this);
-    ui->jobEditor->setModel(m_jobDataModel);
-
-    ui->tableView->setModel(m_jobDataModel);
-    ui->tableView_2->setModel(m_vfdDataModel);
+void MainWindow::initJobDataModel() {
 }
 
 void MainWindow::initPacemaker()

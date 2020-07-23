@@ -16,6 +16,8 @@ public:
 
     QVariant data(const QModelIndex &proxyIndex, int role = Qt::DisplayRole) const override;
     int columnCount(const QModelIndex &parent) const override;
+//    QModelIndex mapToSource(const QModelIndex &proxyIndex) const override;
+    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
 
 private:
 };
