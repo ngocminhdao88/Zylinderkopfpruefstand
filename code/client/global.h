@@ -30,15 +30,17 @@ struct UnicoDataEnum {
     };
 };
 
-enum class JobDataEnum : int {
-    RowCount = 1,
-    ColumnCount = 5,
+struct JobDataEnum{
+    enum {
+        ROW_COUNT = 1,
+        COLUMN_COUNT = 5,
 
-    JobNumber = 0,
-    JobDescription = 1,
-    PartName = 2,
-    PartNumber = 3,
-    Customer = 4,
+        JOB_NUMBER_COL = 0,
+        JOB_DESCRIPTION_COL = 1,
+        PART_NAME_COL = 2,
+        PART_NUMBER_COL = 3,
+        CUSTOMER_COL = 4,
+    };
 };
 
 #endif // GLOBAL_H

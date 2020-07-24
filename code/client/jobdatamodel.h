@@ -15,13 +15,13 @@ public:
     /**
       * @brief A JobData type
       */
-    typedef struct {
+    struct TestJob {
         QString jobNumber;
         QString jobDescription;
         QString partName;
         QString partNumber;
         QString customer;
-    } JobData_t;
+    };
 
     /**
      * @brief Default constructor
@@ -60,7 +60,7 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
 private:
-    JobData_t m_jobData;
+    TestJob m_jobData;
 };
 
 #endif // JOBDATAMODEL_H

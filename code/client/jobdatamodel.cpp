@@ -9,35 +9,42 @@ JobDataModel::JobDataModel(QObject *parent) :
 int JobDataModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    return static_cast<int>(JobDataEnum::RowCount);
+    return JobDataEnum::ROW_COUNT;
 }
 
 int JobDataModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    return static_cast<int>(JobDataEnum::ColumnCount);
+    return JobDataEnum::COLUMN_COUNT;
 }
 
 QVariant JobDataModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid()
-            || index.row() >= static_cast<int>(JobDataEnum::RowCount)
-            || index.column() >= static_cast<int>(JobDataEnum::ColumnCount))
+    if (!index.isValid())
         return QVariant();
 
-    int col = index.column();
+    if (index.row() < 0 || index.row() >= JobDataEnum::ROW_COUNT)
+        return QVariant();
+
+    if (index.column() < 0 || index.column() >= JobDataEnum::COLUMN_COUNT)
+        return QVariant();
+
 
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
-        if (col == static_cast<int>(JobDataEnum::JobNumber))
+        switch (index.column()) {
+        case JobDataEnum::JOB_NUMBER_COL:
             return m_jobData.jobNumber;
-        if (col == static_cast<int>(JobDataEnum::JobDescription))
+        case JobDataEnum::JOB_DESCRIPTION_COL:
             return m_jobData.jobDescription;
-        if (col == static_cast<int>(JobDataEnum::PartName))
+        case JobDataEnum::PART_NAME_COL:
             return m_jobData.partName;
-        if (col == static_cast<int>(JobDataEnum::PartNumber))
+        case JobDataEnum::PART_NUMBER_COL:
             return m_jobData.partNumber;
-        if (col == static_cast<int>(JobDataEnum::Customer))
+        case JobDataEnum::CUSTOMER_COL:
             return m_jobData.customer;
+        default:
+            break;
+        }
     }
 
     return QVariant();
@@ -50,16 +57,20 @@ QVariant JobDataModel::headerData(int section, Qt::Orientation orientation, int 
         return QVariant();
 
     if (orientation == Qt::Horizontal) {
-        if (section == static_cast<int>(JobDataEnum::JobNumber))
+        switch (section) {
+        case JobDataEnum::JOB_NUMBER_COL:
             return "Job Number";
-        if (section == static_cast<int>(JobDataEnum::JobDescription))
+        case JobDataEnum::JOB_DESCRIPTION_COL:
             return "Job Description";
-        if (section == static_cast<int>(JobDataEnum::PartName))
+        case JobDataEnum::PART_NAME_COL:
             return "Part Name";
-        if (section == static_cast<int>(JobDataEnum::PartNumber))
+        case JobDataEnum::PART_NUMBER_COL:
             return "Part Number";
-        if (section == static_cast<int>(JobDataEnum::Customer))
+        case JobDataEnum::CUSTOMER_COL:
             return "Customer";
+        default:
+            break;
+        }
     }
 
     return QVariant();
@@ -67,26 +78,37 @@ QVariant JobDataModel::headerData(int section, Qt::Orientation orientation, int 
 
 bool JobDataModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    if (!index.isValid()
-            || index.row() > static_cast<int>(JobDataEnum::RowCount)
-            || index.column() >= static_cast<int>(JobDataEnum::ColumnCount))
+    if (!index.isValid())
+        return  false;
+
+    if (index.row() < 0 || index.row() > JobDataEnum::ROW_COUNT)
+        return false;
+
+    if (index.column() < 0 || index.column() > JobDataEnum::COLUMN_COUNT)
         return false;
 
     if (role != Qt::EditRole)
         return false;
 
-    const int col = index.column();
-
-    if (col == static_cast<int>(JobDataEnum::JobNumber))
+    switch (index.column()) {
+    case JobDataEnum::JOB_NUMBER_COL:
         m_jobData.jobNumber = value.toString();
-    if (col == static_cast<int>(JobDataEnum::JobDescription))
+        break;
+    case JobDataEnum::JOB_DESCRIPTION_COL:
         m_jobData.jobDescription = value.toString();
-    if (col == static_cast<int>(JobDataEnum::PartName))
+        break;
+    case JobDataEnum::PART_NAME_COL:
         m_jobData.partName = value.toString();
-    if (col == static_cast<int>(JobDataEnum::PartNumber))
+        break;
+    case JobDataEnum::PART_NUMBER_COL:
         m_jobData.partNumber = value.toString();
-    if (col == static_cast<int>(JobDataEnum::Customer))
+        break;
+    case JobDataEnum::CUSTOMER_COL:
         m_jobData.customer = value.toString();
+        break;
+    default:
+        return false;
+    }
 
     emit dataChanged(index, index);
 
