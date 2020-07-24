@@ -11,7 +11,8 @@
 
 TestSequencer::TestSequencer(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::TestSequencer)
+    ui(new Ui::TestSequencer),
+    m_plotWidget(new TestProfilePlotWidget)
 {
     ui->setupUi(this);
 
@@ -21,16 +22,11 @@ TestSequencer::TestSequencer(QWidget *parent) :
     initStateMachine();
 
     m_testProfileDataModel = new TestProfileModel(this);
-    m_testProfileProxyModel = new TestProfileProxyModel(this);
 
     m_testProfileDataModel->insertRows(0, 2);
-    m_testProfileProxyModel->setSourceModel(m_testProfileDataModel);
 
     ui->testProfileTableView->setModel(m_testProfileDataModel);
     ui->testProfileTableView->setColumnHidden(TestProfileEnum::FB_SPEED_COL, true);
-
-    m_testProfilePlot = new TestProfilePlot(this);
-    m_testProfilePlot->setModel(m_testProfileProxyModel);
 
     // Buttons SIGNAL-SLOT
     connect(ui->loadButton, &QPushButton::clicked, this, &TestSequencer::onLoadButtonClicked);
@@ -68,8 +64,8 @@ void TestSequencer::onLoadButtonClicked() {
 }
 
 void TestSequencer::onPlotButtonClicked() {
-    if (m_testProfilePlot)
-        m_testProfilePlot->show();
+    m_plotWidget->plot(m_testProfileDataModel->getPlotData());
+    m_plotWidget->show();
 }
 
 void TestSequencer::onSaveButtonClicked() {

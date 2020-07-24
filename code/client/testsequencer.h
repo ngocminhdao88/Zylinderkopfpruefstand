@@ -6,8 +6,7 @@
 #include <QStateMachine>
 #include <QTimer>
 #include "testprofilemodel.h"
-#include "testprofileproxymodel.h"
-#include "testprofileplot.h"
+#include "testprofileplotwidget.h"
 
 namespace Ui {
 class TestSequencer;
@@ -143,10 +142,9 @@ signals:
 private:
     Ui::TestSequencer *ui = 0;
     TestProfileModel *m_testProfileDataModel = 0;
-    TestProfileProxyModel *m_testProfileProxyModel = 0;
-    TestProfilePlot *m_testProfilePlot = 0;
     QStateMachine m_machine;
     QTimer *m_stepTimer = 0;
+    TestProfilePlotWidget *m_plotWidget = 0;
     int m_loopIndex = 0;
     int m_stepIndex = 0;
     int m_stepTimeLeft;

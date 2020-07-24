@@ -1,3 +1,8 @@
 Duration, Speed, FbSpeed, Direction, Comment
-1, 2, -, 3, abc
-4, 5, -, 6, def
+5, 500, -, 1, Replace me
+200, 500, -, 1, Replace me
+5, 1000, -, 1, Replace me
+500, 1000, -, 1, Replace me
+10, 700, -, 1, Replace me
+200, 700, -, 1, Replace me
+5, 0, -, 1, Replace me

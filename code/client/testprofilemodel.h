@@ -61,6 +61,11 @@ public:
     const QVector<TestProfileData>& getTestProfile() const;
 
     /**
+     * @brief Return the data for ploting this test profile
+     */
+    const QVector<QPointF> getPlotData() const;
+
+    /**
      * @brief Read the test profile from a csv file
      */
     void readCSV(const QString &filePath);

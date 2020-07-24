@@ -5,6 +5,7 @@
 #include <QString>
 #include <QTextStream>
 #include "global.h"
+#include <QPointF>
 
 TestProfileModel::TestProfileModel(QObject *parent) :
     QAbstractTableModel(parent)
@@ -46,25 +47,41 @@ QVariant TestProfileModel::data(const QModelIndex &index, int role) const {
 }
 
 QVariant TestProfileModel::headerData(int section, Qt::Orientation orientation, int role) const {
-    if (role != Qt::DisplayRole)
-        return QVariant();
-
-    if (orientation == Qt::Horizontal) {
-        switch (section) {
-        case TestProfileEnum::DURATION_COL:
-            return "Duration";
-        case TestProfileEnum::SPEED_COL:
-            return "Speed";
-        case TestProfileEnum::DIRECTION_COL:
-            return "Direction";
-        case TestProfileEnum::COMMENT_COL:
-            return "Comment";
-        default:
-            break;
+    if (role == Qt::DisplayRole) {
+        if (orientation == Qt::Horizontal) {
+            switch (section) {
+            case TestProfileEnum::DURATION_COL:
+                return "Duration";
+            case TestProfileEnum::SPEED_COL:
+                return "Speed";
+            case TestProfileEnum::DIRECTION_COL:
+                return "Direction";
+            case TestProfileEnum::COMMENT_COL:
+                return "Comment";
+            default:
+                break;
+            }
+        } else {
+            // rown number
+            return section;
         }
-    } else {
-        // rown number
-        return section;
+    }
+
+    if (role == Qt::ToolTipRole) {
+        if (orientation == Qt::Horizontal) {
+            switch (section) {
+            case TestProfileEnum::DURATION_COL:
+                return "Steps duration in seconds";
+            case TestProfileEnum::SPEED_COL:
+                return "Motors speed in RPM";
+            case TestProfileEnum::DIRECTION_COL:
+                return "Motors direction. 0->Stop, 1->CCW, 2->CW";
+            case TestProfileEnum::COMMENT_COL:
+                return "Users comment";
+            default:
+                break;
+            }
+        }
     }
 
     return QVariant();
@@ -133,6 +150,20 @@ bool TestProfileModel::removeRows(int position, int rows, const QModelIndex &ind
 
 const QVector<TestProfileData> &TestProfileModel::getTestProfile() const {
     return m_testProfile;
+}
+
+const QVector<QPointF> TestProfileModel::getPlotData() const {
+    QVector<QPointF> plotData;
+    int accTime = 0;
+
+    plotData << QPointF(0, 0); // first point in the plot
+
+    for (TestProfileData testStep: getTestProfile()) {
+        accTime = accTime + testStep.getDuration();
+        plotData << QPointF(accTime, testStep.getSpeed());
+    }
+
+    return plotData;
 }
 
 void TestProfileModel::readCSV(const QString &filePath) {
