@@ -22,11 +22,9 @@ TestProfilePlotWidget::TestProfilePlotWidget(QWidget *parent) :
 //    m_chart->setMargins(QMargins(10, 10, 10 , 10));
 
     QValueAxis *axisX = new QValueAxis();
-    axisX->setRange(0, 1000);
 //    axisX->setLabelFormat("%d");
     axisX->setTitleText("Time [s]");
     QValueAxis *axisY = new QValueAxis();
-    axisY->setRange(0, 4000);
     axisY->setTitleText("Speed [1/min]");
 
     m_chart->addAxis(axisX, Qt::AlignBottom);
@@ -43,6 +41,8 @@ TestProfilePlotWidget::TestProfilePlotWidget(QWidget *parent) :
 }
 
 TestProfilePlotWidget::~TestProfilePlotWidget() {
+    delete m_chart;
+    delete m_series;
 }
 
 void TestProfilePlotWidget::plot(QVector<QPointF> points) {
@@ -52,6 +52,7 @@ void TestProfilePlotWidget::plot(QVector<QPointF> points) {
     QPolygonF poly(points);
     QRectF brect = poly.boundingRect();
 
+    // Auto fit new data on the plot
     QList<QAbstractAxis *> axes = m_series->attachedAxes();
     axes[0]->setRange(0, brect.right()); // x axis
     axes[1]->setRange(0, brect.bottom()); // y axis

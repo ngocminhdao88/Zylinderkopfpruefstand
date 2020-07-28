@@ -16,8 +16,8 @@ UnicoVFD::UnicoVFD(QObject *parent, QAbstractItemModel *model) :
     initDevice();
     setModel(model);
 
-    m_speedRamp->setRampUpRate(100);
-    m_speedRamp->setRampDownRate(100);
+    m_speedRamp->setRampUpRate(500);
+    m_speedRamp->setRampDownRate(500);
 }
 
 UnicoVFD::~UnicoVFD() {

@@ -29,6 +29,7 @@ MainWindow::~MainWindow() {
 
 void MainWindow::initActions() {
     if (m_vfdDevice) {
+        connect(ui->vfdConfigButton, &QPushButton::clicked, m_vfdDevice, &AbstractVFD::configDevice);
         connect(ui->actionVfdSetting, &QAction::triggered, m_vfdDevice, &AbstractVFD::configDevice);
         connect(ui->actionConnect, &QAction::triggered, m_vfdDevice, &AbstractVFD::connectDevice);
         connect(ui->actionDisconnect, &QAction::triggered, m_vfdDevice, &AbstractVFD::connectDevice);

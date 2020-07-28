@@ -1,0 +1,15 @@
+@startuml
+title Test Sequencer State Model
+[*] --> Idle
+Idle --> Run : start
+Run --> Parse : step timeout
+Parse --> Run
+Run --> Pause : pause
+Pause --> Run : unpause
+Run --> Stop : stop
+Stop --> Idle
+Run --> EndLoop : loop end
+EndLoop --> Run : if loop count < total loop
+EndLoop --> Stop : if loop count >= total loop
+
+@enduml
