@@ -136,7 +136,7 @@
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>0</number>
       </property>
       <property name="documentMode">
        <bool>false</bool>
@@ -150,24 +150,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Here goes motor speed, torque (multiple y axes)</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QGraphicsView" name="firstChartView"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_10">
-          <property name="text">
-           <string>Here goes force, temperatur (multiple y axes)</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QGraphicsView" name="secondChartView"/>
+         <widget class="DataChart" name="widget" native="true"/>
         </item>
        </layout>
       </widget>
@@ -570,6 +553,12 @@ p, li { white-space: pre-wrap; }
    <class>TestSequencer</class>
    <extends>QWidget</extends>
    <header>testsequencer.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>DataChart</class>
+   <extends>QWidget</extends>
+   <header>datachart.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

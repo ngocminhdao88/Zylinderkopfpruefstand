@@ -25,8 +25,12 @@ TestSequencer::TestSequencer(QWidget *parent) :
 
     m_testProfileDataModel->insertRows(0, 2);
 
-    ui->testProfileTableView->setModel(m_testProfileDataModel);
-    ui->testProfileTableView->setColumnHidden(TestProfileEnum::FB_SPEED_COL, true);
+    ui->tableView->setModel(m_testProfileDataModel);
+    ui->tableView->setColumnHidden(TestProfileEnum::FB_SPEED_COL, true);
+
+    // Resize table header to fit its contents
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui->tableView->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
     // Buttons SIGNAL-SLOT
     connect(ui->loadButton, &QPushButton::clicked, this, &TestSequencer::onLoadButtonClicked);
@@ -38,7 +42,7 @@ TestSequencer::TestSequencer(QWidget *parent) :
 //    connect(ui->stopButton, &QPushButton::clicked, this, &TestSequencer::onStopButtonClicked);
 
     // SIGNAL-SLOT for custom menu on mouse click
-    connect(ui->testProfileTableView, &QTableView::customContextMenuRequested, this, &TestSequencer::onCustomMenuRequested);
+    connect(ui->tableView, &QTableView::customContextMenuRequested, this, &TestSequencer::onCustomMenuRequested);
 }
 
 TestSequencer::~TestSequencer() {
@@ -283,7 +287,7 @@ void TestSequencer::updateTestProgress() {
 }
 
 void TestSequencer::onCustomMenuRequested(const QPoint &pos) {
-    QModelIndex index = ui->testProfileTableView->indexAt(pos);
+    QModelIndex index = ui->tableView->indexAt(pos);
 
     QMenu *menu = new QMenu(this);
 
@@ -298,7 +302,7 @@ void TestSequencer::onCustomMenuRequested(const QPoint &pos) {
     menu->addAction(removeAction);
 
 
-    menu->popup(ui->testProfileTableView->viewport()->mapToGlobal(pos));
+    menu->popup(ui->tableView->viewport()->mapToGlobal(pos));
 
     // Insert a new row before the selected
     connect(insertBeforeAction, &QAction::triggered, [this, index]{
