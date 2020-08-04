@@ -23,6 +23,7 @@ SOURCES += \
     datachart.cpp \
     jobdatamodel.cpp \
     jobeditor.cpp \
+    legendwidget.cpp \
     main.cpp \
     mainwindow.cpp \
     rampgenerator.cpp \
@@ -41,6 +42,7 @@ HEADERS += \
     global.h \
     jobdatamodel.h \
     jobeditor.h \
+    legendwidget.h \
     mainwindow.h \
     rampgenerator.h \
     testprofiledata.h \
