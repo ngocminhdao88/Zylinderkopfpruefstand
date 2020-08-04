@@ -3,6 +3,14 @@
 
 #define PACE_MAKER_RATE 250
 
+struct DataSetEnum {
+    enum {
+        SLOT_SIZE = 1048576, // 1M values
+        SLOT_COUNT = __INT32_MAX__ / DataSetEnum::SLOT_SIZE + 1, // +1 to round up
+        BLOCK_SIZE = 1024,
+    };
+};
+
 struct TestProfileEnum {
     enum {
         COLUMN_COUNT = 5,

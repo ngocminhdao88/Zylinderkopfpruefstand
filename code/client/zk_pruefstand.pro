@@ -21,6 +21,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     datachart.cpp \
+    dataset.cpp \
+    dataslot.cpp \
     jobdatamodel.cpp \
     jobeditor.cpp \
     legendwidget.cpp \
@@ -39,6 +41,8 @@ SOURCES += \
 HEADERS += \
     abstractvfd.h \
     datachart.h \
+    dataset.h \
+    dataslot.h \
     global.h \
     jobdatamodel.h \
     jobeditor.h \
