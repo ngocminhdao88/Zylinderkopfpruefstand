@@ -77,7 +77,7 @@ RESOURCES += \
 test {
     message(Test Build)
     QT += testlib
-    TARGET = UnitTests
+    TARGET = unittest
 
     SOURCES -= main.cpp #remove the main app
 

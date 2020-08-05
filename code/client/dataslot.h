@@ -60,13 +60,16 @@ private:
 signals:
 
 private:
-    QString pathOnDisk; // TODO: reimplement toString method for this class
-    bool inRam = true; // data is in RAM
-    bool flushing = false; // data is currently flushing to disk
+    QString m_pathOnDisk; // TODO: reimplement toString method for this class
+    bool m_inRam = true; // data is in RAM
+    bool m_flushing = false; // data is currently flushing to disk
 
-    float values[DataSetEnum::SLOT_SIZE];
-    float minimumValueInBlock[DataSetEnum::SLOT_SIZE / DataSetEnum::BLOCK_SIZE];
-    float maximumValueInBlock[DataSetEnum::SLOT_SIZE / DataSetEnum::BLOCK_SIZE];
+    QVector<float> m_values;
+//    float values[DataSetEnum::SLOT_SIZE];
+    QVector<float> m_minimumValueInBlock;
+//    float minimumValueInBlock[DataSetEnum::SLOT_SIZE / DataSetEnum::BLOCK_SIZE];
+    QVector<float> m_maximumValueInBlock;
+//    float maximumValueInBlock[DataSetEnum::SLOT_SIZE / DataSetEnum::BLOCK_SIZE];
 
 };
 
