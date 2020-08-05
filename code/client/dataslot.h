@@ -1,8 +1,9 @@
 #ifndef DATASLOT_H
 #define DATASLOT_H
 
-#include <QObject>
 #include "global.h"
+#include <QString>
+#include <QVector>
 
 /**
  * @brief Samples are sotred in an arry of Slots.
@@ -10,11 +11,14 @@
  * Each Slot contains 1M values and may be flushed to disk if RAM runs low.
  * Slots are further divided into "blocks" that cache min/max values.
  */
-class DataSlot : public QObject
+class DataSlot
 {
-    Q_OBJECT
 public:
-    explicit DataSlot(QObject *parent = 0);
+    DataSlot();
+
+    DataSlot(const DataSlot &other);
+
+    ~DataSlot();
 
     /**
      * @brief Flush the data in rame to disk
@@ -57,7 +61,9 @@ private:
      */
     QString getUniqueName();
 
-signals:
+    QVector<float> getValues() const;
+    QVector<float> getMininumValueBlock() const;
+    QVector<float> getMaximumValueBlock() const;
 
 private:
     QString m_pathOnDisk; // TODO: reimplement toString method for this class

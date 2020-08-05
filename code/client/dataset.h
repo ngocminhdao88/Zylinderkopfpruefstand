@@ -1,8 +1,9 @@
 #ifndef DATASET_H
 #define DATASET_H
 
-#include <QObject>
+#include <QString>
 #include <QColor>
+#include <QVector>
 #include "dataslot.h"
 
 /**
@@ -10,14 +11,16 @@
  * Binary packet field, stores all of its samples and provide  several ways to
  * get the samples
  */
-class DataSet : public QObject
+class DataSet
 {
-    Q_OBJECT
 public:
     DataSet(int location, QString name,
             QColor color, QString unit,
-            float convertionFactorA, float convertionFactorB,
-            QObject *parent = 0);
+            float convertionFactorA, float convertionFactorB);
+
+    ~DataSet();
+
+    DataSet(const DataSet &other);
 
     /**
      * @brief Update the name, color and unit of this Dataset
@@ -30,7 +33,42 @@ public:
     /**
      * @brief Return the name of this dataset
      */
-    QString getName();
+    QString getName() const;
+
+    /**
+     * @brief Return color of this dataset
+     */
+    QColor getColor() const;
+
+    /**
+     * @brief Return unit description of this dataset
+     */
+    QString getUnit() const;
+
+    /**
+     * @brief Return GL color of this dataset
+     */
+    QVector<float> getGlColor() const;
+
+    /**
+     * @brief Return if this dataset represents a bitfield
+     */
+    bool isBitfield() const;
+
+    /**
+     * @brief Get convertion factor of this dataset
+     */
+    float getConvertionFactor() const;
+
+    /**
+     * @brief Get convertion factor A of this dataset
+     */
+    float getConvertionFactorA() const;
+
+    /**
+     * @brief Get convertion factor B of this dataset
+     */
+    float getConvertionFactorB() const;
 
     /**
      * @brief Gets on specific sample
@@ -56,7 +94,12 @@ public:
     /**
      * @brief Get current number of samples stored in the dataset
      */
-    int getSampleCount();
+    int getSampleCount() const;
+
+    /**
+     * @brief Get location of this dataset
+     */
+    int getLocation() const;
 
     /**
      * @brief Increments the sample count
@@ -69,6 +112,13 @@ public:
      * @brief Flush the data to disk if the half of RAM is used
      */
     void flushIfNecessary();
+
+    /**
+     * @brief Gets the timestamp for one specific sample
+     * @param sampleNumber Which sample to check
+     * @return The corresponding UNIX timestamp
+     */
+    long getTimestamp(int sampleNumber) const;
 
 private:
     int m_sampleCount;
@@ -87,8 +137,6 @@ private:
 
     QVector<DataSlot> m_slots;
     QVector<DataSlot> m_timestamps;
-
-
 };
 
 #endif // DATASET_H

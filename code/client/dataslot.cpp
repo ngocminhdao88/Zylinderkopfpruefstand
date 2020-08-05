@@ -5,12 +5,21 @@
 #include <QFile>
 #include <QDataStream>
 
-DataSlot::DataSlot(QObject *parent) : QObject(parent),
+DataSlot::DataSlot() :
     m_values(DataSetEnum::SLOT_SIZE),
     m_minimumValueInBlock(DataSetEnum::SLOT_SIZE / DataSetEnum::BLOCK_SIZE),
     m_maximumValueInBlock(DataSetEnum::SLOT_SIZE / DataSetEnum::BLOCK_SIZE)
 {
     m_pathOnDisk = getUniqueName(); // TODO: generate unique number for this Slot
+}
+
+DataSlot::DataSlot(const DataSlot &other) {
+    m_values = other.getValues();
+    m_minimumValueInBlock = other.getMininumValueBlock();
+    m_maximumValueInBlock = other.getMaximumValueBlock();
+}
+
+DataSlot::~DataSlot() {
 }
 
 void DataSlot::moveToDisk() {
@@ -110,4 +119,16 @@ QString DataSlot::getUniqueName() {
         }
     }
     return uniqueName;
+}
+
+QVector<float> DataSlot::getValues() const {
+    return m_values;
+}
+
+QVector<float> DataSlot::getMininumValueBlock() const {
+    return m_minimumValueInBlock;
+}
+
+QVector<float> DataSlot::getMaximumValueBlock() const {
+    return m_maximumValueInBlock;
 }

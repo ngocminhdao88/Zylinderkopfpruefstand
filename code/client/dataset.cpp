@@ -1,7 +1,9 @@
 #include "dataset.h"
-#include <QTime>
+#include <QDateTime>
 
-DataSet::DataSet(int location, QString name, QColor color, QString unit, float convertionFactorA, float convertionFactorB, QObject *parent) : QObject(parent),
+DataSet::DataSet(int location, QString name,
+                 QColor color, QString unit,
+                 float convertionFactorA, float convertionFactorB):
     m_slots(DataSetEnum::SLOT_COUNT),
     m_timestamps(DataSetEnum::SLOT_COUNT)
 {
@@ -17,6 +19,22 @@ DataSet::DataSet(int location, QString name, QColor color, QString unit, float c
     m_isBitfield = false;
 }
 
+DataSet::~DataSet() {
+}
+
+DataSet::DataSet(const DataSet &other) {
+    m_sampleCount = other.getSampleCount();
+    m_location = other.getLocation();
+    m_name = other.getName();
+    m_color = other.getColor();
+    m_glColor = {float(m_color.red())/255, float(m_color.green())/255, float(m_color.blue())/255, 1};
+    m_unit = other.getUnit();
+    m_convertionFactorA = other.getConvertionFactorA();
+    m_convertionFactorB = other.getConvertionFactorB();
+    m_convertionFactor = m_convertionFactorA / m_convertionFactorB;
+    m_isBitfield = other.isBitfield();
+}
+
 void DataSet::setNameColorUnit(QString name, QColor color, QString unit) {
     m_name = name;
     m_color = color;
@@ -24,8 +42,36 @@ void DataSet::setNameColorUnit(QString name, QColor color, QString unit) {
     m_unit = unit;
 }
 
-QString DataSet::getName() {
+QString DataSet::getName() const {
     return m_name;
+}
+
+QColor DataSet::getColor() const {
+    return m_color;
+}
+
+QString DataSet::getUnit() const {
+    return m_unit;
+}
+
+QVector<float> DataSet::getGlColor() const {
+    return m_glColor;
+}
+
+bool DataSet::isBitfield() const {
+    return m_isBitfield;
+}
+
+float DataSet::getConvertionFactor() const {
+    return m_convertionFactor;
+}
+
+float DataSet::getConvertionFactorA() const {
+    return m_convertionFactorA;
+}
+
+float DataSet::getConvertionFactorB() const {
+    return m_convertionFactorB;
 }
 
 float DataSet::getSample(int index) {
@@ -56,8 +102,12 @@ void DataSet::add(float value) {
         m_slots[slotNumber].setValue(slotIndex, value);
 }
 
-int DataSet::getSampleCount() {
+int DataSet::getSampleCount() const {
     return m_sampleCount;
+}
+
+int DataSet::getLocation() const {
+    return m_location;
 }
 
 void DataSet::incrementSampleCount() {
@@ -66,8 +116,17 @@ void DataSet::incrementSampleCount() {
     int slotIndex = currentSize % DataSetEnum::SLOT_SIZE;
 
     flushIfNecessary();
-//    m_timestamps[slotNumber].setValue(slotIndex, QTime::currentTime());
+    QDateTime datetime;
+    m_timestamps[slotNumber].setValue(slotIndex, datetime.toMSecsSinceEpoch());
+
+    m_sampleCount++;
+    // TODO: See DatasetsController.java
 }
 
 void DataSet::flushIfNecessary() {
+}
+
+long DataSet::getTimestamp(int sampleNumber) const
+{
+
 }
