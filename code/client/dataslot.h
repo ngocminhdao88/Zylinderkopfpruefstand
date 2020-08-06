@@ -4,6 +4,7 @@
 #include "global.h"
 #include <QString>
 #include <QVector>
+#include <atomic>
 
 /**
  * @brief Samples are sotred in an arry of Slots.
@@ -50,6 +51,27 @@ public:
      */
     float getMaximumInBlock(int blockIndex);
 
+    /**
+     * @brief isInRam
+     * @return true if DataSlot is in RAM, false if they are on disk
+     */
+    bool isInRam() const;
+
+    /**
+     * @return A reference to values vector
+     */
+    QVector<float>& getValues();
+
+    /**
+     * @return A reference to minimalValueInBlock vector
+     */
+    QVector<float>& getMininumValueBlock();
+
+    /**
+     * @return A reference to maximalValueInBlock vector
+     */
+    QVector<float>& getMaximumValueBlock();
+
 private:
     /**
      * @brief Read cached data on disk into RAM
@@ -61,14 +83,12 @@ private:
      */
     QString getUniqueName();
 
-    QVector<float> getValues() const;
-    QVector<float> getMininumValueBlock() const;
-    QVector<float> getMaximumValueBlock() const;
 
 private:
     QString m_pathOnDisk; // TODO: reimplement toString method for this class
-    bool m_inRam = true; // data is in RAM
-    bool m_flushing = false; // data is currently flushing to disk
+
+    std::atomic<bool> m_inRam  {false};
+    std::atomic<bool> m_flushing {false};
 
     QVector<float> m_values;
 //    float values[DataSetEnum::SLOT_SIZE];

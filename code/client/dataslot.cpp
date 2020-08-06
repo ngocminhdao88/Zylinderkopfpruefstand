@@ -4,6 +4,8 @@
 #include <QDir>
 #include <QFile>
 #include <QDataStream>
+#include <thread>
+#include <future>
 
 DataSlot::DataSlot() :
     m_values(DataSetEnum::SLOT_SIZE),
@@ -14,9 +16,9 @@ DataSlot::DataSlot() :
 }
 
 DataSlot::DataSlot(const DataSlot &other) {
-    m_values = other.getValues();
-    m_minimumValueInBlock = other.getMininumValueBlock();
-    m_maximumValueInBlock = other.getMaximumValueBlock();
+    m_values = other.m_values;
+    m_minimumValueInBlock = other.m_minimumValueInBlock;
+    m_maximumValueInBlock = other.m_maximumValueInBlock;
 }
 
 DataSlot::~DataSlot() {
@@ -28,20 +30,23 @@ void DataSlot::moveToDisk() {
 
     m_flushing = true;
 
-    // TODO: do this operation on different thread
-    QFile m_file(m_pathOnDisk);
-    if (m_file.open(QIODevice::WriteOnly)) {
-        QDataStream out(&m_file);
-        out << m_values;
-        out << m_minimumValueInBlock;
-        out << m_maximumValueInBlock;
-        m_file.close();
+    // do write operation on different thread asynchronously
+    std::async(std::launch::async, [this]{
+        QFile m_file(m_pathOnDisk);
+        if (m_file.open(QIODevice::WriteOnly)) {
+            QDataStream out(&m_file);
+            out << m_values;
+            out << m_minimumValueInBlock;
+            out << m_maximumValueInBlock;
+            m_file.close();
 
-        m_inRam = false;
-        m_flushing = false;
-        m_values.clear();
-        m_values.squeeze(); // release space in RAM
-    }
+            m_inRam = false;
+            m_flushing = false;
+            m_values.clear();
+            m_values.squeeze(); // release space in RAM
+        }
+    });
+
 }
 
 void DataSlot::removeFromDisk() {
@@ -91,18 +96,25 @@ float DataSlot::getMaximumInBlock(int blockIndex) {
     return m_maximumValueInBlock[blockIndex];
 }
 
+bool DataSlot::isInRam() const {
+    return m_inRam;
+}
+
 void DataSlot::copyToRam() {
-    QFile m_file(m_pathOnDisk);
+    // do this operation in another thread async
+    std::async(std::launch::async, [this] {
+        QFile m_file(m_pathOnDisk);
 
-    if (m_file.open(QIODevice::ReadOnly)) {
-        QDataStream in(&m_file);
-        in >> m_values;
-        in >> m_minimumValueInBlock;
-        in >> m_maximumValueInBlock;
-        m_file.close();
+        if (m_file.open(QIODevice::ReadOnly)) {
+            QDataStream in(&m_file);
+            in >> m_values;
+            in >> m_minimumValueInBlock;
+            in >> m_maximumValueInBlock;
+            m_file.close();
 
-        m_inRam = true;
-    }
+            m_inRam = true;
+        }
+    });
 }
 
 QString DataSlot::getUniqueName() {
@@ -121,14 +133,14 @@ QString DataSlot::getUniqueName() {
     return uniqueName;
 }
 
-QVector<float> DataSlot::getValues() const {
+QVector<float>& DataSlot::getValues() {
     return m_values;
 }
 
-QVector<float> DataSlot::getMininumValueBlock() const {
+QVector<float>& DataSlot::getMininumValueBlock() {
     return m_minimumValueInBlock;
 }
 
-QVector<float> DataSlot::getMaximumValueBlock() const {
+QVector<float>& DataSlot::getMaximumValueBlock() {
     return m_maximumValueInBlock;
 }

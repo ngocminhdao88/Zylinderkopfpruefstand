@@ -23,16 +23,16 @@ DataSet::~DataSet() {
 }
 
 DataSet::DataSet(const DataSet &other) {
-    m_sampleCount = other.getSampleCount();
-    m_location = other.getLocation();
-    m_name = other.getName();
-    m_color = other.getColor();
-    m_glColor = {float(m_color.red())/255, float(m_color.green())/255, float(m_color.blue())/255, 1};
-    m_unit = other.getUnit();
-    m_convertionFactorA = other.getConvertionFactorA();
-    m_convertionFactorB = other.getConvertionFactorB();
-    m_convertionFactor = m_convertionFactorA / m_convertionFactorB;
-    m_isBitfield = other.isBitfield();
+    m_sampleCount = other.m_sampleCount;
+    m_location = other.m_location;
+    m_name = other.m_name;
+    m_color = other.m_color;
+    m_glColor = other.m_glColor;
+    m_unit = other.m_unit;
+    m_convertionFactorA = other.m_convertionFactorA;
+    m_convertionFactorB = other.m_convertionFactorB;
+    m_convertionFactor = other.m_convertionFactor;
+    m_isBitfield = other.m_isBitfield;
 }
 
 void DataSet::setNameColorUnit(QString name, QColor color, QString unit) {
@@ -124,9 +124,58 @@ void DataSet::incrementSampleCount() {
 }
 
 void DataSet::flushIfNecessary() {
+    // TODO: determine how much space is avaiable and how much is used
+    // by the timestamps and datasets
+    long maxHeapSize = 0; // TODO: logic
+    long currentSize = 0;
+
+    for (int i = 0; i < m_timestamps.size(); i++) {
+        currentSize += DataSetEnum::SLOT_SIZE * 8; // float is 4 bytes, 4 for data + 4 for timestamps
+    }
+//    currentSize += (getDatasetsCount() / 2) * currentSize;
+
+    if (currentSize > maxHeapSize / 2) {
+        // figure out which slots NOT to flush
+        int firstProtectedSlotA = m_minimumSampleNumberOnScreen / DataSetEnum::SLOT_SIZE;
+        int lastProtectedSlotA = m_maximumSampleNumberOnScreen / DataSetEnum::SLOT_SIZE;
+
+        for (int i = 0; i < m_timestamps.size(); i++) {
+            // don't flush protected slots
+            if (i >= firstProtectedSlotA && i <= lastProtectedSlotA)
+                continue;
+
+            // TODO: stop checking if we reached the end
+
+            // move the unnecessary timestamps and datasets to disk
+            if (m_timestamps[i].isInRam()) {
+                m_timestamps[i].moveToDisk();
+
+                //            for (int j = 0; i < getDatasetsCount(); j++)
+                //                getDatasetByIndex(j).slots[i].moveToDisk();
+            }
+            // using map the keeps track of all datasets
+        }
+    }
 }
 
-long DataSet::getTimestamp(int sampleNumber) const
-{
+long DataSet::getTimestamp(int sampleNumber) {
+    if (sampleNumber < 0)
+        return 0;
 
+    int slotNumber = sampleNumber / DataSetEnum::SLOT_SIZE;
+    int slotIndex = sampleNumber % DataSetEnum::SLOT_SIZE;
+
+    return m_timestamps[slotNumber].getValue(slotIndex);
+}
+
+long DataSet::getFirstTimestamp() {
+    return m_firstTimestamp;
+}
+
+bool DataSet::removeDataset(int location) {
+}
+
+void DataSet::dontFlushRangeOnScreen(int minimumSampleNumber, int maximumSampleNumber) {
+    m_minimumSampleNumberOnScreen = minimumSampleNumber;
+    m_maximumSampleNumberOnScreen = maximumSampleNumber;
 }

@@ -118,7 +118,28 @@ public:
      * @param sampleNumber Which sample to check
      * @return The corresponding UNIX timestamp
      */
-    long getTimestamp(int sampleNumber) const;
+    long getTimestamp(int sampleNumber);
+
+    /**
+     * @return The timestamp for sample number 0,
+     * or 0 if there are no samples
+     */
+    long getFirstTimestamp();
+
+    /**
+     * @brief Removes a specific dataset
+     * @return true on success, false if nothing existed there
+     */
+    bool removeDataset(int location);
+
+    /**
+     * @brief Prevents slots from being flushed to disk because they are
+     * actively being used to draw charts
+     *
+     * @param minimumSampleNumber Minimum sample number shown on screen
+     * @param maximumSampleNumberMaximum sample number shown on screen
+     */
+    void dontFlushRangeOnScreen(int minimumSampleNumber, int maximumSampleNumber);
 
 private:
     int m_sampleCount;
@@ -137,6 +158,12 @@ private:
 
     QVector<DataSlot> m_slots;
     QVector<DataSlot> m_timestamps;
+
+    long m_firstTimestamp = 0;
+
+    // for keeping track of what slots not to flush to disk
+    int m_minimumSampleNumberOnScreen = -1;
+    int m_maximumSampleNumberOnScreen = -1;
 };
 
 #endif // DATASET_H
