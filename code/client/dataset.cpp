@@ -1,5 +1,6 @@
 #include "dataset.h"
 #include <QDateTime>
+#include <algorithm>
 
 DataSet::DataSet(int location, QString name,
                  QColor color, QString unit,
@@ -92,7 +93,7 @@ QVector<float> DataSet::getSamples(int startIndex, int endIndex) {
     return samples;
 }
 
-void DataSet::add(float value) {
+void DataSet::addSample(float value) {
     value *= m_convertionFactor;
     int currentSize = getSampleCount();
     int slotNumber = currentSize / DataSetEnum::SLOT_SIZE;
@@ -178,4 +179,16 @@ bool DataSet::removeDataset(int location) {
 void DataSet::dontFlushRangeOnScreen(int minimumSampleNumber, int maximumSampleNumber) {
     m_minimumSampleNumberOnScreen = minimumSampleNumber;
     m_maximumSampleNumberOnScreen = maximumSampleNumber;
+}
+
+float DataSet::getMinInRange(int firstSampleNumber, int lastSampleNumber) {
+    QVector<float> samples = getSamples(firstSampleNumber, lastSampleNumber);
+
+    return *std::min_element(samples.begin(), samples.end());
+}
+
+float DataSet::getMaxInRange(int firstSampleNumber, int lastSampleNumber) {
+    auto samples_vec = getSamples(firstSampleNumber, lastSampleNumber);
+
+    return *std::max_element(samples_vec.begin(), samples_vec.end());
 }

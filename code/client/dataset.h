@@ -89,7 +89,7 @@ public:
      * @brief Add new sample to dataset
      * @param value New sample
      */
-    void add(float value);
+    void addSample(float value);
 
     /**
      * @brief Get current number of samples stored in the dataset
@@ -140,6 +140,16 @@ public:
      * @param maximumSampleNumberMaximum sample number shown on screen
      */
     void dontFlushRangeOnScreen(int minimumSampleNumber, int maximumSampleNumber);
+
+    /**
+     * @return A minimum in dataset between a range
+     */
+    float getMinInRange(int firstSampleNumber, int lastSampleNumber);
+
+    /**
+     * @return A maximum in dataset between a range
+     */
+    float getMaxInRange(int firstSampleNumber, int lastSampleNumber);
 
 private:
     int m_sampleCount;

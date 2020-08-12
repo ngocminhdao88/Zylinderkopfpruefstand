@@ -15,9 +15,19 @@
 class DataSlot
 {
 public:
+    /**
+     * @brief Default constructor
+     */
     DataSlot();
 
+    /**
+     * @brief Copy constructor
+     */
     DataSlot(const DataSlot &other);
+
+    /**
+      * @brief Default destructor
+      */
 
     ~DataSlot();
 
@@ -91,12 +101,8 @@ private:
     std::atomic<bool> m_flushing {false};
 
     QVector<float> m_values;
-//    float values[DataSetEnum::SLOT_SIZE];
     QVector<float> m_minimumValueInBlock;
-//    float minimumValueInBlock[DataSetEnum::SLOT_SIZE / DataSetEnum::BLOCK_SIZE];
     QVector<float> m_maximumValueInBlock;
-//    float maximumValueInBlock[DataSetEnum::SLOT_SIZE / DataSetEnum::BLOCK_SIZE];
-
 };
 
 #endif // DATASLOT_H
