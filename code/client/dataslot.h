@@ -42,24 +42,24 @@ public:
     void removeFromDisk();
 
     /**
-     * @brief Set the DataSet at index to value
+     * @brief Set a sample in this slot at index to value
      */
-    void setValue(int index, float value);
+    void setSample(int index, float value);
 
     /**
-     * @brief Get a value from DataSet at index
+     * @brief Get a sample from this slot at index
      */
-    float getValue(int index);
+    float getSample(int index);
 
     /**
-     * @brief Get a minimum value from a block index
+     * @brief Get a minimum value in this block
      */
-    float getMinimumInBlock(int blockIndex);
+    float getMinimumInBlock();
 
     /**
-     * @brief Get a maximum value from a block index
+     * @brief Get a maximum value in this block
      */
-    float getMaximumInBlock(int blockIndex);
+    float getMaximumInBlock();
 
     /**
      * @brief isInRam
@@ -68,19 +68,9 @@ public:
     bool isInRam() const;
 
     /**
-     * @return A reference to values vector
+     * @return All samples in this slot
      */
-    QVector<float>& getValues();
-
-    /**
-     * @return A reference to minimalValueInBlock vector
-     */
-    QVector<float>& getMininumValueBlock();
-
-    /**
-     * @return A reference to maximalValueInBlock vector
-     */
-    QVector<float>& getMaximumValueBlock();
+    QVector<float>& getSamples();
 
 private:
     /**
@@ -95,14 +85,12 @@ private:
 
 
 private:
-    QString m_pathOnDisk; // TODO: reimplement toString method for this class
+    QString m_pathOnDisk;
 
     std::atomic<bool> m_inRam  {false};
     std::atomic<bool> m_flushing {false};
 
-    QVector<float> m_values;
-    QVector<float> m_minimumValueInBlock;
-    QVector<float> m_maximumValueInBlock;
+    QVector<float> m_samples;
 };
 
 #endif // DATASLOT_H

@@ -79,7 +79,7 @@ float DataSet::getSample(int index) {
     int slotNumber = index / DataSetEnum::SLOT_SIZE;
     int slotIndex = index % DataSetEnum::SLOT_SIZE;
 
-    return m_slots[slotNumber].getValue(slotIndex);
+    return m_slots[slotNumber].getSample(slotIndex);
 }
 
 QVector<float> DataSet::getSamples(int startIndex, int endIndex) {
@@ -100,7 +100,7 @@ void DataSet::addSample(float value) {
     int slotIndex = currentSize % DataSetEnum::SLOT_SIZE;
 
     if (slotIndex == 0)
-        m_slots[slotNumber].setValue(slotIndex, value);
+        m_slots[slotNumber].setSample(slotIndex, value);
 }
 
 int DataSet::getSampleCount() const {
@@ -118,7 +118,7 @@ void DataSet::incrementSampleCount() {
 
     flushIfNecessary();
     QDateTime datetime;
-    m_timestamps[slotNumber].setValue(slotIndex, datetime.toMSecsSinceEpoch());
+    m_timestamps[slotNumber].setSample(slotIndex, datetime.toMSecsSinceEpoch());
 
     m_sampleCount++;
     // TODO: See DatasetsController.java
@@ -166,7 +166,7 @@ long DataSet::getTimestamp(int sampleNumber) {
     int slotNumber = sampleNumber / DataSetEnum::SLOT_SIZE;
     int slotIndex = sampleNumber % DataSetEnum::SLOT_SIZE;
 
-    return m_timestamps[slotNumber].getValue(slotIndex);
+    return m_timestamps[slotNumber].getSample(slotIndex);
 }
 
 long DataSet::getFirstTimestamp() {

@@ -7,7 +7,6 @@ struct DataSetEnum {
     enum {
         SLOT_SIZE = 1048576, // 1M values
         SLOT_COUNT = __INT32_MAX__ / DataSetEnum::SLOT_SIZE + 1, // +1 to round up
-        BLOCK_SIZE = 1024,
     };
 };
 
